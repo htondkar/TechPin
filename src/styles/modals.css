@@ -1,0 +1,27 @@
+.login-signup-modal {
+  z-index: 1201;
+  background-color: white;
+  border-radius: 10px;
+}
+.ReactModal__Body--open {
+    overflow: hidden;
+}
+.login-singnup-overlay {
+  z-index: 1200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.7);
+  border-radius: 10px;
+}
+.login-form h3{
+  font-family: 'Rubik';
+  font-size: 18px;
+}

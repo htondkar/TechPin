@@ -1,0 +1,130 @@
+.single-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 60%;
+  margin: 50px auto;
+}
+.single-page > div > div:first-child {
+  padding-bottom: 20px;
+}
+.single-body img {
+  display: inline-block;
+}
+.single-body > div {
+  display: inline-block;
+  max-width: 70%;
+  margin-bottom: 29px;
+}
+.single-body > div span  {
+  display: block;
+  margin-left: 20px;
+}
+.single-body > div span.star-rating-single  {
+  display: inline-block;
+  margin-left: 20px;
+}
+.single-body > div span.nps-score  {
+  color: #666;
+  font-family: 'Rubik';
+  font-weight: 400;
+  display: inline-block;
+  margin-left: 20px;
+}
+.single-page > div > div > div > div {
+  border-radius: 5px 5px 0 0  !important;
+}
+.single-body > div span:first-child  {
+  margin-left: 20px;
+  color: #555;
+  font-size: 26px;
+  font-family: 'Raleway';
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.single-body > div span:nth-child(2)  {
+  color: grey;
+  font-size: 16px;
+  font-family: 'Raleway';
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.single-body {
+  padding: 30px;
+}
+.detailed-info {
+  padding: 0 30px;
+}
+.single-about span {
+  font-size: 20px;
+  font-family: 'Rubik';
+  line-height: 30px;
+}
+.single-about p {
+  font-size: 15px;
+  max-width: 95%;
+  font-family: 'Rubik';
+  text-align: justify;
+}
+#single-meta-info {
+  font-size: 16px;
+  font-family: 'Raleway';
+  display: inline;
+  margin-left: 10px;
+  font-weight: 400;
+}
+.single-link {
+  margin: 20px 0;
+  padding: 0 30px;
+}
+.single-link img {
+  width: 100px;
+  height: 30px;
+  margin-right: 15px;
+}
+.single-link a:nth-of-type(3) img {
+  width: 30px;
+  height: 30px;
+}
+.comments{
+  margin: 20px 0;
+  padding: 0 30px;
+}
+.comments-row {
+  margin: 10px 0;
+  padding: 5px;
+  box-sizing: 0 0 5px rgba(0,0,0,0.3);
+  font-family: 'Rubik';
+}
+.comments-row > div {
+  border-left: 5px solid #1A237E;
+  padding-left: 5px;
+}
+.comments-row div.comment-author {
+  font-weight: 600;
+}
+div.comments > span {
+  margin-left: 4px;
+}
+@media screen and (max-width: 920px) {
+  .single-page {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 650px) {
+  div.single-body {
+    display: flex;
+    justify-content: center;
+  }
+  .single-page {
+    width: 100%;
+    margin: 0
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .single-page {
+    width: 42.5%;
+  }
+}

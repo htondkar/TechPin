@@ -1,0 +1,31 @@
+const list = [
+"E-Commerce",
+"Tourism",
+"Communication",
+"Fashion",
+"VC",
+"classifieds",
+"Advertising",
+"Retail",
+"Marketing",
+"Investment Management",
+"Marketplace",
+"Transportation",
+"Food",
+"HR",
+"Learning",
+"Entertainment",
+"Music",
+"Fintech",
+"news",
+"Real Estate",
+"Art &amp; Culture",
+"Cloud Services",
+"Hardware",
+"IoT",
+"SaaS",
+"Productivity",
+"Accelerator"
+];
+
+export default list
