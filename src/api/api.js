@@ -68,8 +68,15 @@ class mockApi {
     setTimeout(function() {
       resolve(Object.assign([], list));
     }, 200);
-  });
-}
+    });
+  }
+  static submitStartUp(formData) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('submit successful');
+      }, 1000);
+    })
+  }
 }
 
 

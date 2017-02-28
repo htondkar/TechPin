@@ -10,12 +10,24 @@ function initialLoadActionCreator(response) {
 }
 
 export function loadIntialData() {
-  return function (dispatch) {
-    if (process.env.NODE_ENV === 'development') {
-      return api.loadList()
+  return dispatch => {
+    return api.loadList()
       .then(response => dispatch(initialLoadActionCreator(response)))
-    } else {
-      dispatch(initialLoadActionCreator(api.loadList()))
-    }
+  }
+}
+
+export function submitStartUp(formData) {
+  return dispatch => {
+    return api.submitStartUp(JSON.stringify(formData))
+      .then(
+        (response) => {
+          console.log(response)
+          return Promise.resolve()
+        },
+        (response) => {
+           console.log(response)
+           return Promise.reject(response)
+         }
+       )
   }
 }

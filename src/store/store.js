@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 
 // laod initial state
 const defaultState = {
-  startUps: []
+  startUps: [],
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
