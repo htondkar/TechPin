@@ -9,6 +9,7 @@ import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import RaisedButton from 'material-ui/RaisedButton';
+import Snackbar from 'material-ui/Snackbar';
 
 const styles = {
   toolbarBackArrow: {
@@ -20,25 +21,59 @@ const styles = {
   }
 }
 
-// browserHistory.goBack
-const SinglePageToolbar = ({editAble}) => {
-  return (
-    <div>
-      <Toolbar>
-        <ToolbarGroup firstChild={true}>
-          <IconButton tooltip='back' tooltipPosition='top-center'>
-            <NavigationArrowBack
-              style={styles.toolbarBackArrow}
+export default class SinglePageToolbar extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      snackBarOpen: false
+    }
+  }
+
+
+  checkAuthAndRedirect = () => {
+    if (!this.props.auth) {
+      console.log('not auth');
+      this.setState({snackBarOpen: true})
+    } else {
+      browserHistory.push(`/start-ups/${this.props.name}/edit`)
+    }
+  }
+
+  handleSnackBarClose = () => {
+    this.setState({snackBarOpen: false})
+  }
+
+  render() {
+    const editAble = this.props.editAble;
+    return (
+      <div>
+        <Toolbar>
+          <ToolbarGroup firstChild={true}>
+            <IconButton tooltip='back' tooltipPosition='top-center'>
+              <NavigationArrowBack
+                style={styles.toolbarBackArrow}
+                hoverColor={'#9C27B0'}
+                onClick={()=>browserHistory.push('/')}/>
+            </IconButton>
+          </ToolbarGroup>
+          {editAble && <ToolbarGroup>
+              <EditorModeEdit
+              style={styles.editModeIcon}
               hoverColor={'#9C27B0'}
-              onClick={()=>browserHistory.push('/')}/>
-          </IconButton>
-        </ToolbarGroup>
-        {editAble && <ToolbarGroup><EditorModeEdit style={styles.editModeIcon} hoverColor={'#9C27B0'}/></ToolbarGroup>}
-      </Toolbar>
-    </div>);
+              onClick={this.checkAuthAndRedirect}/>
+            </ToolbarGroup>}
+        </Toolbar>
+        <Snackbar
+          open={this.state.snackBarOpen}
+          message='you are not logged in, please log in first'
+          autoHideDuration={5000}
+          onRequestClose={this.handleSnackBarClose}
+        />
+      </div>
+    );
+  }
 }
 
 SinglePageToolbar.propTypes = {
 };
-
-export default SinglePageToolbar;

@@ -9,7 +9,6 @@ import 'jquery';
 import store, {history} from './store/store';
 import routes from './routes/routes';
 
-import './styles/scrollBar.css';
 import './styles/reset.css';
 import './styles/main.css';
 import './styles/appBar.css';
@@ -22,6 +21,7 @@ import './styles/addWidgetModal.css';
 import './styles/categoryPage.css';
 import './styles/modals.css';
 import './styles/header.css';
+import './styles/editInfo.css';
 
 render(
   <Provider store={store}>

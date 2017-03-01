@@ -54,6 +54,12 @@ const list = names.map( function(name, i) {
     comments: [
       {author:'lorem1', text:'Lorem ipsum dolor sit.'},
       {author:'lorem2', text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
+      {author:'lorem2', text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
+      {author:'lorem2', text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
+      {author:'lorem2', text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
+      {author:'lorem2', text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
+      {author:'lorem2', text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
+      {author:'lorem2', text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
       {author:'lorem3', text:'Lorem ipsum dolor sit.'}
     ],
     npsScore: getRandomNps(),

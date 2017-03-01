@@ -16,7 +16,7 @@ class SinglePage extends React.Component {
     return (
       <div className='single-page main-content'>
         <SinglePageMain  startUp={startUp}>
-          <SinglePageToolbar editAble={true}/>
+          <SinglePageToolbar editAble={true} name={startUpName} auth={this.props.authenticated}/>
         </SinglePageMain>
       </div>
     );
@@ -29,6 +29,7 @@ SinglePage.propTypes = {
 function mapStateToProps(state) {
   return {
     list: state.startUps,
+    authenticated: state.auth.authenticated
   }
 }
 

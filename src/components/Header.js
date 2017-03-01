@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import Modal from 'react-modal';
 import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import AppBar from 'material-ui/AppBar'
 import Divider from 'material-ui/Divider';
@@ -98,8 +99,8 @@ export default class Header extends React.Component {
           className='login-signup-modal'
           contentLabel="Modal">
             {this.state.view === 'login' ?
-            <LoginForm handleLogIn={this.handleLogIn} handleSignUp={this.handleSignUp}/> :
-            <SignupForm handleSignUp={this.handleSignUp}/>}
+            <LoginForm handleLogIn={this.handleLogIn} handleSignUp={this.handleSignUp} key='login'/> :
+            <SignupForm handleSignUp={this.handleSignUp} key='signup'/>}
         </Modal>
         <Drawer
           width={250}

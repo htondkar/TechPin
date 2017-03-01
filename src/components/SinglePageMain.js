@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 
-import StarRating from './StarRating';
+
 import CommentRow from './CommentRow';
+import StartupWidgetMoreInfo from './StartupWidgetMoreInfo';
 
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
@@ -14,8 +15,6 @@ import LinkedLogo from '../../images/linkedin.png'
 const styles = {
   paper: {
     Width: '100%',
-    // minWidth: '650px',
-    // height: '700px',
   },
 }
 
@@ -32,19 +31,7 @@ export default class SinglePageMain extends React.Component {
         <div>
           <Paper style={styles.paper} zDepth={3}>
             {this.props.children}
-            <div className="single-body">
-              <img src={require('../../images/eventbox.jpg')} height='100px'/>
-              <div>
-                <span>
-                  <a href={startUp.webSite}>{startUp.name}</a>
-                  <span id='single-meta-info'>{`${startUp.city},${startUp.country}. founded in ${startUp.creationYear}`}</span>
-                </span>
-                <span>{startUp.shortDesc}</span>
-                <StarRating rating={startUp.rating} editAble={true} className='star-rating-single' />
-                <span className="nps-score">{`N.P.S: ${startUp.npsScore}`}</span>
-              </div>
-              <Divider />
-            </div>
+            <StartupWidgetMoreInfo {...startUp} />
             <div className="detailed-info">
               <div className="single-about">
                 <span>{`About ${startUp.name}`}</span>

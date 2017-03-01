@@ -9,6 +9,25 @@ function initialLoadActionCreator(response) {
   }
 }
 
+function successfulLogin() {
+  return {
+    type: actionTypes.SUCCESSFUL_LOGIN,
+  }
+}
+function failedLogin(response) {
+  return {
+    type: actionTypes.FAILED_LOGIN,
+    response
+  }
+}
+
+function initialLoadActionCreator(response) {
+  return {
+    type: actionTypes.INITIAL_LOAD,
+    list: response
+  }
+}
+
 export function loadIntialData() {
   return dispatch => {
     return api.loadList()
@@ -26,6 +45,21 @@ export function submitStartUp(formData) {
         },
         (response) => {
            console.log(response)
+           return Promise.reject(response)
+         }
+       )
+  }
+}
+export function authenticate(username, password) {
+  return dispatch => {
+    return api.fakeaAuthenticate()
+      .then(
+        (response) => {
+          dispatch(successfulLogin())
+          return Promise.resolve()
+        },
+        (response) => {
+           dispatch(failedLogin(response))
            return Promise.reject(response)
          }
        )
