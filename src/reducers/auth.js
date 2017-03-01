@@ -5,7 +5,7 @@ export default function auth(state = [], action) {
     switch (action.type) {
 
         case actionTypes.SUCCESSFUL_LOGIN:
-          return {authenticated: true};
+          return {authenticated: true, token: action.token};
           break;
 
         case actionTypes.SUCCESSFUL_LOGOUT:

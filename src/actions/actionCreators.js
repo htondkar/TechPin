@@ -9,9 +9,10 @@ function initialLoadActionCreator(response) {
   }
 }
 
-function successfulLogin() {
+function successfulLogin(token) {
   return {
     type: actionTypes.SUCCESSFUL_LOGIN,
+    token
   }
 }
 function failedLogin(response) {
@@ -55,11 +56,26 @@ export function authenticate(username, password) {
     return api.fakeaAuthenticate()
       .then(
         (response) => {
-          dispatch(successfulLogin())
-          return Promise.resolve()
+          dispatch(successfulLogin(response))
+          return Promise.resolve(response)
         },
         (response) => {
            dispatch(failedLogin(response))
+           return Promise.reject(response)
+         }
+       )
+  }
+}
+
+
+export function submitMoreInfoForm(formData) {
+  return dispatch => {
+    return api.editFormSubmit(formData) // instead of this start a new ajax call with and send the formdata
+      .then(
+        (response) => {
+          return Promise.resolve(response)
+        },
+        (response) => {
            return Promise.reject(response)
          }
        )

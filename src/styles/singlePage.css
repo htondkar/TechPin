@@ -27,6 +27,7 @@
 }
 .single-body > div span.nps-score  {
   color: #666;
+  font-size: 15.5px;
   font-family: 'Rubik';
   font-weight: 400;
   display: inline-block;

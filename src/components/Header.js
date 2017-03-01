@@ -1,5 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import * as actions from '../actions/actionCreators';
 
 import Modal from 'react-modal';
 import SignupForm from './SignupForm';
@@ -31,7 +33,7 @@ const modalStyle = {
 
 };
 
-export default class Header extends React.Component {
+class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,8 +68,9 @@ export default class Header extends React.Component {
     }
  }
 
-  handleLogIn = () => {
-   console.log('login');
+  handleLogIn = (username, password) => {
+   this.props.authenticate(username, password)
+     .then((response)=>{console.log(response)}, ()=>{});
  }
 
   render() {
@@ -99,7 +102,7 @@ export default class Header extends React.Component {
           className='login-signup-modal'
           contentLabel="Modal">
             {this.state.view === 'login' ?
-            <LoginForm handleLogIn={this.handleLogIn} handleSignUp={this.handleSignUp} key='login'/> :
+            <LoginForm handleLogIn={this.handleLogIn} key='login'/> :
             <SignupForm handleSignUp={this.handleSignUp} key='signup'/>}
         </Modal>
         <Drawer
@@ -126,3 +129,5 @@ export default class Header extends React.Component {
 
 Header.propTypes = {
 };
+
+export default connect(null, actions)(Header);

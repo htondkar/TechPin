@@ -129,7 +129,7 @@ export default class Top25 extends React.Component {
             className='add-modal'
             overlayClassName="add-overlay"
             contentLabel="Modal">
-              <AddForm />
+              <AddForm closeModal={this.closeModal} />
           </Modal>
         </div>
       );

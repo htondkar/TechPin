@@ -79,7 +79,21 @@ class mockApi {
   static submitStartUp(formData) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve('submit successful');
+        resolve('123456789');
+      }, 1000);
+    })
+  }
+  static fakeaAuthenticate(userna, password) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('123456789');
+      }, 1000);
+    })
+  }
+  static editFormSubmit(formData) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(formData.get('website'));
       }, 1000);
     })
   }

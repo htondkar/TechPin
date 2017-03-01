@@ -1,3 +1,52 @@
-.edit-info-main {
+.edit-info-form {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.three-field {
+  flex-basis: 30%;
+  width: 30% !important;
+}
+.two-field {
+  flex-basis: 45%;
+  width: 45% !important;
+}
+.share-info {
+  text-align: center;
+}
+.submit-edit {
   padding: 0 30px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.full {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+.input-file {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+}
+.input-file + label {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.25em;
+  cursor: pointer;
+  font-weight: 400;
+  color: white;
+  background: #E8E8E8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.upload-button > button > div:first-child {
+  cursor: pointer;
 }

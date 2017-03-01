@@ -58,10 +58,13 @@ export default class SinglePageToolbar extends React.Component {
             </IconButton>
           </ToolbarGroup>
           {editAble && <ToolbarGroup>
+            <IconButton tooltip='edit this page' tooltipPosition='top-center'>
               <EditorModeEdit
               style={styles.editModeIcon}
+              color='red'
               hoverColor={'#9C27B0'}
               onClick={this.checkAuthAndRedirect}/>
+            </IconButton>
             </ToolbarGroup>}
         </Toolbar>
         <Snackbar

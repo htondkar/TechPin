@@ -65,6 +65,7 @@ class AddForm extends React.Component {
     this.setState({
       snackBarOpen: false,
     });
+    this.props.aSyncSuccess && this.props.closeModal();
   };
 
   handleSubmit = () => {
