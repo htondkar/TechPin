@@ -21,33 +21,49 @@ class EditInfo extends React.Component {
     super(props);
     this.state = {
       snackBarOpen: false,
-      responseText: ''
+      responseText: '',
+      formData: {}
     }
   }
 
   textFieldChangeHandler = (event, value) => {
     const formVals = {};
     formVals[event.target.id] = value;
-    this.setState({...formVals})
+    const prevFormData = this.state.formData;
+    const newFormData = Object.assign({}, prevFormData, formVals);
+
+    this.setState({formData: newFormData})
+  }
+
+  valid = (values) => {
+    if (values.length >= 3) {
+      return true;
+    }
+    return false;
   }
 
   handleSubmit = () => {
     let formData = new FormData();
-    const keys = Object.keys(this.state);
-    const values = Object.values(this.state);
-    for (let i = 0; i < keys.length; i++) {
-      formData.append(keys[i], values[i])
+    const keys = Object.keys(this.state.formData);
+    const values = Object.values(this.state.formData);
+    if(this.valid(values)) {
+      this.setState({formIsValid: true})
+      for (let i = 0; i < keys.length; i++) {
+        formData.append(keys[i], values[i])
+      }
+      formData.append('logo', document.getElementById('logo').files[0]);
+      this.props.actions.submitMoreInfoForm(formData)
+        .then(
+          response=>this.setState({snackBarOpen: true, responseText: editFormSubmitSuccessFeedbackText}),
+          response=>this.setState({snackBarOpen: true, responseText: editFormSubmitFailedFeedbackText})
+        );
+    } else {
+      this.setState({snackBarOpen: true, responseText: 'please give us more info!', formIsValid: false})
     }
-    formData.append('logo', document.getElementById('logo').files[0]);
-    this.props.actions.submitMoreInfoForm(formData)
-      .then(
-        response=>this.setState({snackBarOpen: true, responseText: editFormSubmitSuccessFeedbackText}),
-        response=>this.setState({snackBarOpen: true, responseText: editFormSubmitFailedFeedbackText})
-      );
   }
 
   handleSnackBarClose = () => {
-    browserHistory.push(`/start-ups/${this.props.params.startUpName}/`);
+    this.state.formIsValid && browserHistory.push(`/start-ups/${this.props.params.startUpName}/`);
   }
 
   render() {
@@ -64,23 +80,26 @@ class EditInfo extends React.Component {
             {`Share your info about ${name} with us!`}
           </div>
           <form className="edit-info-form">
-            <TextField id='website' className='three-field' hintText="Website" onChange={this.textFieldChangeHandler} />
-            <TextField id='email' className='three-field' hintText="email address" type='email' onChange={this.textFieldChangeHandler}/>
-            <TextField id='employees' className='three-field' hintText="Number of Employees" onChange={this.textFieldChangeHandler}/>
-            <TextField id='launch' className='three-field' hintText="Launch Year" onChange={this.textFieldChangeHandler}/>
-            <TextField id='city' className='three-field' hintText="City" onChange={this.textFieldChangeHandler}/>
-            <TextField id='country' className='three-field' hintText="Country" onChange={this.textFieldChangeHandler}/>
-            <TextField id='desc' fullWidth={true} rows={3} multiLine={true} hintText="What do they do?" onChange={this.textFieldChangeHandler}/>
-            <TextField id='android' fullWidth={true} hintText="Android App Url" onChange={this.textFieldChangeHandler}/>
-            <TextField id='ios' fullWidth={true} hintText="iOs App Url" onChange={this.textFieldChangeHandler}/>
-            <TextField id='linkedin' className='three-field' hintText="Linkedin profile" onChange={this.textFieldChangeHandler}/>
-            <TextField id='twitter' className='three-field' hintText="Twitter Account" onChange={this.textFieldChangeHandler}/>
-            <TextField id='instagram' className='three-field' hintText="Instagram profile" onChange={this.textFieldChangeHandler}/>
+            <TextField id='website' className='three-field' floatingLabelText="Website" onChange={this.textFieldChangeHandler} />
+            <TextField id='email' className='three-field' floatingLabelText="email address" type='email' onChange={this.textFieldChangeHandler}/>
+            <TextField id='employees' className='three-field' floatingLabelText="Number of Employees" onChange={this.textFieldChangeHandler}/>
+            <TextField id='launch' className='three-field' floatingLabelText="Launch Year" onChange={this.textFieldChangeHandler}/>
+            <TextField id='city' className='three-field' floatingLabelText="City" onChange={this.textFieldChangeHandler}/>
+            <TextField id='country' className='three-field' floatingLabelText="Country" onChange={this.textFieldChangeHandler}/>
+            <TextField id='desc' fullWidth={true} rows={3} multiLine={true} floatingLabelText="What do they do?" onChange={this.textFieldChangeHandler}/>
+            <TextField id='android' fullWidth={true} floatingLabelText="Android App Url" onChange={this.textFieldChangeHandler}/>
+            <TextField id='ios' fullWidth={true} floatingLabelText="iOs App Url" onChange={this.textFieldChangeHandler}/>
+            <TextField id='linkedin' className='three-field' floatingLabelText="Linkedin profile" onChange={this.textFieldChangeHandler}/>
+            <TextField id='twitter' className='three-field' floatingLabelText="Twitter Account" onChange={this.textFieldChangeHandler}/>
+            <TextField id='instagram' className='three-field' floatingLabelText="Instagram profile" onChange={this.textFieldChangeHandler}/>
             <div className='full upload-button'>
-              <IconButton tooltip="upload a logo">
-                <label htmlFor='logo'><FileFileUpload/></label>
+              <div>
+                <div className="upload-logo-text">upload logo</div>
+                <IconButton style={{width: '24px', height: '24px', padding: 0}}>
                 <input type="file" id='logo' name='logo' className='input-file'/>
-              </IconButton>
+                <label htmlFor='logo'><FileFileUpload/></label>
+                </IconButton>
+              </div>
             </div>
           </form>
           <div className="submit-edit">

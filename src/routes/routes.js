@@ -6,10 +6,10 @@ import Top25 from '../components/Top25';
 import EditInfo from '../components/EditInfo';
 import AboutPage from '../components/AboutPage';
 import SinglePage from '../components/SinglePage';
-import DetailedInfo from '../components/DetailedInfo';
 import CategoryPage from '../components/CategoryPage';
 import RequireAuth from '../components/HOCs/RequireAuth';
 import ContributePage from '../components/ContributePage';
+import AllEntries from '../components/AllEntries';
 
 export default (
   <Route path="/" component={Main}>
@@ -17,6 +17,7 @@ export default (
     <Route path="about" component={AboutPage} />
     <Route path="contribute" component={ContributePage} />
     <Route path="categories/:category" component={CategoryPage} />
+    <Route path="all-entries" component={AllEntries} />
     <Route path="start-ups/:startUpName" component={SinglePage}/>
     <Route path="start-ups/:startUpName/edit" component={RequireAuth(EditInfo)} />
   </Route>

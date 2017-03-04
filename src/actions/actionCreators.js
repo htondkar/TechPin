@@ -81,3 +81,21 @@ export function submitMoreInfoForm(formData) {
        )
   }
 }
+export function signupUser(formData) {
+  return dispatch => {
+    return api.signupUser(formData) // instead of this start a new ajax call with and send the formdata
+      .then(
+        (response) => {
+          return Promise.resolve(response)
+        },
+        (response) => {
+           return Promise.reject(response)
+         }
+       )
+  }
+}
+export function logOut() {
+  return {
+    type: actionTypes.LOG_OUT,
+  };
+}

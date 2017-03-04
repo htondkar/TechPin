@@ -119,7 +119,7 @@ export default class Top25 extends React.Component {
               </list>
             </div>
           </main>
-          <FloatingActionButton className='floating-action-button' onClick={this.handleModalOpen}>
+          <FloatingActionButton secondary={true} className='floating-action-button' onClick={this.handleModalOpen}>
             <ContentAdd />
           </FloatingActionButton>
           <Modal

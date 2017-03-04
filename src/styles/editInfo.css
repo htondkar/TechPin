@@ -35,18 +35,50 @@
 	position: absolute;
 }
 .input-file + label {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  /*border-radius: 50%;*/
   font-size: 1.25em;
   cursor: pointer;
   font-weight: 400;
   color: white;
-  background: #E8E8E8;
+  /*background: #E8E8E8;*/
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.upload-button > button > div:first-child {
+.upload-logo-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #bbb;
+  margin-right: 5px;
+}
+.upload-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.upload-button > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+}
+.upload-button > button  {
   cursor: pointer;
+}
+.upload-button > button > div svg {
+  cursor: pointer;
+}
+@media screen and (max-width: 410px) {
+  .three-field {
+    flex-basis: 100%;
+  }
+  .two-field {
+    flex-basis: ;
+  }
 }

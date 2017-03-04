@@ -19,11 +19,14 @@
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
 }
 .column:hover {
-  background-color: #9C27B0;
+  background-color: #304FFE;
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 14px, rgba(0, 0, 0, 0.117647) 0px 1px 10px;
 }
 .column:hover div.chooser-title > div{
   color: white;
+}
+.column:hover div.sort-menu > button svg{
+  fill: white !important;
 }
 .top25-header {
   text-align: center;
@@ -126,9 +129,10 @@ div.before-top25-title {
 @media screen and (max-width: 860px) {
   .flex-container {
     flex-wrap: wrap;
+    justify-content: space-between;
   }
   .column {
-    flex-basis: 45%;
+    flex-basis: 47%;
     margin-bottom: 27px;
   }
 }

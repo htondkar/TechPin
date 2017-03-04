@@ -8,8 +8,8 @@ export default function auth(state = [], action) {
           return {authenticated: true, token: action.token};
           break;
 
-        case actionTypes.SUCCESSFUL_LOGOUT:
-          return {authenticated: false};
+        case actionTypes.LOG_OUT:
+          return {authenticated: false, token: null};
           break;
 
         default:

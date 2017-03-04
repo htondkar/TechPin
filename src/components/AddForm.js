@@ -39,8 +39,8 @@ class AddForm extends React.Component {
 
   handleFormFields = (event, value) => {
     const field = event.target.name;
-    event.target.name === 'name' && this.setState({nameField: value})
-    event.target.name === 'website' && this.setState({websiteField: value})
+    field === 'name' && this.setState({nameField: value})
+    field === 'website' && this.setState({websiteField: value})
   };
 
   handleAddTag = tag => {

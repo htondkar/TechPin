@@ -9,6 +9,7 @@ import LoginForm from './LoginForm';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import AppBar from 'material-ui/AppBar'
+import Snackbar from 'material-ui/Snackbar';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -17,9 +18,10 @@ import ContentContentPaste from 'material-ui/svg-icons/content/content-paste';
 import Drawer from 'material-ui/Drawer';
 import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
 import Logo from '../../images/techpin.png';
-import categories from '../helpers/categories'
+import categories from '../helpers/categories';
 
 const modalStyle = {
   overlay : {
@@ -30,9 +32,11 @@ const modalStyle = {
     bottom            : 0,
     backgroundColor   : 'rgba(0, 0, 0, 0.4)',
   },
-
 };
-
+const toolbarStyle = {
+  height: '45px',
+  backgroundColor: '#304FFE',
+};
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -40,6 +44,9 @@ class Header extends React.Component {
       modalIsOpen: false,
       drawerIsOpen: false,
       view: 'login',
+      aSyncCall: false,
+      snackBarOpen: false,
+      responseText: ''
     }
   }
 
@@ -60,18 +67,34 @@ class Header extends React.Component {
 
   handleDrawerClose = () => this.setState({drawerIsOpen: false});
 
-  handleSignUp = () => {
+  handleSignUp = (formData) => {
     if (this.state.view === 'login') {
       this.setState({view: 'signup'})
     } else {
-      console.log('signup');
+      this.setState({aSyncCall: true});
+      this.props.signupUser(formData)
+        .then((response) => this.setState({
+          modalIsOpen: false,
+          snackBarOpen: true,
+          responseText: response}));
     }
  }
 
   handleLogIn = (username, password) => {
+  this.setState({aSyncCall: true});
    this.props.authenticate(username, password)
-     .then((response)=>{console.log(response)}, ()=>{});
+   .then(() => this.setState({
+     modalIsOpen: false,
+     snackBarOpen: true,
+     aSyncCall: false,
+     responseText: 'You are now authenticated'}));
  }
+
+ handleRequestSnackBarClose = () => {
+    this.setState({
+      snackBarOpen: false,
+    });
+  };
 
   render() {
 
@@ -85,7 +108,15 @@ class Header extends React.Component {
             <div>
               <FlatButton
                 label={this.props.authenticated ? 'logout' : 'login'}
-                onClick={this.openModal}
+                onClick={() => {
+                  if(!this.props.authenticated) {
+                    this.openModal()
+                  }
+                  else {
+                    this.setState({responseText: 'You signed out'})
+                    this.props.logOut()
+                  }
+                }}
               />
               <FlatButton
                 label="categories"
@@ -94,6 +125,7 @@ class Header extends React.Component {
             </div>
          }
         />
+
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
@@ -102,8 +134,8 @@ class Header extends React.Component {
           className='login-signup-modal'
           contentLabel="Modal">
             {this.state.view === 'login' ?
-            <LoginForm handleLogIn={this.handleLogIn} key='login'/> :
-            <SignupForm handleSignUp={this.handleSignUp} key='signup'/>}
+            <LoginForm handleLogIn={this.handleLogIn} handleSignUp={this.handleSignUp} aSyncCall={this.state.aSyncCall} key='login'/> :
+            <SignupForm handleSignUp={this.handleSignUp} aSyncCall={this.state.aSyncCall} key='signup'/>}
         </Modal>
         <Drawer
           width={250}
@@ -122,6 +154,12 @@ class Header extends React.Component {
                 </Link>)})}
           </List>
         </Drawer>
+        <Snackbar
+          open={this.state.snackBarOpen}
+          message={this.state.responseText}
+          autoHideDuration={2500}
+          onRequestClose={this.handleRequestSnackBarClose}
+        />
       </div>
       );
   }
@@ -129,5 +167,9 @@ class Header extends React.Component {
 
 Header.propTypes = {
 };
-
-export default connect(null, actions)(Header);
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth.authenticated
+  }
+}
+export default connect(mapStateToProps, actions)(Header);

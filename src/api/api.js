@@ -73,28 +73,35 @@ class mockApi {
   return new Promise(function(resolve, reject) {
     setTimeout(function() {
       resolve(Object.assign([], list));
-    }, 200);
+    }, 300);
     });
   }
   static submitStartUp(formData) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve('123456789');
-      }, 1000);
+      }, 1500);
     })
   }
-  static fakeaAuthenticate(userna, password) {
+  static fakeaAuthenticate(username, password) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve('123456789');
-      }, 1000);
+      }, 1500);
     })
   }
   static editFormSubmit(formData) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(formData.get('website'));
-      }, 1000);
+      }, 2500);
+    })
+  }
+  static signupUser(formData) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('Successfuly signed up, you can login now');
+      }, 3500);
     })
   }
 }

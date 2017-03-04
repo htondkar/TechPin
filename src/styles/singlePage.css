@@ -108,6 +108,9 @@
 div.comments > span {
   margin-left: 4px;
 }
+.toolbar > div:last-of-type {
+  margin-right: -23px;
+}
 @media screen and (max-width: 920px) {
   .single-page {
     width: 80%;
@@ -122,6 +125,29 @@ div.comments > span {
     width: 100%;
     margin: 0
   }
+}
+@media screen and (max-width: 400px) {
+  div.single-body {
+    flex-direction: column;
+    align-items: center;
+  }
+  div.single-body > * {
+    display: block;
+  }
+  div.single-body > div > *:not(:last-child) {
+    margin-left: 0 !important;
+  }
+  div.single-body > img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 30px;
+  }
+  .single-body > div {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+
 }
 
 @media screen and (min-width: 1400px) {

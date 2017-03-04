@@ -12,12 +12,13 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 
 const styles = {
-  toolbarBackArrow: {
+  toolbarHomeIcon: {
     marginLeft: 27,
     cursor: 'pointer',
   },
   editModeIcon: {
     cursor: 'pointer',
+    marginRight: '-23px !important',
   }
 }
 
@@ -48,11 +49,11 @@ export default class SinglePageToolbar extends React.Component {
     const editAble = this.props.editAble;
     return (
       <div>
-        <Toolbar>
+        <Toolbar className='toolbar'>
           <ToolbarGroup firstChild={true}>
-            <IconButton tooltip='back' tooltipPosition='top-center'>
+            <IconButton tooltip='back to home' tooltipPosition='top-center'>
               <NavigationArrowBack
-                style={styles.toolbarBackArrow}
+                style={styles.toolbarHomeIcon}
                 hoverColor={'#9C27B0'}
                 onClick={()=>browserHistory.push('/')}/>
             </IconButton>
