@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
+import {Link, browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import * as actions from '../actions/actionCreators';
 
@@ -97,7 +97,6 @@ class Header extends React.Component {
   };
 
   render() {
-
     return (
       <div>
         <AppBar
@@ -122,10 +121,13 @@ class Header extends React.Component {
                 label="categories"
                 onTouchTap={this.handleDrawerToggle}
               />
+              <FlatButton
+                label="all start ups"
+                onTouchTap={() => browserHistory.push('/all-entries')}
+              />
             </div>
          }
         />
-
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}

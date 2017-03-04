@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 
 import IconButton from 'material-ui/IconButton';
-import CategoryPaper from './CategoryPaper';
+import StartupPaper from './StartupPaper';
 import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 
 const styles = {
@@ -50,7 +50,7 @@ class CategoryPage extends React.Component {
           <div></div>
         </header>
         <main className="category-flex-container">
-          {this.filterByCategory(list).map((product, i) => <CategoryPaper key={i} product={product} />)}
+          {this.filterByCategory(list).map((product, i) => <StartupPaper key={i} product={product} />)}
         </main>
       </div>);
   }

@@ -55,6 +55,7 @@ export default class SinglePageToolbar extends React.Component {
               <NavigationArrowBack
                 style={styles.toolbarHomeIcon}
                 hoverColor={'#9C27B0'}
+                color='black'
                 onClick={()=>browserHistory.push('/')}/>
             </IconButton>
           </ToolbarGroup>
@@ -62,7 +63,7 @@ export default class SinglePageToolbar extends React.Component {
             <IconButton tooltip='edit this page' tooltipPosition='top-center'>
               <EditorModeEdit
               style={styles.editModeIcon}
-              color='red'
+              color='#0D47A1'
               hoverColor={'#9C27B0'}
               onClick={this.checkAuthAndRedirect}/>
             </IconButton>
