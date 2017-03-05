@@ -1,11 +1,11 @@
 import * as actionTypes from '../actions/actionTypes';
 
-export default function sortedList(state = [], action) {
+export default function startUps(state = [], action) {
 
     switch (action.type) {
 
-        case actionTypes.INITIAL_LOAD:
-          return action.list;
+        case actionTypes.INITIAL_SORT:
+          return action.sortedList;
           break;
 
         default:

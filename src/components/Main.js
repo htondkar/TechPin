@@ -6,6 +6,7 @@ import * as actions from '../actions/actionCreators';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Header from './Header';
 import Footer from './Footer';
+import $ from 'jquery';
 
 
 class Main extends React.Component {
@@ -13,6 +14,16 @@ class Main extends React.Component {
   constructor(){
     super();
     injectTapEventPlugin();
+  }
+
+  componentDidMount = () => {
+    $(window).bind('scroll', function () {
+    if ($(window).scrollTop() > 65) {
+        $('.all-entries-toolbar').addClass('fixed');
+    } else {
+        $('.all-entries-toolbar').removeClass('fixed');
+    }
+});
   }
 
   render() {
@@ -38,6 +49,7 @@ class Main extends React.Component {
 function mapStateToProps(state) {
   return {
     list: state.startUps,
+    sortedList: state.sortedList,
   }
 }
 

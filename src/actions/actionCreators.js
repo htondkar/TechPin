@@ -1,11 +1,19 @@
-
 import * as actionTypes from './actionTypes';
 import api from '../api/api';
+import alphaSorter from '../helpers/alphaSorter';
 
 function initialLoadActionCreator(response) {
   return {
     type: actionTypes.INITIAL_LOAD,
     list: response
+  }
+}
+
+function initialSortActionCreator(response) {
+  const sortedList = alphaSorter(response);
+  return {
+    type: actionTypes.INITIAL_SORT,
+    sortedList
   }
 }
 
@@ -29,10 +37,15 @@ function initialLoadActionCreator(response) {
   }
 }
 
+
+
 export function loadIntialData() {
   return dispatch => {
     return api.loadList()
-      .then(response => dispatch(initialLoadActionCreator(response)))
+      .then(response => {
+        dispatch(initialLoadActionCreator(response));
+        dispatch(initialSortActionCreator(response));
+      })
   }
 }
 
