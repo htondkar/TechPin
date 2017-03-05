@@ -74,11 +74,21 @@ div.fixed {
 }
 
 @media screen and (max-width: 880px) {
-  .all-entries-wrapper {
-
-    /*justify-content: space-around;*/
-  }
   .row-wrapper {
     flex-direction: column;
+    align-items: center;
+    align-content: center;
+  }
+  .startup-row {
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 600px) {
+  .all-entries-toolbar > div:first-of-type > span {
+    display: none
+  }
+  .all-entries-toolbar > div:last-of-type,
+  .all-entries-toolbar > div:last-of-type > input {
+    width: 100% !important;
   }
 }

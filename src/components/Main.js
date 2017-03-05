@@ -18,12 +18,12 @@ class Main extends React.Component {
 
   componentDidMount = () => {
     $(window).bind('scroll', function () {
-    if ($(window).scrollTop() > 65) {
-        $('.all-entries-toolbar').addClass('fixed');
-    } else {
-        $('.all-entries-toolbar').removeClass('fixed');
-    }
-});
+      if ($(window).scrollTop() > 65) {
+          $('.all-entries-toolbar').addClass('fixed');
+      } else {
+          $('.all-entries-toolbar').removeClass('fixed');
+      }
+    });
   }
 
   render() {
