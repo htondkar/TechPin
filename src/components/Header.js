@@ -6,8 +6,8 @@ import * as actions from '../actions/actionCreators';
 import Modal from 'react-modal';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
-import AppbarRightControlDesktop from './AppbarRightControlDesktop';
 import AppbarRightControlMobile from './AppbarRightControlMobile';
+import AppbarRightControlDesktop from './AppbarRightControlDesktop';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import AppBar from 'material-ui/AppBar'
@@ -35,10 +35,12 @@ const modalStyle = {
     backgroundColor   : 'rgba(0, 0, 0, 0.4)',
   },
 };
+
 const toolbarStyle = {
   height: '45px',
   backgroundColor: '#304FFE',
 };
+
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -82,14 +84,18 @@ class Header extends React.Component {
         .then((response) => this.setState({
           modalIsOpen: false,
           snackBarOpen: true,
+          aSyncCall: false,
+          view: 'login',
           responseText: response}));
     }
  }
+
   handleLogOut = () => {
     this.props.logOut();
     this.setState({responseText: 'You signed out'});
     this.openModal();
   }
+
   handleLogIn = (username, password) => {
   this.setState({aSyncCall: true});
    this.props.authenticate(username, password)
@@ -120,7 +126,7 @@ class Header extends React.Component {
               openModal={this.openModal}
               handleDrawerToggle={this.handleDrawerToggle}
               LogOut={this.handleLogOut} /> :
-            <AppbarRightControlMobile />
+            <AppbarRightControlMobile handleDrawerToggle={this.handleDrawerToggle} />
           }
         />
         <Modal
@@ -142,8 +148,20 @@ class Header extends React.Component {
           docked={false}
           onRequestChange={(open) => this.setState({drawerIsOpen: open})} >
           <List>
-            <Subheader>Categories</Subheader>
+            {this.state.windowWidth < 600 && <ListItem
+              primaryText={this.props.authenticated ? 'LOG OUT' : 'LOG IN'}
+              onClick={() => {
+                this.setState({drawerIsOpen: false});
+                this.openModal();
+              }}/>}
+            {this.state.windowWidth < 600 && <ListItem
+              primaryText='ALL STARTUPS'
+              onClick={() => {
+                this.setState({drawerIsOpen: false});
+                browserHistory.push('/all-entries');
+              }}/>}
             <Divider></Divider>
+            <Subheader style={{paddingLeft: 0, textAlign: 'center'}}>Categories</Subheader>
             {categories.map((item, i) => {
               return (
                 <Link to={`/categories/${item}`} key={i}>

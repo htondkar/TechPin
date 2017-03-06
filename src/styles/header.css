@@ -1,4 +1,5 @@
-div.drawer > div:last-child > div > a > div > span {
+div.drawer > div:last-child > div > a > div > span,
+div.drawer > div:last-child > div:first-child > div span {
   text-align: center;
   font-family: 'Rubik' !important;
 }

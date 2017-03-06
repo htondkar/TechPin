@@ -27,7 +27,7 @@ export default class LoginForm extends React.Component {
       <div>
         <FlatButton label="signup" onClick={this.props.handleSignUp}></FlatButton>
         <RaisedButton
-          label={!this.props.aSyncCall && "signup"}
+          label={!this.props.aSyncCall && "login"}
           primary={true}
           onClick={this.props.handleLogIn}>
             {this.props.aSyncCall && <CircularProgress size={30} color='white'/>}

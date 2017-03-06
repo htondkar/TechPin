@@ -11,7 +11,7 @@
 
 }
 .column {
-  transition: background-color 0.4s ease-out;
+  transition: all 0.4s ease-out;
   flex-basis: 30%;
   border: 1px solid #e8e8e8;
   background-color: #e8e8e8;
@@ -20,7 +20,8 @@
 }
 .column:hover {
   background-color: #304FFE;
-  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 14px, rgba(0, 0, 0, 0.117647) 0px 1px 10px;
+  border: 1px solid #304FFE;
+  box-shadow: rgba(48, 79, 254, 0.117647) 0px 0px 15px 5px, rgba(48, 79, 254, 0.117647) 0px 0px 10px 5px;
 }
 .column:hover div.chooser-title > div{
   color: white;
@@ -78,7 +79,10 @@
   top: 20px !important;
 }
 span.widget:hover div.widget-title {
-  color: #9C27B0;
+  color: #304FFE;
+}
+span.widget:hover div.widget-text {
+  color: black;
 }
 div.widget-title {
   transition: color .4s ease-out;
