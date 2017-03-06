@@ -1,4 +1,5 @@
 const categories =  require( '../helpers/categories');
+
 function getRandomYear() {
   return Math.floor(Math.random() * 15 + 2000);
 }
@@ -52,15 +53,15 @@ const list = names.map( function(name, i) {
     linkedinProfile: '',
     webSite: 'http://www.google.com',
     comments: [
-      {author:'lorem1', text:'Lorem ipsum dolor sit.'},
-      {author:'lorem2', text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
-      {author:'lorem2', text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
-      {author:'lorem2', text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
-      {author:'lorem2', text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
-      {author:'lorem2', text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
-      {author:'lorem2', text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
-      {author:'lorem2', text:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
-      {author:'lorem3', text:'Lorem ipsum dolor sit.'}
+      {author:'lorem1', date: new Date(), commentText:'Lorem ipsum dolor sit.'},
+      {author:'lorem2', date: new Date(), commentText:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
+      {author:'lorem2', date: new Date(), commentText:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
+      {author:'lorem2', date: new Date(), commentText:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
+      {author:'lorem2', date: new Date(), commentText:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
+      {author:'lorem2', date: new Date(), commentText:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
+      {author:'lorem2', date: new Date(), commentText:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
+      {author:'lorem2', date: new Date(), commentText:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, repellat.'},
+      {author:'lorem3', date: new Date(), commentText:'Lorem ipsum dolor sit.'}
     ],
     npsScore: getRandomNps(),
   }
@@ -101,6 +102,20 @@ class mockApi {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve('Successfuly signed up, you can login now');
+      }, 3500);
+    })
+  }
+  static getCategories() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(categories);
+      }, 3500);
+    })
+  }
+  static postNewComment(commentData) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve();
       }, 3500);
     })
   }

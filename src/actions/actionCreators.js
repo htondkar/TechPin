@@ -17,10 +17,11 @@ function initialSortActionCreator(response) {
   }
 }
 
-function successfulLogin(token) {
+function successfulLogin(token, username) {
   return {
     type: actionTypes.SUCCESSFUL_LOGIN,
-    token
+    token,
+    username
   }
 }
 function failedLogin(response) {
@@ -34,6 +35,13 @@ function initialLoadActionCreator(response) {
   return {
     type: actionTypes.INITIAL_LOAD,
     list: response
+  }
+}
+
+function successfulNewComment(commentData) {
+  return {
+    type: actionTypes.POST_NEW_COMMENT,
+    commentData
   }
 }
 
@@ -54,12 +62,24 @@ export function submitStartUp(formData) {
     return api.submitStartUp(JSON.stringify(formData))
       .then(
         (response) => {
-          console.log(response)
           return Promise.resolve()
         },
         (response) => {
-           console.log(response)
            return Promise.reject(response)
+         }
+       )
+  }
+}
+export function loadIntialCategories() {
+  return dispatch => {
+    return api.getCategories()
+      .then(
+        (response) => {
+          dispatch({type: actionTypes.INITIAL_CATEGORIES_LOAD, categories: response});
+          return Promise.resolve();
+        },
+        (error) => {
+           return Promise.reject(error);
          }
        )
   }
@@ -69,12 +89,12 @@ export function authenticate(username, password) {
     return api.fakeaAuthenticate()
       .then(
         (response) => {
-          dispatch(successfulLogin(response))
+          dispatch(successfulLogin(response, username))
           return Promise.resolve(response)
         },
-        (response) => {
-           dispatch(failedLogin(response))
-           return Promise.reject(response)
+        (error) => {
+           dispatch(failedLogin(error))
+           return Promise.reject(error)
          }
        )
   }
@@ -107,6 +127,21 @@ export function signupUser(formData) {
        )
   }
 }
+export function postNewComment(commentData) {
+  return dispatch => {
+    return api.postNewComment(commentData)
+      .then(
+        (response) => {
+          dispatch(successfulNewComment(commentData))
+          return Promise.resolve(response)
+        },
+        (error) => {
+           return Promise.reject(error)
+         }
+       )
+  }
+}
+
 export function logOut() {
   return {
     type: actionTypes.LOG_OUT,

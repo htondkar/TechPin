@@ -29,7 +29,7 @@ export default class LoginForm extends React.Component {
         <RaisedButton
           label={!this.props.aSyncCall && "login"}
           primary={true}
-          onClick={this.props.handleLogIn}>
+          onClick={() => this.props.handleLogIn(this.state.username, this.state.password)}>
             {this.props.aSyncCall && <CircularProgress size={30} color='white'/>}
         </RaisedButton>
       </div>

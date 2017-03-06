@@ -147,7 +147,7 @@ div.before-top25-title {
     margin-bottom: 27px;
   }
 }
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 699px) {
   .column {
     flex-basis: 100%;
     margin-bottom: 27px;

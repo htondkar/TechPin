@@ -2,13 +2,14 @@ import {createStore, compose, applyMiddleware} from 'redux';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {browserHistory} from 'react-router';
 import rootReducer from '../reducers/index';
-import {loadIntialData} from '../actions/actionCreators';
+import {loadIntialData, loadIntialCategories} from '../actions/actionCreators';
 import thunk from 'redux-thunk';
 
 // laod initial state
 const defaultState = {
   startUps: [],
   sortedList: {},
+  categories: [],
   auth: {authenticated: false},
 };
 
@@ -21,6 +22,7 @@ const store = createStore(
 );
 
 store.dispatch(loadIntialData());
+store.dispatch(loadIntialCategories());
 
 export const history = syncHistoryWithStore(browserHistory, store);
 export default store;

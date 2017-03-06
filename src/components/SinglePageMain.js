@@ -1,7 +1,10 @@
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import * as actions from '../actions/actionCreators';
 
 
 import CommentRow from './CommentRow';
+import CommentBox from './CommentBox';
 import StartupWidgetMoreInfo from './StartupWidgetMoreInfo';
 
 import Paper from 'material-ui/Paper';
@@ -18,11 +21,32 @@ const styles = {
   },
 }
 
-export default class SinglePageMain extends React.Component {
+class SinglePageMain extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      username: '',
+      commentAsyncCall: false,
+    }
   }
 
+  componentWillReceiveProps = (nextProps) => {
+    if(nextProps.username) {
+      this.setState({username: nextProps.username})
+    }
+  }
+
+  handlePostComment = (commentData) => {
+    if (commentData.commentText.length > 1) {
+      this.setState({commentAsyncCall: true})
+      commentData.author = this.state.username;
+      commentData.startupName = this.props.startUp.name;
+      this.props.postNewComment(commentData)
+        .then(response => {
+          this.setState({commentAsyncCall: false})
+        })
+    }
+  }
 
   render() {
       const startUp = this.props.startUp || {};
@@ -44,16 +68,21 @@ export default class SinglePageMain extends React.Component {
               <a href={startUp.androidApp}><img src={GoogleStoreLogo} alt=""/></a>
               <a href={startUp.linkedinProfile}><img src={LinkedLogo} alt=""/></a>
             </div>
-
             <Divider />
-
             <div className="comments">
-              <span>Comments</span>
+              <CommentBox
+                authenticated={this.props.authenticated}
+                handlePostComment={this.handlePostComment}/>
               {comments.map((comment, i) => <CommentRow comment={comment} key={i}/>)}
-              <RaisedButton primary={true} label={this.props.authenticated ? 'post comment' : 'login to comment'} />
             </div>
-
           </Paper>
         </div>);
   }
 }
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth.authenticated,
+    username: state.auth.username,
+  }
+}
+export default connect(mapStateToProps, actions)(SinglePageMain);

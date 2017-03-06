@@ -23,7 +23,6 @@ import ContentContentPaste from 'material-ui/svg-icons/content/content-paste';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
 import Logo from '../../images/techpin.png';
-import categories from '../helpers/categories';
 
 const modalStyle = {
   overlay : {
@@ -51,12 +50,20 @@ class Header extends React.Component {
       aSyncCall    : false,
       snackBarOpen : false,
       responseText : '',
+      categories   : [],
     }
   }
 
   componentDidMount = () => {
+
     this.setState({windowWidth: window.innerWidth});
     window.addEventListener('resize', () => this.setState({windowWidth: window.innerWidth}));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.categories.length > 0) {
+      this.setState({categories: nextProps.categories});
+    }
   }
 
   openModal = () => {
@@ -141,7 +148,7 @@ class Header extends React.Component {
             <SignupForm handleSignUp={this.handleSignUp} aSyncCall={this.state.aSyncCall} key='signup'/>}
         </Modal>
         <Drawer
-          width={250}
+          width={270}
           className='drawer'
           openSecondary={true}
           open={this.state.drawerIsOpen}
@@ -162,7 +169,7 @@ class Header extends React.Component {
               }}/>}
             <Divider></Divider>
             <Subheader style={{paddingLeft: 0, textAlign: 'center'}}>Categories</Subheader>
-            {categories.map((item, i) => {
+            {this.state.categories.map((item, i) => {
               return (
                 <Link to={`/categories/${item}`} key={i}>
                   <ListItem primaryText={item} onClick={this.handleDrawerClose}/>
@@ -184,7 +191,8 @@ Header.propTypes = {
 };
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    categories: state.categories
   }
 }
 export default connect(mapStateToProps, actions)(Header);
