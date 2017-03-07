@@ -44,12 +44,15 @@
   font-weight: 600;
   margin-bottom: 10px;
 }
-.single-body > div span:nth-child(2)  {
+.single-body > div div:nth-child(2) > span {
   color: grey;
-  font-size: 16px;
+  font-size: 20px;
   font-family: 'Raleway';
   font-weight: 400;
   margin-bottom: 10px;
+}
+.single-body > div div:nth-child(2) {
+  display: inline-block;
 }
 .single-body {
   padding: 30px;
@@ -126,6 +129,7 @@ div.comments > span {
   border-radius: 10px;
   display: flex;
   align-items: flex-end;
+  padding-left: 10px;
 }
 .comment-box > button > div svg{
   width: 40px !important;
@@ -133,6 +137,18 @@ div.comments > span {
 }
 .comment-box > div:first-child {
   flex: 1 0 auto;
+}
+.divider {
+  margin-top: 34px;
+  width: 100%;
+  border-bottom: 1px solid rgb(224,224,244);
+}
+.comment-title {
+  font-size: 20px;
+  font-family: 'Rubik';
+}
+#signle-page-snackbar > div > div > span {
+  font-size: 20px;
 }
 @media screen and (max-width: 920px) {
   .single-page {

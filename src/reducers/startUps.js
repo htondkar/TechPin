@@ -13,7 +13,6 @@ export default function startUps(state = [], action) {
           const index = nextState.findIndex(startUp => startUp.name === action.commentData.startupName);
           let startupToMutate = state[index];
           startupToMutate.comments.unshift(action.commentData);
-          console.log(startupToMutate);
           nextState[index] = startupToMutate;
           return nextState
           break;

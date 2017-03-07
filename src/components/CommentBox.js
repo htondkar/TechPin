@@ -3,6 +3,7 @@ import React, {PropTypes} from 'react';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import ContentAddCircle from 'material-ui/svg-icons/content/add-circle';
+import CircularProgress from 'material-ui/CircularProgress';
 
 export default class CommentBox extends React.Component {
   constructor(props) {
@@ -31,13 +32,17 @@ export default class CommentBox extends React.Component {
         hintText="Write A Comment"
         rows={3}
         multiLine={true}
+        id='comment-field'
         onChange={this.handleTextFieldChange}
       />
-      <IconButton
-        style={{padding: 0}}><ContentAddCircle
-        color='#2196F3'
-        onClick={this.handleNewComment}/>
-      </IconButton>
+      {this.props.commentAsyncCall ?
+        <CircularProgress size={33.33} style={{marginBottom: '10px'}}/> :
+        <IconButton
+          style={{padding: 0}}><ContentAddCircle
+          color='#2196F3'
+          onClick={this.handleNewComment}/>
+        </IconButton>
+      }
       </div>
     );
   }
@@ -45,4 +50,3 @@ export default class CommentBox extends React.Component {
 
 CommentBox.propTypes = {
 };
-// <RaisedButton primary={true} label={this.props.authenticated ? 'post comment' : 'login to comment'} />
