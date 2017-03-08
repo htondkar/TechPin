@@ -21,7 +21,6 @@ export default class LoginForm extends React.Component {
   }
 
   googleAuthSuccess = (response) => {
-    console.log(response);
     let payLoad = {
       userInfo: response.profileObj,
       tokenId: response.tokenId
@@ -50,12 +49,19 @@ export default class LoginForm extends React.Component {
             {this.props.aSyncCall && <CircularProgress size={30} color='white'/>}
         </RaisedButton>
       </div>
-      <GoogleLogin
-        clientId="73175440911-t81rmqp1ij2f9tt8jupiqksd1srrot79.apps.googleusercontent.com"
-        buttonText="Login"
-        onSuccess={this.googleAuthSuccess}
-        onFailure={this.googleAuthfailed}
-      />
+      <div className="google-wrapper">
+        <GoogleLogin
+          clientId="73175440911-t81rmqp1ij2f9tt8jupiqksd1srrot79.apps.googleusercontent.com"
+          buttonText={'google signin'}
+          className='google-login-button'
+          onSuccess={this.googleAuthSuccess}
+          onFailure={this.googleAuthfailed}>
+            {<div>
+              <i className="fa fa-google-plus-official" aria-hidden="true"></i>
+              <span className="google-text">google signin</span>
+            </div> }
+        </GoogleLogin>
+      </div>
     </div>);
   }
 }
