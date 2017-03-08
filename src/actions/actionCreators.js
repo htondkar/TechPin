@@ -10,11 +10,14 @@ function initialLoadActionCreator(response) {
 }
 
 function initialSortActionCreator(response) {
-  const sortedList = alphaSorter(response);
-  return {
-    type: actionTypes.INITIAL_SORT,
-    sortedList
-  }
+  // const sortedList = alphaSorter(response);
+  // return {
+  //   type: actionTypes.INITIAL_SORT,
+  //   sortedList
+  // }
+  return new Promise((resolve, reject) => {
+    resolve(alphaSorter(response))
+  })
 }
 
 function successfulLogin(token, username) {
@@ -28,13 +31,6 @@ function failedLogin(response) {
   return {
     type: actionTypes.FAILED_LOGIN,
     response
-  }
-}
-
-function initialLoadActionCreator(response) {
-  return {
-    type: actionTypes.INITIAL_LOAD,
-    list: response
   }
 }
 
@@ -56,17 +52,21 @@ function successfulNewRate(response, productId) {
   }
 }
 
-
-
 export function loadInitialData() {
   return dispatch => {
     return api.loadList()
       .then(response => {
         dispatch(initialLoadActionCreator(response));
-        dispatch(initialSortActionCreator(response));
+        initialSortActionCreator(response).then( sortedList => 
+          dispatch({
+            type: actionTypes.INITIAL_SORT,
+             sortedList
+          })
+        )
       })
   }
 }
+
 
 export function submitStartUp(formData) {
   return dispatch => {

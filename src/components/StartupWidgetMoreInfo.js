@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 
 import StarRating from './StarRating';
 import Divider from 'material-ui/Divider';
-import Badge from 'material-ui/Badge';
 
 const StartupWidgetMoreInfo = (
   {webSite,
@@ -18,7 +17,7 @@ const StartupWidgetMoreInfo = (
   }) => {
   return (
     <div className="single-body">
-      <img src={require('../../images/eventbox.jpg')} height='100px'/>
+      <img src={require('../../images/eventbox.jpg')} height='100px' alt='logo'/>
       <div>
         <span>
           <a href={webSite}>{name}</a>

@@ -1,13 +1,10 @@
 import React, {PropTypes} from 'react';
 
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import StartupRow from './StartupRow';
 
 const toolbarStyles = {
   color: 'white',
-}
-
-const paperStyles = {
 }
 
 export default class AllEntries extends React.Component {
@@ -31,7 +28,7 @@ export default class AllEntries extends React.Component {
           <ToolbarGroup firstChild={true} >
             <ToolbarTitle text="Alphabetically ordered list of startups" style={toolbarStyles}/>
           </ToolbarGroup>
-          <ToolbarGroup>
+          <ToolbarGroup className='search-box-wrapper'>
             <input type='text' name='search' id='search' placeholder='search...' onChange={this.searchHandler}/>
           </ToolbarGroup>
         </Toolbar>

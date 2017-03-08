@@ -6,11 +6,8 @@ import SortingMenu from './SortingMenu';
 
 import sort from '../helpers/helpers';
 import StartUpWidget from './StartUpWidget';
-import {List} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-
 
 const modalStyle = {
   overlay : {

@@ -9,18 +9,18 @@ function compareName(a,b) {
 }
 
 function compareNps(a,b) {
-  if (parseInt(a.nps) - parseInt(b.nps) < 0) {
+  if (parseInt(a.nps, 10) - parseInt(b.nps, 10) < 0) {
     return 1;
-  } else if (parseInt(a.nps) - parseInt(b.nps) > 0) {
+  } else if (parseInt(a.nps, 10) - parseInt(b.nps, 10) > 0) {
     return -1;
   } else {
     return 0;
   }
 }
 function compareRating(a,b) {
-  if (parseInt(a.rating) - parseInt(b.rating) < 0) {
+  if (parseInt(a.rating, 10) - parseInt(b.rating, 10) < 0) {
     return 1;
-  } else if (parseInt(a.rating) - parseInt(b.rating) > 0) {
+  } else if (parseInt(a.rating, 10) - parseInt(b.rating, 10) > 0) {
     return -1;
   } else {
     return 0;

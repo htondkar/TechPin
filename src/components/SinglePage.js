@@ -5,9 +5,6 @@ import SinglePageToolbar from './SinglePageToolbar';
 import SinglePageMain from './SinglePageMain';
 
 class SinglePage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const startUpName = this.props.params.startUpName;

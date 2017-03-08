@@ -2,8 +2,6 @@ import React, {PropTypes} from 'react';
 import Paper from 'material-ui/Paper';
 import {Link} from 'react-router';
 
-import StarRating from './StarRating';
-
 const styles = {
   paper: {
     height: '350px',

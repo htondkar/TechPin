@@ -8,19 +8,14 @@ import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 import AppbarRightControlMobile from './AppbarRightControlMobile';
 import AppbarRightControlDesktop from './AppbarRightControlDesktop';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
 import Snackbar from 'material-ui/Snackbar';
 import Subheader from 'material-ui/Subheader';
-import IconButton from 'material-ui/IconButton';
 
 import {List, ListItem} from 'material-ui/List';
-import ActionNoteAdd from 'material-ui/svg-icons/action/note-add';
-import ContentContentPaste from 'material-ui/svg-icons/content/content-paste';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
 import Logo from '../../images/techpin.png';
 
@@ -33,11 +28,6 @@ const modalStyle = {
     bottom            : 0,
     backgroundColor   : 'rgba(0, 0, 0, 0.4)',
   },
-};
-
-const toolbarStyle = {
-  height: '45px',
-  backgroundColor: '#304FFE',
 };
 
 class Header extends React.Component {
@@ -120,18 +110,18 @@ class Header extends React.Component {
   };
 
   handleOAuthLogIn = (isSuccessful, payload) => {
-    //should dispatch 2 actions: 
-    // 1.call server with the token and payload. 
+    //should dispatch 2 actions:
+    // 1.call server with the token and payload.
     // 2.retrieve new token from server and save it in the store
     if (isSuccessful) {
       this.props.OAuthLogIn(payload)
         .then(() => this.setState({
-          modalIsOpen: false, 
-          snackBarOpen: true, 
-          responseText: 'You are now authenticated'}) ); 
+          modalIsOpen: false,
+          snackBarOpen: true,
+          responseText: 'You are now authenticated'}) );
     } else {
       this.setState({
-        snackBarOpen: true, 
+        snackBarOpen: true,
         responseText: payload})
     }
   }
@@ -141,7 +131,7 @@ class Header extends React.Component {
       <div>
         <AppBar
           className={'app-bar'}
-          title={<Link to='/'><img src={Logo} className='logo-img'/></Link>}
+          title={<Link to='/'><img src={Logo} alt="logo" className='logo-img'/></Link>}
           showMenuIconButton={false}
           iconElementRight={
             this.state.windowWidth > 600 ?
@@ -161,15 +151,15 @@ class Header extends React.Component {
           className='login-signup-modal'
           contentLabel="Modal">
             {this.state.view === 'login' ?
-            <LoginForm 
+            <LoginForm
               handleOAuthLogIn={this.handleOAuthLogIn}
-              handleLogIn={this.handleLogIn} 
-              handleSignUp={this.handleSignUp} 
-              aSyncCall={this.state.aSyncCall} 
+              handleLogIn={this.handleLogIn}
+              handleSignUp={this.handleSignUp}
+              aSyncCall={this.state.aSyncCall}
               key='login'/> :
-            <SignupForm 
-              handleSignUp={this.handleSignUp} 
-              aSyncCall={this.state.aSyncCall} 
+            <SignupForm
+              handleSignUp={this.handleSignUp}
+              aSyncCall={this.state.aSyncCall}
               key='signup'/>}
         </Modal>
         <Drawer
