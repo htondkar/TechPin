@@ -119,6 +119,23 @@ class Header extends React.Component {
     });
   };
 
+  handleOAuthLogIn = (isSuccessful, payload) => {
+    //should dispatch 2 actions: 
+    // 1.call server with the token and payload. 
+    // 2.retrieve new token from server and save it in the store
+    if (isSuccessful) {
+      this.props.OAuthLogIn(payload)
+        .then(() => this.setState({
+          modalIsOpen: false, 
+          snackBarOpen: true, 
+          responseText: 'You are now authenticated'}) ); 
+    } else {
+      this.setState({
+        snackBarOpen: true, 
+        responseText: payload})
+    }
+  }
+
   render() {
     return (
       <div>
@@ -144,8 +161,16 @@ class Header extends React.Component {
           className='login-signup-modal'
           contentLabel="Modal">
             {this.state.view === 'login' ?
-            <LoginForm handleLogIn={this.handleLogIn} handleSignUp={this.handleSignUp} aSyncCall={this.state.aSyncCall} key='login'/> :
-            <SignupForm handleSignUp={this.handleSignUp} aSyncCall={this.state.aSyncCall} key='signup'/>}
+            <LoginForm 
+              handleOAuthLogIn={this.handleOAuthLogIn}
+              handleLogIn={this.handleLogIn} 
+              handleSignUp={this.handleSignUp} 
+              aSyncCall={this.state.aSyncCall} 
+              key='login'/> :
+            <SignupForm 
+              handleSignUp={this.handleSignUp} 
+              aSyncCall={this.state.aSyncCall} 
+              key='signup'/>}
         </Modal>
         <Drawer
           width={270}

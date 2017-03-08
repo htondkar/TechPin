@@ -8,29 +8,26 @@ export default function startUps(state = [], action) {
           return action.list;
           break;
 
-        case actionTypes.POST_NEW_COMMENT:
-          let nextState = [...state];
-          const index = nextState.findIndex(startUp => startUp.name === action.commentData.startupName);
+        case actionTypes.SUCCESSFUL_NEW_RATE_SUBMIT:
+        console.log(action);
+          const index = state.findIndex(startUp => startUp.id === action.productId);
+          console.log(index);
           let startupToMutate = state[index];
-          startupToMutate.comments.unshift(action.commentData);
-          nextState[index] = startupToMutate;
-          return nextState
-          break;
+          startupToMutate.rating = action.newRating;
+          // startupToMutate.raters = action.raters;
+          return [...state.slice(0, index), startupToMutate, ...state.slice(index + 1)];
+        break;
+
+        // case actionTypes.POST_NEW_COMMENT:
+        //   let nextState = [...state];
+        //   const index = nextState.findIndex(startUp => startUp.name === action.commentData.startupName);
+        //   let startupToMutate = nextState[index];
+        //   startupToMutate.comments.unshift(action.commentData);
+        //   nextState[index] = startupToMutate;
+        //   return nextState
+        //   break;
 
         default:
             return state;
     }
 }
-
-// state.map(startup => {
-//   if () {
-//     let comments = startup.comments;
-//     const newComment = {
-//       author: action.commentData.author,
-//       text: action.commentData.commentText,
-//       date: action.commentData.date}
-//     return startup.comments.push(newComment);
-//   } else {
-//     return startup;
-//   }
-// })

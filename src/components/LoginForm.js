@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import GoogleLogin from 'react-google-login';
 
 import CircularProgress from 'material-ui/CircularProgress';
 import TextField from 'material-ui/TextField';
@@ -14,9 +15,25 @@ export default class LoginForm extends React.Component {
       password: ''
     };
   }
+
   handleLogin = () => {
     this.props.handleLogIn(this.state.username, this.state.password);
   }
+
+  googleAuthSuccess = (response) => {
+    console.log(response);
+    let payLoad = {
+      userInfo: response.profileObj,
+      tokenId: response.tokenId
+    };
+    this.props.handleOAuthLogIn(true, payLoad);
+  }
+
+  googleAuthfailed = (response) => {
+    console.log(response);
+    this.props.handleOAuthLogIn(false, 'failed to login...');
+  }
+
   render() {
     return (
       <div className='login-form'>
@@ -33,6 +50,12 @@ export default class LoginForm extends React.Component {
             {this.props.aSyncCall && <CircularProgress size={30} color='white'/>}
         </RaisedButton>
       </div>
+      <GoogleLogin
+        clientId="73175440911-t81rmqp1ij2f9tt8jupiqksd1srrot79.apps.googleusercontent.com"
+        buttonText="Login"
+        onSuccess={this.googleAuthSuccess}
+        onFailure={this.googleAuthfailed}
+      />
     </div>);
   }
 }

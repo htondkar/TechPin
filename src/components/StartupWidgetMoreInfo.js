@@ -13,7 +13,8 @@ const StartupWidgetMoreInfo = (
     shortDesc,
     rating,
     raters,
-    npsScore
+    npsScore,
+    id
   }) => {
   return (
     <div className="single-body">
@@ -25,7 +26,7 @@ const StartupWidgetMoreInfo = (
             {`${city},${country}. founded in ${creationYear}`}
           </span>
         </span>
-        <StarRating rating={rating} raters={raters} editAble={true} className='star-rating-single' />
+        <StarRating productId={id} rating={rating} raters={raters} editAble={true} className='star-rating-single' />
         <span className="nps-score">{`N.P.S: ${npsScore}`}</span>
         <span>{shortDesc}</span>
       </div>

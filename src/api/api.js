@@ -15,6 +15,9 @@ function getRandomNps() {
 function getRandomCategory(arr) {
   return arr[Math.floor(Math.random()*arr.length)]
 }
+function getId() {
+  return Math.floor(Math.random()*10000);
+}
 
 const names = [
   "Snapp","Divar","Digikala","Aparat","Digiato","Takhfifan","Eventbox","Jobinja"
@@ -38,6 +41,7 @@ const list = names.map( function(name, i) {
   else {ratedBy = 'new';}
   return {
     name: name,
+    id: getId(),
     creationYear: getRandomYear(),
     shortDesc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, quam.',
     longDesc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima facere minus dolores amet itaque, ullam harum nisi voluptatibus velit praesentium quaerat laboriosam esse consectetur a dignissimos culpa perspiciatis fugit. Ipsa!',
@@ -117,6 +121,20 @@ class mockApi {
       setTimeout(() => {
         resolve();
       }, 3500);
+    })
+  }
+  static postNewRate(rate, productId, userName) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(rate);
+      }, 500);
+    })
+  }
+  static OAuthLogIn({tokenId, firstName, lastName, email}) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({token: '1111111111', username: 'randomestring!'});
+      }, 500);
     })
   }
 }

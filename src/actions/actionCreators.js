@@ -45,6 +45,17 @@ function successfulNewComment(commentData) {
   }
 }
 
+function successfulNewRate(response, productId) {
+  const newRaters = 20;
+  const newRating = response;
+  return {
+    type: actionTypes.SUCCESSFUL_NEW_RATE_SUBMIT,
+    newRating: newRating,
+    newRaters: newRaters,
+    productId
+  }
+}
+
 
 
 export function loadIntialData() {
@@ -127,13 +138,45 @@ export function signupUser(formData) {
        )
   }
 }
+
+
 export function postNewComment(commentData) {
-  return dispatch => {
+  return dispatch => { ///////// NIAZ BE PRODUCT ID HAST BARAYE CALL
     return api.postNewComment(commentData)
       .then(
         (response) => {
           dispatch(successfulNewComment(commentData))
           return Promise.resolve(response)
+        },
+        (error) => {
+           return Promise.reject(error)
+         }
+       )
+  }
+}
+export function postNewRate(rate, productId, userName) {
+  console.log(rate, productId, userName);
+  return dispatch => {
+    return api.postNewRate(rate, productId, userName)
+      .then(
+        (response) => {
+          dispatch(successfulNewRate(response, productId))
+          return Promise.resolve(response)
+        },
+        (error) => {
+           return Promise.reject(error)
+         }
+       )
+  }
+}
+
+export function OAuthLogIn(payLoad) {
+  return dispatch => {
+    return api.OAuthLogIn(payLoad)
+      .then(
+        (response) => {
+          dispatch(successfulLogin(response.token, response.username))
+          return Promise.resolve(response.username)
         },
         (error) => {
            return Promise.reject(error)

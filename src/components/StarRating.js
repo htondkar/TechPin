@@ -34,7 +34,7 @@ class StarRating extends React.Component {
 	}
 	componentWillReceiveProps = (nextProps) => {
 		let rating = nextProps.rating;
-		let raters = this.props.raters;
+		let raters = nextProps.raters;
 		const editAble = nextProps.editAble || false;
 	  this.setState({rating, editAble, raters});
 	}
@@ -59,19 +59,13 @@ class StarRating extends React.Component {
 				//check if user is authenticated -> if not -> give feedback -> OK
 				this.setState({snackBarIsOpen: true, snackBarText: 'Please login first'})
 			} else {
-				this.setState({ratingAsyncCall: true, rating: 0});
-				//calculate the new rating --> how ?
-				const newRating = this.calculateNewRating(idx + 1);
-				console.log(newRating);
-				this.setState({rating: newRating, ratingAsyncCall: false, raters: this.state.raters + 1});
-				//call the submit rate action creator directly -> does not exist right now
-				// if successful -> dispatch an action -> update the store via reducer -> new rating, if not show old rating
+				this.setState({ratingAsyncCall: true});
+				let newRating = ((idx + 1) + this.state.rating * this.state.raters) / (this.state.raters + 1);
+				this.setState({rating: newRating, raters: this.state.raters + 1}); //call the api
+				this.props.postNewRate(idx + 1, this.props.productId, 'username') //call the api
 			}
 		}
   }
-	calculateNewRating = (newRate) => {
-		return Math.floor((this.state.rating * this.state.raters + newRate)/(this.state.raters + 1));
-	}
   render() {
 		let stars = [];
 		for(let i = 0 ; i < 5; i++){
