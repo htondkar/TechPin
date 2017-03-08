@@ -78,7 +78,7 @@ class mockApi {
   return new Promise(function(resolve, reject) {
     setTimeout(function() {
       resolve(Object.assign([], list));
-    }, 300);
+    }, 500);
     });
   }
   static submitStartUp(formData) {

@@ -21,7 +21,6 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
-store.dispatch(loadIntialData());
 store.dispatch(loadIntialCategories());
 
 export const history = syncHistoryWithStore(browserHistory, store);

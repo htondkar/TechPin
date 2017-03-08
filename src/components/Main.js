@@ -16,6 +16,10 @@ class Main extends React.Component {
     injectTapEventPlugin();
   }
 
+  componentWillMount = () => {
+    this.props.actions.loadInitialData()
+  }
+
   componentDidMount = () => {
     $(window).bind('scroll', function () {
       if ($(window).scrollTop() > 65) {

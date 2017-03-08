@@ -58,7 +58,7 @@ function successfulNewRate(response, productId) {
 
 
 
-export function loadIntialData() {
+export function loadInitialData() {
   return dispatch => {
     return api.loadList()
       .then(response => {
