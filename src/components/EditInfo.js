@@ -36,7 +36,7 @@ class EditInfo extends React.Component {
   }
 
   valid = (values) => {
-    if (values.length >= 3) {
+    if (values.length >= 1) {
       return true;
     }
     return false;
@@ -58,7 +58,7 @@ class EditInfo extends React.Component {
           response=>this.setState({snackBarOpen: true, responseText: editFormSubmitFailedFeedbackText})
         );
     } else {
-      this.setState({snackBarOpen: true, responseText: 'please give us more info!', formIsValid: false})
+      this.setState({snackBarOpen: true, responseText: 'please fill at least 1 field', formIsValid: false})
     }
   }
 
@@ -117,12 +117,10 @@ class EditInfo extends React.Component {
     );
   }
 }
-//
-// <input type='file' id='logo' name='logo' className='input-file'/>
-// <label htmlFor='logo'>&#10153;</label>
-//
+
 EditInfo.propTypes = {
 };
+
 function mapStateToProps(state){
   return {token: state.auth.token};
 }

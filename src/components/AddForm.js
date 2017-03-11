@@ -2,8 +2,6 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/actionCreators';
 
-import tagList from '../helpers/tagList';
-
 import CircularProgress from 'material-ui/CircularProgress';
 import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
@@ -18,15 +16,17 @@ class AddForm extends React.Component {
   constructor () {
     super();
     this.state = {
-      selectFieldValue : 1,
+      p_type : 1,
       chipList : [],
+      categoryIds : [],
       errors: {},
       snackBarOpen: false,
       addStartUpResponseText: '',
-      nameField: '',
-      websiteField: '',
+      name_en: '',
+      website: '',
       aSyncCall: false,
       aSyncSuccess: false,
+      categories: [],
     };
     this.styles = {
      chip: {
@@ -35,18 +35,27 @@ class AddForm extends React.Component {
    };
   }
 
-  handleSelectFieldChange = (event, index, selectFieldValue) => this.setState({selectFieldValue});
+  componentDidMount = () => {
+    this.setState({categories: this.props.categories});
+  }
+
+  handleSelectFieldChange = (event, index, selectFieldValue) => this.setState({p_type: selectFieldValue});
 
   handleFormFields = (event, value) => {
     const field = event.target.name;
-    field === 'name' && this.setState({nameField: value})
-    field === 'website' && this.setState({websiteField: value})
+    field === 'name_en' && this.setState({name_en: value})
+    field === 'website' && this.setState({website: value})
   };
 
   handleAddTag = tag => {
-    let chipList = this.state.chipList;
-    chipList.push(this.state.searchText);
-    this.setState({chipList, searchText: ''});
+    if (this.state.chipList.length < 3) {
+      let chipList = this.state.chipList;
+      let categoryIds = this.state.categoryIds;
+      let index = this.state.categories.findIndex(item => item.name_en === this.state.searchText)
+      categoryIds.push(this.state.categories[index].id)
+      chipList.push(this.state.searchText);
+      this.setState({chipList, searchText: ''});
+    }
   };
 
   handleRequestDelete = key => {
@@ -69,37 +78,39 @@ class AddForm extends React.Component {
   };
 
   handleSubmit = () => {
-    this.setState({aSyncCall: true});
+
     const formData = {
-      name: this.state.nameField,
-      website: this.state.websiteField,
-      type: this.state.selectFieldValue,
-      tags: this.state.chipList
+      name_en: this.state.name_en,
+      website: this.state.website,
+      p_type: this.state.p_type,
+      categories: this.state.categoryIds
     }
     const validationResult = this.validateForms(formData);
-    validationResult.valid ?
-    this.clearStateAndSubmit(formData) :
-    this.setState({errors: validationResult.errors})
+    if (validationResult.valid) {
+      this.clearStateAndSubmit(formData)
+      this.setState({aSyncCall: true});
+    } else {
+      this.setState({errors: validationResult.errors})
+    }
   }
 
   clearStateAndSubmit = formData => {
     this.setState({errors: {}});
-    this.props.submitStartUp(formData)
+    this.props.submitProduct(formData)
       .then(response => {
         this.setState({
           addStartUpResponseText: 'successfully submitted, we will check this product asap!',
-          selectFieldValue : 1,
+          p_type : 1,
           chipList : [],
           errors: {},
           snackBarOpen: true,
-          nameField: '',
-          websiteField: '',
+          name_en: '',
+          website: '',
           aSyncCall: false,
           aSyncSuccess: true
         });
       })
       .catch(response => {
-        console.log(response);
         this.setState({
           addStartUpResponseText: 'failed to submit, plaease try again or contact us',
           snackBarOpen: true,
@@ -113,7 +124,7 @@ class AddForm extends React.Component {
     let valid = true;
     let errors = {};
 
-    if (!formData.name || formData.name === '' || formData.name.length <= 1) {
+    if (!formData.name_en || formData.name_en === '' || formData.name_en.length <= 1) {
       errors.name = 'name is rquired !';
       valid = false;
     }
@@ -144,7 +155,7 @@ class AddForm extends React.Component {
         <div><h3>Add a Startup!</h3></div>
         <div>
           <TextField
-            name='name'
+            name='name_en'
             errorText={this.state.errors.name}
             floatingLabelText="Product Name"
             onChange={(event, newValue)=>this.handleFormFields(event, newValue)}/>
@@ -158,9 +169,9 @@ class AddForm extends React.Component {
         </div>
         <div>
           <SelectField
-            name='type'
+            name='p_type'
             floatingLabelText="Product Type"
-            value={this.state.selectFieldValue}
+            value={this.state.p_type}
             onChange={this.handleSelectFieldChange}>
               <MenuItem value={1} primaryText="Startup" />
               <MenuItem value={2} primaryText="Accelerator" />
@@ -172,7 +183,7 @@ class AddForm extends React.Component {
             floatingLabelText="Add Tags"
             filter={AutoComplete.caseInsensitiveFilter}
             searchText={this.state.searchText}
-            dataSource={tagList}
+            dataSource={this.state.categories.map(item => item.name_en)}
             maxSearchResults={5}
             onUpdateInput={this.handleUpdateInput}
             onNewRequest={(tag) => this.handleAddTag(tag)}
@@ -207,4 +218,7 @@ class AddForm extends React.Component {
 AddForm.propTypes = {
 };
 
-export default connect(null, actions)(AddForm);
+function mapStateToProps(state) {
+  return {categories: state.categories}
+}
+export default connect(mapStateToProps, actions)(AddForm);

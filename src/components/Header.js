@@ -90,7 +90,7 @@ class Header extends React.Component {
   handleLogOut = () => {
     this.props.logOut();
     this.setState({responseText: 'You signed out'});
-    this.openModal();
+    this.setState({snackBarOpen: true});
   }
 
   handleLogIn = (username, password) => {
@@ -186,8 +186,8 @@ class Header extends React.Component {
             <Subheader style={{paddingLeft: 0, textAlign: 'center'}}>Categories</Subheader>
             {this.state.categories.map((item, i) => {
               return (
-                <Link to={`/categories/${item}`} key={i}>
-                  <ListItem primaryText={item} onClick={this.handleDrawerClose}/>
+                <Link to={`/categories/${item.name_en}`} key={i}>
+                  <ListItem primaryText={item.name_en} onClick={this.handleDrawerClose}/>
                 </Link>)})}
           </List>
         </Drawer>

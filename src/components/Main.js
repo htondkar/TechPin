@@ -8,7 +8,6 @@ import Header from './Header';
 import Footer from './Footer';
 import $ from 'jquery';
 
-
 class Main extends React.Component {
 
   constructor(){

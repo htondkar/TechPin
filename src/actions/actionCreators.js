@@ -57,7 +57,7 @@ export function loadInitialData() {
     return api.loadList()
       .then(response => {
         dispatch(initialLoadActionCreator(response));
-        initialSortActionCreator(response).then( sortedList => 
+        initialSortActionCreator(response).then( sortedList =>
           dispatch({
             type: actionTypes.INITIAL_SORT,
              sortedList
@@ -67,8 +67,9 @@ export function loadInitialData() {
   }
 }
 
-
-export function submitStartUp(formData) {
+export function submitProduct(formData) {
+  console.log(formData);
+  //use real api here
   return dispatch => {
     return api.submitStartUp(JSON.stringify(formData))
       .then(
@@ -81,6 +82,7 @@ export function submitStartUp(formData) {
        )
   }
 }
+
 export function loadIntialCategories() {
   return dispatch => {
     return api.getCategories()

@@ -24,7 +24,7 @@ class CategoryPage extends React.Component {
   }
 
   filterByCategory = arr => arr.filter(item => {
-    return item.category === this.props.params.category;
+    return item.category.name_en === this.props.params.category;
   })
 
   componentDidMount = () => {

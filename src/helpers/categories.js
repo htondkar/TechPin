@@ -27,6 +27,6 @@ const categories = [
   "SaaS",
   "Productivity",
   "Accelerator"
-]
+].map((item, i) => {return {name_en: item, id: i}});
 
 module.exports = categories;

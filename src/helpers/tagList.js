@@ -26,6 +26,6 @@ const list = [
 "SaaS",
 "Productivity",
 "Accelerator"
-];
+]
 
 export default list

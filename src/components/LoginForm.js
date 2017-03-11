@@ -1,23 +1,22 @@
 import React, {PropTypes} from 'react';
 import GoogleLogin from 'react-google-login';
 
-import CircularProgress from 'material-ui/CircularProgress';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-
+import {PulseLoader} from 'halogen';
 
 export default class LoginForm extends React.Component {
   constructor () {
     super();
     this.state={
-      username: '',
+      email: '',
       password: ''
     };
   }
 
   handleLogin = () => {
-    this.props.handleLogIn(this.state.username, this.state.password);
+    this.props.handleLogIn(this.state.email, this.state.password);
   }
 
   googleAuthSuccess = (response) => {
@@ -37,7 +36,7 @@ export default class LoginForm extends React.Component {
     return (
       <div className='login-form'>
       <div><h3>Login or Signup</h3></div>
-      <div><TextField floatingLabelText="Username" onChange={(event, val)=>this.setState({username: val})}/></div>
+      <div><TextField floatingLabelText="email" onChange={(event, val)=>this.setState({email: val})}/></div>
       <div><TextField type='password' floatingLabelText="password" onChange={(event, val)=>this.setState({password: val})}/></div>
       <br/>
       <div>
@@ -46,7 +45,7 @@ export default class LoginForm extends React.Component {
           label={!this.props.aSyncCall && "login"}
           primary={true}
           onClick={() => this.props.handleLogIn(this.state.username, this.state.password)}>
-            {this.props.aSyncCall && <CircularProgress size={30} color='white'/>}
+            {this.props.aSyncCall && <PulseLoader color="#FFFFFF" size="6px"/> }
         </RaisedButton>
       </div>
       <div className="google-wrapper">
