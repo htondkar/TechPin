@@ -14,21 +14,23 @@ const styles = {
     borderRadius: '50%',
   }
 };
-
+const baseUrl = 'http://185.117.22.106:8000'
 const CategoryPaper = ({product, WrapperClassName}) => {
   return (
-    <Link to={`/start-ups/${product.name}`}>
+    <Link to={`/start-ups/${product.slug}`}>
       <Paper style={styles.paper} className={`category-paper ${WrapperClassName}`}>
           <div className="category-image">
-            <img style={styles.img} crossOrigin src={require('../../images/eventbox.jpg')} alt=""/>
+            <img style={styles.img} src={baseUrl + product.details.logo} alt="logo"/>
           </div>
-          <span><h3>{product.name}</h3></span>
+          <span><h3>{product.name_en}</h3></span>
           <div className="category-info-box">
-            <div>{`${product.city}, ${product.country}`}</div>
-            <div>{`Founded in ${product.creationYear}`}</div>
-            <div>{`N.P.S: ${product.npsScore}`}</div>
+            <div>{`${product.details.city}, ${product.details.country}`}</div>
+            <div>{`Founded in ${product.details.year}`}</div>
+            <div>{`N.P.S: ${product.n_p_score}`}</div>
           </div>
-          <div id='paper-short-desc'>{product.shortDesc}</div>
+          <div id='paper-short-desc'>
+            {product.details.summary.split(' ').splice(0, 10).join(' ')}
+          </div>
       </Paper>
     </Link>
   );

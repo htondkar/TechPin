@@ -186,7 +186,7 @@ class Header extends React.Component {
             <Subheader style={{paddingLeft: 0, textAlign: 'center'}}>Categories</Subheader>
             {this.state.categories.map((item, i) => {
               return (
-                <Link to={`/categories/${item.name_en}`} key={i}>
+                <Link to={`/categories/${item.slug}`} key={i}>
                   <ListItem primaryText={item.name_en} onClick={this.handleDrawerClose}/>
                 </Link>)})}
           </List>

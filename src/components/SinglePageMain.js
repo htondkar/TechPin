@@ -35,7 +35,7 @@ class SinglePageMain extends React.Component {
   componentWillMount = () => {
     this.setState({
       product: this.props.product.product,
-      // comments: this.props.product.comments,
+      comments: this.props.product.comments,
     })
   }
 
@@ -83,45 +83,50 @@ class SinglePageMain extends React.Component {
         var desc = details.description_en
       }
     }
-      return(
-        <div>
-          <Paper style={styles.paper} zDepth={3}>
-            {this.props.children}
-            <StartupWidgetMoreInfo
-              product={this.state.product || {}}/>
-            <div className="detailed-info">
-              <div className="single-about">
-                <span>{`About ${name}`}</span>
-                <p>{desc}</p>
-              </div>
+    const comments = this.state.comments || []
+    return(
+      <div>
+        <Paper style={styles.paper} zDepth={3}>
+          {this.props.children}
+          <StartupWidgetMoreInfo
+            product={this.state.product || {}}/>
+          <div className="detailed-info">
+            <div className="single-about">
+              <span>{`About ${name}`}</span>
+              <p>{desc}</p>
             </div>
-
-            <div className="single-link">
-              <a href={''}><img src={AppleStoreLogo} alt=""/></a>
-              <a href={''}><img src={GoogleStoreLogo} alt=""/></a>
-              <a href={''}><img src={LinkedLogo} alt=""/></a>
-              <div className='divider'></div>
-            </div>
-            <div className="comments">
-              <span className="comment-title">Comments</span>
-              <CommentBox
-                authenticated={this.props.authenticated}
-                handlePostComment={this.handlePostComment}
-                commentAsyncCall={this.state.commentAsyncCall}
-                />
-
-            </div>
-          </Paper>
-          <Snackbar
-            open={this.state.snackBarIsOpen}
-            message={this.state.snackBarText}
-            autoHideDuration={3500}
-            onRequestClose={this.handleSnackBarClose}
-          />
-        </div>);
+          </div>
+          <div className="single-link">
+            <a href={this.state.product ? this.state.product.details.ios_app : ''} target="_blank">
+              <img src={AppleStoreLogo} alt=""/>
+            </a>
+            <a href={this.state.product ? this.state.product.details.android_app : ''} target="_blank">
+              <img src={GoogleStoreLogo} alt=""/>
+            </a>
+            <a href={this.state.product ? this.state.product.details.linkedin : ''} target="_blank">
+              <img src={LinkedLogo} alt=""/>
+            </a>
+            <div className='divider'></div>
+          </div>
+          <div className="comments">
+            <span className="comment-title">Comments</span>
+            <CommentBox
+              authenticated={this.props.authenticated}
+              handlePostComment={this.handlePostComment}
+              commentAsyncCall={this.state.commentAsyncCall}/>
+                {comments.map((comment, i) => <CommentRow comment={comment} key={i}/>)}
+          </div>
+        </Paper>
+        <Snackbar
+          open={this.state.snackBarIsOpen}
+          message={this.state.snackBarText}
+          autoHideDuration={3500}
+          onRequestClose={this.handleSnackBarClose}
+        />
+      </div>);
   }
 }
-// {comments.map((comment, i) => <CommentRow comment={comment} key={i}/>)}
+
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,

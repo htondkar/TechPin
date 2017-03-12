@@ -13,10 +13,10 @@ const CommentRow = ({comment}) => {
           />
         </div>
         <div>
-          <div className="comment-author">{comment.author}:</div>
-          <span className="comment-text">{comment.commentText}</span>
+          <div className="comment-author">{comment.user}:</div>
+          <span className="comment-text">{comment.text}</span>
           <span className="comment-date">
-            {comment.date.toDateString()}
+            {new Date(comment.created_at).toDateString()}
           </span>
         </div>
       </div>

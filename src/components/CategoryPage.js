@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
+import * as actions from '../actions/actionCreators';
 
 import IconButton from 'material-ui/IconButton';
 import StartupPaper from './StartupPaper';
@@ -17,23 +18,38 @@ const styles = {
 }
 
 class CategoryPage extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
+      allTopProducts: [],
     }
   }
 
   filterByCategory = arr => arr.filter(item => {
-    return item.category.name_en === this.props.params.category;
+       return item.categories
+         .some(category => category === this.props.params.category)
   })
 
-  componentDidMount = () => {
-    window.scrollTo(0,0);
+  componentWillMount = () => {
+    if(this.props.topProducts.length > 0) {
+      const allTop = this.props.topProducts
+      this.setState({
+        allTopProducts: [...allTop.topNew, ...allTop.topRanked, ...allTop.randomProducts]
+      })
+    } else {
+      this.props.initialLoadTop25().then(allTop => {
+        this.setState({
+          allTopProducts:
+          [ ...allTop.top_new,
+            ...allTop.top_ranked,
+            ...allTop.random_products]
+        })
+      })
+    }
   }
 
-
   render() {
-    const list = this.props.startUpsList;
     return (
       <div className='category-page main-content'>
         <header className="category-header">
@@ -50,7 +66,8 @@ class CategoryPage extends React.Component {
           <div></div>
         </header>
         <main className="category-flex-container">
-          {this.filterByCategory(list).map((product, i) => <StartupPaper key={i} product={product} />)}
+          {this.filterByCategory(this.state.allTopProducts)
+            .map((product, i) => <StartupPaper key={i} product={product} />)}
         </main>
       </div>);
   }
@@ -61,7 +78,8 @@ CategoryPage.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    startUpsList: state.startUps
+    topProducts: state.topProducts
   }
 }
-export default connect(mapStateToProps)(CategoryPage);
+
+export default connect(mapStateToProps, actions)(CategoryPage);

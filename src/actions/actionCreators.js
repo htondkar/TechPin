@@ -126,6 +126,7 @@ export function initialLoadTop25() {
     return techpinApi.getTop25Products()
       .then(response => {
         dispatch(initialLoadTop25ActionCreator(response.data));
+        return Promise.resolve(response.data)
       })
   }
 }

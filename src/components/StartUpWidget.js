@@ -23,13 +23,14 @@ const StartUpWidget = ({product, i}) => {
     if (shortDesc.split(' ').length < 13) return shortDesc;
     return `${shortDesc} ...`
   }
+  const baseUrl = 'http://185.117.22.106:8000';
   return (
     <div style={styles.container}>
       <Link to={`start-ups/${slug}`}>
         <ListItem
           className='widget'
           secondaryTextLines={2}
-          leftAvatar={<img src={require('../../images/eventbox.jpg')} alt='logo' style={styles.logo} />}
+          leftAvatar={<img src={baseUrl + details.logo} alt='logo' style={styles.logo} />}
           primaryText={null}
           secondaryText={null}>
             <div className='widget-title'>{name_en}</div>

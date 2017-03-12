@@ -21,7 +21,6 @@ const modalStyle = {
 
 };
 
-
 function generateListItem (product, i) {
   return <StartUpWidget product={product} key={product.name_en} i={i}/>
 };

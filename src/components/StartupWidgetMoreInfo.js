@@ -23,13 +23,9 @@ export default class StartupWidgetMoreInfo extends React.Component {
       this.setState({product: nextProps.product})
     }
   }
-  //
-  // componentDidMount = () => {
-  //   console.log(this.props.product);
-  //   this.setState({product: this.props.product})
-  // }
 
   render() {
+    const baseUrl = 'http://185.117.22.106:8000'
     let data = {
       website: this.state.product.website || '',
       name_en: this.state.product.name_en || '',
@@ -40,10 +36,11 @@ export default class StartupWidgetMoreInfo extends React.Component {
       country: this.state.product.details ? this.state.product.details.country : '',
       year: this.state.product.details ? this.state.product.details.year || '' : '',
       summary: this.state.product.details? this.state.product.details.summary : '',
+      logo: this.state.product.details? this.state.product.details.logo : '',
     }
     return (
       <div className="single-body">
-        <img src={require('../../images/eventbox.jpg')} height='100px' alt='logo'/>
+        <img src={baseUrl + data.logo} height='100px' alt='logo'/>
         <div>
           <span>
             <a href={data.website}>{data.name_en}</a>
