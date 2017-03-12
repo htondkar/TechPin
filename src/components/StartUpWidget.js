@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import {baseUrl} from '../api/realApi';
 
 import StarRating from './StarRating';
 
@@ -19,14 +20,17 @@ const StartUpWidget = ({product, i}) => {
     },
   }
   const generateShortDesc = (desc) => {
-    let shortDesc = desc.split(" ").splice(0,13).join(" ")
-    if (shortDesc.split(' ').length < 13) return shortDesc;
-    return `${shortDesc} ...`
+    if (desc.length === 0) {
+      return 'No descriptions yet. be the first one to add descriptions to this product !'
+    } else {
+      let shortDesc = desc.split(" ").splice(0,13).join(" ")
+      if (shortDesc.split(' ').length < 13) return shortDesc;
+      return `${shortDesc} ...`
+    }
   }
-  const baseUrl = 'http://185.117.22.106:8000';
   return (
     <div style={styles.container}>
-      <Link to={`start-ups/${slug}`}>
+      <Link to={`products/${slug}`}>
         <ListItem
           className='widget'
           secondaryTextLines={2}

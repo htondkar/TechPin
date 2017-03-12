@@ -67,15 +67,17 @@ class EditInfo extends React.Component {
   }
 
   render() {
-    const startUpName = this.props.params.startUpName;
-    const index = this.props.list.findIndex(item => item.name === startUpName);
-    const startUp = this.props.list[index];
-    const name = startUp && startUp.name;
+    console.log(this.props.singleProducts);
+    const productSlug = this.props.params.startUpName;
+    const index = this.props.singleProducts
+          .findIndex(item => item.product.slug === productSlug);
+    const product = this.props.singleProducts[index];
+    const name = product && product.name_en;
     return (
       <div className='single-page main-content edit-info'>
         <Paper style={{width: '100%'}} zDepth={3}>
           <SinglePageToolbar editAble={false} />
-          <StartupWidgetMoreInfo {...startUp}/>
+            <StartupWidgetMoreInfo {...product}/>
           <div className="share-info">
             {`Share your info about ${name} with us!`}
           </div>

@@ -20,6 +20,13 @@ function singleProductActionCreator(product) {
   }
 }
 
+function allProductsActionCreator(allProducts) {
+  return {
+    type: actionTypes.LOAD_ALL_PRODUCTS,
+    allProducts
+  }
+}
+
 function initialLoadTop25ActionCreator(response) {
   return {
     type: actionTypes.INITIAL_TOP25_LOAD,
@@ -29,6 +36,7 @@ function initialLoadTop25ActionCreator(response) {
   }
 }
 
+//this is depricated
 function initialSortActionCreator(response) {
   return new Promise((resolve, reject) => {
     resolve(alphaSorter(response))
@@ -167,7 +175,6 @@ export function authenticate(username, password) {
 }
 
 export function getSingleProduct(slug) {
-  console.log('getSingleProduct is called');
   return dispatch => {
     return techpinApi.getSingleProduct(slug)
       .then(
@@ -177,6 +184,21 @@ export function getSingleProduct(slug) {
         },
         (response) => {
            return Promise.reject(response.data)
+         }
+       )
+  }
+}
+
+export function getAllProducts() {
+  return dispatch => {
+    return techpinApi.getAllProducts()
+      .then(
+        (response) => {
+          dispatch(allProductsActionCreator(response.data))
+          return Promise.resolve(response.data.products)
+        },
+        (error) => {
+           return Promise.reject(error)
          }
        )
   }

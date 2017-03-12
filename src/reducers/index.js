@@ -3,7 +3,7 @@ import { routerReducer } from 'react-router-redux'; // to sync react router with
 
 import startUps from './startUps';
 import auth from './auth';
-import sortedList from './sortedList';
+import allProducts from './allProducts';
 import categories from './categories';
 import productTypes from './productTypes';
 import topProducts from './topProducts';
@@ -12,7 +12,7 @@ import singleProducts from './singleProducts';
 const rootReducer = combineReducers({
   startUps,
   auth,
-  sortedList,
+  allProducts,
   categories,
   productTypes,
   topProducts,

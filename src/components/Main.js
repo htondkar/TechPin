@@ -51,8 +51,8 @@ class Main extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    list: state.startUps,
-    sortedList: state.sortedList,
+    allProducts: state.allProducts,
+    singleProducts: state.singleProducts,
     topProducts: state.topProducts,
   }
 }

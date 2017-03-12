@@ -3,7 +3,7 @@ import StartupPaper from './StartupPaper';
 
 function filterSearchTerm(list, searchTerm){
   if (searchTerm !== '') {
-    let filterdList = list.filter(item => item.name.match(new RegExp(searchTerm, 'gi')))
+    let filterdList = list.filter(item => item.name_en.match(new RegExp(searchTerm, 'gi')))
     return filterdList;
   } else {
     return list;

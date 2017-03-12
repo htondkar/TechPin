@@ -32,7 +32,7 @@ class CategoryPage extends React.Component {
   })
 
   componentWillMount = () => {
-    if(this.props.topProducts.length > 0) {
+    if(Object.keys(this.props.topProducts).length > 0) {
       const allTop = this.props.topProducts
       this.setState({
         allTopProducts: [...allTop.topNew, ...allTop.topRanked, ...allTop.randomProducts]

@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 // laod initial state
 const defaultState = {
   startUps: [],
-  sortedList: {},
+  allProducts: {},
   categories: [],
   auth: {authenticated: false},
 };

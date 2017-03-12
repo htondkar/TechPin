@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import {baseUrl} from '../api/realApi';
 
 import StarRating from './StarRating';
 import Divider from 'material-ui/Divider';
@@ -25,7 +26,6 @@ export default class StartupWidgetMoreInfo extends React.Component {
   }
 
   render() {
-    const baseUrl = 'http://185.117.22.106:8000'
     let data = {
       website: this.state.product.website || '',
       name_en: this.state.product.name_en || '',

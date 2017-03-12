@@ -1,4 +1,6 @@
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import * as actions from '../actions/actionCreators';
 
 import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import StartupRow from './StartupRow';
@@ -7,11 +9,20 @@ const toolbarStyles = {
   color: 'white',
 }
 
-export default class AllEntries extends React.Component {
+class AllProducts extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       searchTerm: '',
+      products: {charecter: []}
+    }
+  }
+  componentDidMount = () => {
+    if (Object.keys(this.props.allProducts).length === 0) {
+      this.props.getAllProducts()
+      .then(allProducts => this.setState({products: allProducts}))
+    } else {
+      this.setState({products: this.props.allProducts})
     }
   }
 
@@ -33,12 +44,13 @@ export default class AllEntries extends React.Component {
           </ToolbarGroup>
         </Toolbar>
         <div className="all-entries-wrapper">
-        {Object.keys(this.props.sortedList).map((char, i) => {
-          if (this.props.sortedList[char].length > 0) {
+        {Object.keys(this.state.products)
+          .sort().map((charecter, i) => {
+          if (this.state.products[charecter].length > 0) {
             return <StartupRow
               searchTerm={this.state.searchTerm}
-              key={i} char={char}
-              list={this.props.sortedList[char]} />
+              key={i} char={charecter}
+              list={this.state.products[charecter]} />
           }
         })}
         </div>
@@ -46,5 +58,6 @@ export default class AllEntries extends React.Component {
     );
   }
 }
-AllEntries.propTypes = {
+AllProducts.propTypes = {
 };
+export default connect(null, actions)(AllProducts);

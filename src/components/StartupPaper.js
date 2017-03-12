@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import Paper from 'material-ui/Paper';
 import {Link} from 'react-router';
+import {baseUrl} from '../api/realApi';
 
 const styles = {
   paper: {
@@ -14,10 +15,9 @@ const styles = {
     borderRadius: '50%',
   }
 };
-const baseUrl = 'http://185.117.22.106:8000'
 const CategoryPaper = ({product, WrapperClassName}) => {
   return (
-    <Link to={`/start-ups/${product.slug}`}>
+    <Link to={`/products/${product.slug}`}>
       <Paper style={styles.paper} className={`category-paper ${WrapperClassName}`}>
           <div className="category-image">
             <img style={styles.img} src={baseUrl + product.details.logo} alt="logo"/>

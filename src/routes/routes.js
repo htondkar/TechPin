@@ -9,7 +9,7 @@ import SinglePage from '../components/SinglePage';
 import CategoryPage from '../components/CategoryPage';
 import RequireAuth from '../components/HOCs/RequireAuth';
 import ContributePage from '../components/ContributePage';
-import AllEntries from '../components/AllEntries';
+import AllProducts from '../components/AllProducts';
 
 export default (
   <Route path="/" component={Main}>
@@ -17,8 +17,8 @@ export default (
     <Route path="about" component={AboutPage} />
     <Route path="contribute" component={ContributePage} />
     <Route path="categories/:category" component={CategoryPage} />
-    <Route path="all-entries" component={AllEntries} />
-    <Route path="start-ups/:startUpName" component={SinglePage}/>
-    <Route path="start-ups/:startUpName/edit" component={RequireAuth(EditInfo)} />
+    <Route path="all-entries" component={AllProducts} />
+    <Route path="products/:startUpName" component={SinglePage}/>
+    <Route path="products/:startUpName/edit" component={RequireAuth(EditInfo)} />
   </Route>
 );
