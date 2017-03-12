@@ -66,6 +66,7 @@ export default class Top25 extends React.Component {
    }
 
    handleChangeSorting = (event, value) => {
+     console.log(value);
      const values = value.split('-');
      const updatePrevSort = this.state.sortBy;
      updatePrevSort[values[1]] = values[0]
