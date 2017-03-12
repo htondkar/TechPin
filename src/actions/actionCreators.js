@@ -1,6 +1,10 @@
 import * as actionTypes from './actionTypes';
 import api from '../api/api';
+import techpinApi from '../api/realApi';
 import alphaSorter from '../helpers/alphaSorter';
+
+
+//************************// Action Creators and helpers //************************//
 
 function initialLoadActionCreator(response) {
   return {
@@ -9,16 +13,28 @@ function initialLoadActionCreator(response) {
   }
 }
 
+function singleProductActionCreator(product) {
+  return {
+    type: actionTypes.SINGLE_PAGE_LOAD,
+    product
+  }
+}
+
+function initialLoadTop25ActionCreator(response) {
+  return {
+    type: actionTypes.INITIAL_TOP25_LOAD,
+    topNew: response.top_new,
+    topRanked: response.top_ranked,
+    randomProducts: response.random_products
+  }
+}
+
 function initialSortActionCreator(response) {
-  // const sortedList = alphaSorter(response);
-  // return {
-  //   type: actionTypes.INITIAL_SORT,
-  //   sortedList
-  // }
   return new Promise((resolve, reject) => {
     resolve(alphaSorter(response))
   })
 }
+
 
 function successfulLogin(token, username) {
   return {
@@ -27,6 +43,7 @@ function successfulLogin(token, username) {
     username
   }
 }
+
 function failedLogin(response) {
   return {
     type: actionTypes.FAILED_LOGIN,
@@ -52,11 +69,15 @@ function successfulNewRate(response, productId) {
   }
 }
 
+//************************//  Async Actions //************************//
+
+//******** PART 1: Initial Loadings ********//
+
+//this is depricated, remove when real api is ready
 export function loadInitialData() {
   return dispatch => {
     return api.loadList()
-      .then(response => {
-        dispatch(initialLoadActionCreator(response));
+      .then(response => {dispatch(initialLoadActionCreator(response));
         initialSortActionCreator(response).then( sortedList =>
           dispatch({
             type: actionTypes.INITIAL_SORT,
@@ -66,6 +87,51 @@ export function loadInitialData() {
       })
   }
 }
+
+//first api call
+export function loadIntialCategories() {
+  return dispatch => {
+    return techpinApi.getAllcategories()
+    .then(
+      (response) => {
+        dispatch({type: actionTypes.INITIAL_CATEGORIES_LOAD, categories: response.data.categories});
+        return Promise.resolve();
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    )
+  }
+}
+
+//second api call
+export function loadIntialProductTypes() {
+  return dispatch => {
+    return techpinApi.getAllProductTypes()
+    .then(
+      (response) => {
+        dispatch({type: actionTypes.INITIAL_PRODUCT_TYPES_LOAD, productTypes: response.data.product_types});
+        return Promise.resolve();
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    )
+  }
+}
+
+//third initial call
+export function initialLoadTop25() {
+  return dispatch => {
+    return techpinApi.getTop25Products()
+      .then(response => {
+        dispatch(initialLoadTop25ActionCreator(response.data));
+      })
+  }
+}
+
+
+//******** PART 2: On Demand Calls ********//
 
 export function submitProduct(formData) {
   console.log(formData);
@@ -83,20 +149,6 @@ export function submitProduct(formData) {
   }
 }
 
-export function loadIntialCategories() {
-  return dispatch => {
-    return api.getCategories()
-      .then(
-        (response) => {
-          dispatch({type: actionTypes.INITIAL_CATEGORIES_LOAD, categories: response});
-          return Promise.resolve();
-        },
-        (error) => {
-           return Promise.reject(error);
-         }
-       )
-  }
-}
 export function authenticate(username, password) {
   return dispatch => {
     return api.fakeaAuthenticate()
@@ -113,8 +165,25 @@ export function authenticate(username, password) {
   }
 }
 
+export function getSingleProduct(slug) {
+  console.log('getSingleProduct is called');
+  return dispatch => {
+    return techpinApi.getSingleProduct(slug)
+      .then(
+        (response) => {
+          dispatch(singleProductActionCreator(response.data))
+          return Promise.resolve(response.data)
+        },
+        (response) => {
+           return Promise.reject(response.data)
+         }
+       )
+  }
+}
 
-export function submitMoreInfoForm(formData) {
+
+export function submitAddNewVersion(formData) {
+  //this is a form data, to access data in it, you should use it's methods
   return dispatch => {
     return api.editFormSubmit(formData) // instead of this start a new ajax call with and send the formdata
       .then(
@@ -128,6 +197,7 @@ export function submitMoreInfoForm(formData) {
   }
 }
 export function signupUser(formData) {
+  console.log(formData);
   return dispatch => {
     return api.signupUser(formData) // instead of this start a new ajax call with and send the formdata
       .then(

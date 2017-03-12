@@ -2,7 +2,7 @@ import {createStore, compose, applyMiddleware} from 'redux';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {browserHistory} from 'react-router';
 import rootReducer from '../reducers/index';
-import {loadIntialCategories} from '../actions/actionCreators';
+import {loadIntialCategories, loadIntialProductTypes, initialLoadTop25} from '../actions/actionCreators';
 import thunk from 'redux-thunk';
 
 // laod initial state
@@ -21,7 +21,15 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
+//load categories
 store.dispatch(loadIntialCategories());
+
+//load product types
+store.dispatch(loadIntialProductTypes());
+
+//load top25, remove depricated api call
+store.dispatch(initialLoadTop25());
+
 
 export const history = syncHistoryWithStore(browserHistory, store);
 export default store;

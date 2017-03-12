@@ -22,16 +22,8 @@ const modalStyle = {
 };
 
 
-function generateListItem (startUp, i) {
-  return <StartUpWidget startUp={startUp} key={startUp.name} i={i}/>
-};
-
-function filterStartUpList(list, sortBy) {
-  return {
-    ratedByPeople: sort(list.filter(item => item.ratedBy === 'people'), sortBy.people),
-    ratedByEditors: sort(list.filter(item => item.ratedBy === 'editors'), sortBy.editors),
-    newStartUps: sort(list.filter(item => item.ratedBy === 'new'), sortBy._new)
-  };
+function generateListItem (product, i) {
+  return <StartUpWidget product={product} key={product.name_en} i={i}/>
 };
 
 export default class Top25 extends React.Component {
@@ -40,6 +32,11 @@ export default class Top25 extends React.Component {
       super(props);
       this.state = {
         modalIsOpen : false,
+        topProducts: {
+          topNew: [],
+          topRanked: [],
+          randomProducts: []
+        },
         sortBy: {
           editors: 'name',
           people: 'name',
@@ -57,15 +54,15 @@ export default class Top25 extends React.Component {
    }
 
    componentWillMount = () => {
-     if (this.props.list) {
-       const list = this.props.list;
-       this.setState({list});
+     if (Object.keys(this.props.topProducts).length > 0) {
+       const topProducts = this.props.topProducts;
+       this.setState({topProducts});
      }
    }
 
    componentWillReceiveProps = (nextProps) => {
-     if (nextProps.list) {
-       this.setState({list: nextProps.list});
+     if (Object.keys(nextProps.topProducts).length > 0) {
+       this.setState({topProducts: nextProps.topProducts});
      }
    }
 
@@ -77,7 +74,6 @@ export default class Top25 extends React.Component {
     };
 
     render() {
-      const filteredListByRater = filterStartUpList(this.state.list, this.state.sortBy);
       return (
         <div className='top25 main-content'>
           <header className="top25-header">
@@ -86,33 +82,36 @@ export default class Top25 extends React.Component {
           </header>
           <main className="flex-container">
             <div className="column">
-              <list>
+              <list className='widget-list'>
                 <div className='chooser-title'>
                   <div className='before-top25-title'></div>
                   <div>Editors</div>
                   {<SortingMenu column='editors' onChange={this.handleChangeSorting}/>}
                 </div>
-                {filteredListByRater.ratedByEditors.map(generateListItem)}
+                {sort(this.state.topProducts.randomProducts, this.state.sortBy.editors)
+                  .map(generateListItem)}
               </list>
             </div>
             <div className="column">
-              <list>
+              <list className='widget-list'>
                 <div className='chooser-title'>
                   <div className='before-top25-title'></div>
                   <div>People</div>
                   {<SortingMenu column='people' onChange={this.handleChangeSorting}/>}
                 </div>
-                {filteredListByRater.ratedByPeople.map(generateListItem)}
+                {sort(this.state.topProducts.topRanked, this.state.sortBy.people)
+                  .map(generateListItem)}
               </list>
             </div>
             <div className="column" >
-              <list>
+              <list className='widget-list'>
                 <div className='chooser-title'>
                   <div className='before-top25-title'></div>
                   <div>New</div>
                   {<SortingMenu column='_new' onChange={this.handleChangeSorting}/>}
                 </div>
-                {filteredListByRater.newStartUps.map(generateListItem)}
+                {sort(this.state.topProducts.topNew, this.state.sortBy._new)
+                  .map(generateListItem)}
               </list>
             </div>
           </main>

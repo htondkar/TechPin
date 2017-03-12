@@ -3,38 +3,64 @@ import React, {PropTypes} from 'react';
 import StarRating from './StarRating';
 import Divider from 'material-ui/Divider';
 
-const StartupWidgetMoreInfo = (
-  {webSite,
-    name,
-    city,
-    country,
-    creationYear,
-    shortDesc,
-    rating,
-    raters,
-    npsScore,
-    id
-  }) => {
-  return (
-    <div className="single-body">
-      <img src={require('../../images/eventbox.jpg')} height='100px' alt='logo'/>
-      <div>
-        <span>
-          <a href={webSite}>{name}</a>
-          <span id='single-meta-info'>
-            {`${city},${country}. founded in ${creationYear}`}
+export default class StartupWidgetMoreInfo extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      product: {
+        details: {}
+      },
+    }
+  }
+
+  componentWillMount = () => {
+    if (Object.keys(this.props.product).length > 0) {
+      this.setState({product: this.props.product})
+    }
+  }
+  componentWillReceiveProps = (nextProps) => {
+    if (Object.keys(nextProps.product).length > 0) {
+      this.setState({product: nextProps.product})
+    }
+  }
+  //
+  // componentDidMount = () => {
+  //   console.log(this.props.product);
+  //   this.setState({product: this.props.product})
+  // }
+
+  render() {
+    let data = {
+      website: this.state.product.website || '',
+      name_en: this.state.product.name_en || '',
+      slug: this.state.product.slug || '',
+      average_p_rate: this.state.product.average_p_rate || 0,
+      n_p_score: this.state.product.n_p_score || 0,
+      city: this.state.product.details ? this.state.product.details.city : '',
+      country: this.state.product.details ? this.state.product.details.country : '',
+      year: this.state.product.details ? this.state.product.details.year || '' : '',
+      summary: this.state.product.details? this.state.product.details.summary : '',
+    }
+    return (
+      <div className="single-body">
+        <img src={require('../../images/eventbox.jpg')} height='100px' alt='logo'/>
+        <div>
+          <span>
+            <a href={data.website}>{data.name_en}</a>
+            <span id='single-meta-info'>
+              {`${data.city},${data.country} `}{data.year ? `founded in ${data.year}` : ''}
+            </span>
           </span>
-        </span>
-        <StarRating productId={id} rating={rating} raters={raters} editAble={true} className='star-rating-single' />
-        <span className="nps-score">{`N.P.S: ${npsScore}`}</span>
-        <span>{shortDesc}</span>
+          <StarRating productId={data.slug} rating={data.average_p_rate} editAble={true} className='star-rating-single' />
+          <span className="nps-score">{`N.P.S: ${data.n_p_score}`}</span>
+          <span>{data.summary}</span>
+        </div>
+        <Divider />
       </div>
-      <Divider />
-    </div>
-  );
+    )
+  }
+
 }
 
 StartupWidgetMoreInfo.propTypes = {
 };
-
-export default StartupWidgetMoreInfo;

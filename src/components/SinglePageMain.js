@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/actionCreators';
 
-
 import CommentRow from './CommentRow';
 import CommentBox from './CommentBox';
 import StartupWidgetMoreInfo from './StartupWidgetMoreInfo';
@@ -24,6 +23,8 @@ class SinglePageMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      product: {},
+      comments: [],
       username: '',
       commentAsyncCall: false,
       snackBarIsOpen: false,
@@ -31,9 +32,23 @@ class SinglePageMain extends React.Component {
     }
   }
 
+  componentWillMount = () => {
+    this.setState({
+      product: this.props.product.product,
+      // comments: this.props.product.comments,
+    })
+  }
+
   componentWillReceiveProps = (nextProps) => {
     if(nextProps.username) {
       this.setState({username: nextProps.username})
+    }
+
+    if (nextProps.product) {
+      this.setState({
+        product: nextProps.product.product,
+        comments: nextProps.product.comments
+      })
     }
   }
 
@@ -61,24 +76,30 @@ class SinglePageMain extends React.Component {
   };
 
   render() {
-      const startUp = this.props.startUp || {};
-      const comments = startUp.comments || [];
+    if (this.state.product) {
+      var name = this.state.product.name_en || '';
+      var details = this.state.product.details;
+      if (details) {
+        var desc = details.description_en
+      }
+    }
       return(
         <div>
           <Paper style={styles.paper} zDepth={3}>
             {this.props.children}
-            <StartupWidgetMoreInfo {...startUp} />
+            <StartupWidgetMoreInfo
+              product={this.state.product || {}}/>
             <div className="detailed-info">
               <div className="single-about">
-                <span>{`About ${startUp.name}`}</span>
-                <p>{startUp.longDesc}</p>
+                <span>{`About ${name}`}</span>
+                <p>{desc}</p>
               </div>
             </div>
 
             <div className="single-link">
-              <a href={startUp.iOsApp}><img src={AppleStoreLogo} alt=""/></a>
-              <a href={startUp.androidApp}><img src={GoogleStoreLogo} alt=""/></a>
-              <a href={startUp.linkedinProfile}><img src={LinkedLogo} alt=""/></a>
+              <a href={''}><img src={AppleStoreLogo} alt=""/></a>
+              <a href={''}><img src={GoogleStoreLogo} alt=""/></a>
+              <a href={''}><img src={LinkedLogo} alt=""/></a>
               <div className='divider'></div>
             </div>
             <div className="comments">
@@ -88,7 +109,7 @@ class SinglePageMain extends React.Component {
                 handlePostComment={this.handlePostComment}
                 commentAsyncCall={this.state.commentAsyncCall}
                 />
-              {comments.map((comment, i) => <CommentRow comment={comment} key={i}/>)}
+
             </div>
           </Paper>
           <Snackbar
@@ -100,6 +121,7 @@ class SinglePageMain extends React.Component {
         </div>);
   }
 }
+// {comments.map((comment, i) => <CommentRow comment={comment} key={i}/>)}
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,

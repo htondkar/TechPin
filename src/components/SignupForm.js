@@ -41,10 +41,10 @@ export default class SignupForm extends React.Component {
       }
       this.setState({errors: {}})
       this.props.handleSignUp({
-        fullName: this.state.fullName,
+        full_name: this.state.fullName,
         email: this.state.email,
         password: this.state.password,
-        confirmPassword: this.state.confirmPassword
+        confirm_password: this.state.confirmPassword
       });
     }
   };

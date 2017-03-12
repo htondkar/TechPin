@@ -1,26 +1,27 @@
-function compareName(a,b) {
-  if (a.name > b.name) {
+function sortByName(a,b) {
+  if (a.name_en > b.name_en) {
     return 1;
-  } else if (a.name < b.name) {
+  } else if (a.name_en < b.name_en) {
     return -1;
   } else {
     return 0;
   }
 }
 
-function compareNps(a,b) {
-  if (parseInt(a.nps, 10) - parseInt(b.nps, 10) < 0) {
+function sortByNps(a,b) {
+  if (parseInt(a.n_p_score, 10) - parseInt(b.n_p_score, 10) < 0) {
     return 1;
-  } else if (parseInt(a.nps, 10) - parseInt(b.nps, 10) > 0) {
+  } else if (parseInt(a.n_p_score, 10) - parseInt(b.n_p_score, 10) > 0) {
     return -1;
   } else {
     return 0;
   }
 }
-function compareRating(a,b) {
-  if (parseInt(a.rating, 10) - parseInt(b.rating, 10) < 0) {
+
+function sortByRating(a,b) {
+  if (parseInt(a.average_p_rate, 10) - parseInt(b.average_p_rate, 10) < 0) {
     return 1;
-  } else if (parseInt(a.rating, 10) - parseInt(b.rating, 10) > 0) {
+  } else if (parseInt(a.average_p_rate, 10) - parseInt(b.average_p_rate, 10) > 0) {
     return -1;
   } else {
     return 0;
@@ -30,11 +31,11 @@ function compareRating(a,b) {
 export default function sort(array, sortBy) {
   return array.sort((a,b) => {
     if (sortBy === 'name') {
-      return compareName(a,b);
+      return sortByName(a,b);
     } else if (sortBy === 'nps') {
-      return compareNps(a,b);
+      return sortByNps(a,b);
     } else {
-      return compareRating(a,b);
+      return sortByRating(a,b);
     }
   })
 }

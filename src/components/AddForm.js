@@ -173,10 +173,7 @@ class AddForm extends React.Component {
             floatingLabelText="Product Type"
             value={this.state.p_type}
             onChange={this.handleSelectFieldChange}>
-              <MenuItem value={1} primaryText="Startup" />
-              <MenuItem value={2} primaryText="Accelerator" />
-              <MenuItem value={3} primaryText="V.C." />
-              <MenuItem value={4} primaryText="Product" />
+              {this.props.productTypes.map((type, i) => <MenuItem key={i} value={type.id} primaryText={type.name} />)}
           </SelectField></div>
         <div>
           <AutoComplete
@@ -219,6 +216,9 @@ AddForm.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return {categories: state.categories}
+  return {
+    categories: state.categories,
+    productTypes: state.productTypes,
+  }
 }
 export default connect(mapStateToProps, actions)(AddForm);

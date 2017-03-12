@@ -31,7 +31,6 @@ class EditInfo extends React.Component {
     formVals[event.target.id] = value;
     const prevFormData = this.state.formData;
     const newFormData = Object.assign({}, prevFormData, formVals);
-
     this.setState({formData: newFormData})
   }
 
@@ -47,15 +46,16 @@ class EditInfo extends React.Component {
     const keys = Object.keys(this.state.formData);
     const values = Object.values(this.state.formData);
     if(this.valid(values)) {
+      console.log('valid');
       this.setState({formIsValid: true})
       for (let i = 0; i < keys.length; i++) {
         formData.append(keys[i], values[i])
       }
       formData.append('logo', document.getElementById('logo').files[0]);
-      this.props.actions.submitMoreInfoForm(formData)
+      this.props.actions.submitAddNewVersion(formData)
         .then(
-          response=>this.setState({snackBarOpen: true, responseText: editFormSubmitSuccessFeedbackText}),
-          response=>this.setState({snackBarOpen: true, responseText: editFormSubmitFailedFeedbackText})
+          response => this.setState({snackBarOpen: true, responseText: editFormSubmitSuccessFeedbackText}),
+          response => this.setState({snackBarOpen: true, responseText: editFormSubmitFailedFeedbackText})
         );
     } else {
       this.setState({snackBarOpen: true, responseText: 'please fill at least 1 field', formIsValid: false})
@@ -83,12 +83,12 @@ class EditInfo extends React.Component {
             <TextField id='website' className='three-field' floatingLabelText="Website" onChange={this.textFieldChangeHandler} />
             <TextField id='email' className='three-field' floatingLabelText="email address" type='email' onChange={this.textFieldChangeHandler}/>
             <TextField id='employees' className='three-field' floatingLabelText="Number of Employees" onChange={this.textFieldChangeHandler}/>
-            <TextField id='launch' className='three-field' floatingLabelText="Launch Year" onChange={this.textFieldChangeHandler}/>
+            <TextField id='year' className='three-field' floatingLabelText="Launch Year" onChange={this.textFieldChangeHandler}/>
             <TextField id='city' className='three-field' floatingLabelText="City" onChange={this.textFieldChangeHandler}/>
             <TextField id='country' className='three-field' floatingLabelText="Country" onChange={this.textFieldChangeHandler}/>
-            <TextField id='desc' fullWidth={true} rows={3} multiLine={true} floatingLabelText="What do they do?" onChange={this.textFieldChangeHandler}/>
-            <TextField id='android' fullWidth={true} floatingLabelText="Android App Url" onChange={this.textFieldChangeHandler}/>
-            <TextField id='ios' fullWidth={true} floatingLabelText="iOs App Url" onChange={this.textFieldChangeHandler}/>
+            <TextField id='description_en' fullWidth={true} rows={3} multiLine={true} floatingLabelText="What do they do?" onChange={this.textFieldChangeHandler}/>
+            <TextField id='android_app' fullWidth={true} floatingLabelText="Android App Url" onChange={this.textFieldChangeHandler}/>
+            <TextField id='ios_app' fullWidth={true} floatingLabelText="iOs App Url" onChange={this.textFieldChangeHandler}/>
             <TextField id='linkedin' className='three-field' floatingLabelText="Linkedin profile" onChange={this.textFieldChangeHandler}/>
             <TextField id='twitter' className='three-field' floatingLabelText="Twitter Account" onChange={this.textFieldChangeHandler}/>
             <TextField id='instagram' className='three-field' floatingLabelText="Instagram profile" onChange={this.textFieldChangeHandler}/>

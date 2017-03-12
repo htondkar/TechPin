@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // const baseUrl = 'http://www.techpin.ir/api';
-const baseUrl = 'http://185.117.22.106:8000/api/';
+const baseUrl = 'http://185.117.22.106:8000/api';
 
 export default class techpinApi {
 

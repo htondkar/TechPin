@@ -53,6 +53,7 @@ function mapStateToProps(state) {
   return {
     list: state.startUps,
     sortedList: state.sortedList,
+    topProducts: state.topProducts,
   }
 }
 

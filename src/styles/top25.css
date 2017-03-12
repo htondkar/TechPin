@@ -129,6 +129,20 @@ div.before-top25-title {
   width: 48px;
   height: 48px;
 }
+.widget-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: ;
+}
+.widget {
+  height: 140px;
+  /*display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;*/
+}
+
 
 @media screen and (max-width: 860px) {
   .flex-container {
