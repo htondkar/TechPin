@@ -44,11 +44,10 @@ function initialSortActionCreator(response) {
 }
 
 
-function successfulLogin(token, username) {
+function successfulLogin(response) {
   return {
     type: actionTypes.SUCCESSFUL_LOGIN,
-    token,
-    username
+    response
   }
 }
 
@@ -81,20 +80,6 @@ function successfulNewRate(response, productId) {
 
 //******** PART 1: Initial Loadings ********//
 
-//this is depricated, remove when real api is ready
-export function loadInitialData() {
-  return dispatch => {
-    return api.loadList()
-      .then(response => {dispatch(initialLoadActionCreator(response));
-        initialSortActionCreator(response).then( sortedList =>
-          dispatch({
-            type: actionTypes.INITIAL_SORT,
-             sortedList
-          })
-        )
-      })
-  }
-}
 
 //first api call
 export function loadIntialCategories() {
@@ -146,9 +131,10 @@ export function submitProduct(formData) {
   console.log(formData);
   //use real api here
   return dispatch => {
-    return api.submitStartUp(JSON.stringify(formData))
+    return techpinApi.postNewProduct(formData)
       .then(
         (response) => {
+          console.log(response.data);
           return Promise.resolve()
         },
         (response) => {
@@ -160,15 +146,23 @@ export function submitProduct(formData) {
 
 export function authenticate(username, password) {
   return dispatch => {
-    return api.fakeaAuthenticate()
+    return techpinApi.login(username, password)
       .then(
         (response) => {
-          dispatch(successfulLogin(response, username))
-          return Promise.resolve(response)
+          console.log(response);
+          if (response.data.success) {
+            const authData = {
+              'api-token': response.data['api-token'],
+              username: response.data.user.username
+            }
+            localStorage.setItem('techpin', JSON.stringify(authData))
+            dispatch(successfulLogin(response.data))
+          }
+          return Promise.resolve(response.data)
         },
-        (error) => {
-           dispatch(failedLogin(error))
-           return Promise.reject(error)
+        (response) => {
+           dispatch(failedLogin(response.data))
+           return Promise.reject(response.data)
          }
        )
   }
@@ -220,15 +214,14 @@ export function submitAddNewVersion(formData) {
   }
 }
 export function signupUser(formData) {
-  console.log(formData);
   return dispatch => {
-    return api.signupUser(formData) // instead of this start a new ajax call with and send the formdata
+    return techpinApi.signup(formData) // instead of this start a new ajax call with and send the formdata
       .then(
         (response) => {
-          return Promise.resolve(response)
+          return Promise.resolve(response.data)
         },
         (response) => {
-           return Promise.reject(response)
+           return Promise.reject(response.data)
          }
        )
   }
@@ -267,11 +260,16 @@ export function postNewRate(rate, productId, userName) {
 
 export function OAuthLogIn(payLoad) {
   return dispatch => {
-    return api.OAuthLogIn(payLoad)
+    return techpinApi.googleLogin(payLoad.tokenId)
       .then(
         (response) => {
-          dispatch(successfulLogin(response.token, response.username))
-          return Promise.resolve(response.username)
+          const authData = {
+            'api-token': response['api-token'],
+            username: response.user.username
+          }
+          localStorage.setItem('techpin', JSON.stringify(authData))
+          dispatch(successfulLogin(response.data))
+          return Promise.resolve(response.data)
         },
         (error) => {
            return Promise.reject(error)
@@ -281,7 +279,16 @@ export function OAuthLogIn(payLoad) {
 }
 
 export function logOut() {
+  localStorage.removeItem('techpin')
+  techpinApi.logout()
   return {
     type: actionTypes.LOG_OUT,
   };
+}
+
+export function wasAuthed(authObject) {
+  return {
+    type: actionTypes.WAS_LOGGED_IN,
+    response: authObject
+  }
 }

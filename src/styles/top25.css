@@ -88,6 +88,7 @@ div.widget-title {
   transition: color .4s ease-out;
 }
 .widget-text {
+  
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   margin-left: 44px;
@@ -136,15 +137,15 @@ div.before-top25-title {
 }
 .widget {
   height: 140px;
-  /*display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  align-content: center;*/
 }
 
+@media screen and (max-width: 1170px) {
+  .widget {
+    height: auto;
+  }
+}
 
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 1000px) {
   .flex-container {
     flex-wrap: wrap;
     justify-content: space-between;
@@ -155,13 +156,7 @@ div.before-top25-title {
   }
 }
 
-@media screen and (max-width: 700px) {
-  .column {
-    flex-basis: 70%;
-    margin-bottom: 27px;
-  }
-}
-@media screen and (max-width: 699px) {
+@media screen and (max-width: 760px) {
   .column {
     flex-basis: 100%;
     margin-bottom: 27px;

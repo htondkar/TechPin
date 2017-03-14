@@ -44,13 +44,13 @@ export default class LoginForm extends React.Component {
         <RaisedButton
           label={!this.props.aSyncCall && "login"}
           primary={true}
-          onClick={() => this.props.handleLogIn(this.state.username, this.state.password)}>
+          onClick={() => this.props.handleLogIn(this.state.email, this.state.password)}>
             {this.props.aSyncCall && <PulseLoader color="#FFFFFF" size="6px"/> }
         </RaisedButton>
       </div>
       <div className="google-wrapper">
         <GoogleLogin
-          clientId="73175440911-t81rmqp1ij2f9tt8jupiqksd1srrot79.apps.googleusercontent.com"
+          clientId="57613180365-kgcq8nq2pb2v9psdqc4upm8cgmd13vam.apps.googleusercontent.com"
           buttonText={'google signin'}
           className='google-login-button'
           onSuccess={this.googleAuthSuccess}

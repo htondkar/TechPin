@@ -23,8 +23,8 @@ const StartUpWidget = ({product, i}) => {
     if (desc.length === 0) {
       return 'No descriptions yet. be the first one to add descriptions to this product !'
     } else {
-      let shortDesc = desc.split(" ").splice(0,13).join(" ")
-      if (shortDesc.split(' ').length < 13) return shortDesc;
+      let shortDesc = desc.split(" ").splice(0, 10).join(" ")
+      if (shortDesc.split(' ').length < 10) return shortDesc;
       return `${shortDesc} ...`
     }
   }

@@ -28,7 +28,7 @@ export default class SignupForm extends React.Component {
     (this.state.fullName.length < 4) && (errors.fullName = 'Name is too short, *Required');
     !(this.state.email.length > 0) && (errors.email = 'Email is too short, *Required');
     !(validateEmail(this.state.email)) && (errors.email = 'Email is not valid, *Required');
-    (this.state.password.length < 5) && (errors.password = 'Password is too short');
+    (this.state.password.length < 8) && (errors.password = 'Password is too short');
     (this.state.password !== this.state.confirmPassword) && (errors.confirmPassword = "passwords don't match");
     if (Object.keys(errors).length > 0) {
       this.setState({errors});

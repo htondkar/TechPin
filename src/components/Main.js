@@ -15,10 +15,6 @@ class Main extends React.Component {
     injectTapEventPlugin();
   }
 
-  componentWillMount = () => {
-    this.props.actions.loadInitialData()
-  }
-
   componentDidMount = () => {
     $(window).bind('scroll', function () {
       if ($(window).scrollTop() > 65) {
@@ -27,7 +23,19 @@ class Main extends React.Component {
           $('.all-entries-toolbar').removeClass('fixed');
       }
     });
+
+    const authed = JSON.parse(localStorage.getItem('techpin'));
+    try {
+      if (authed['api-token']) {
+        this.props.actions.wasAuthed(authed);
+      }
+    } catch (e) {
+      // no-op
+    }
+
   }
+
+
 
   render() {
     return (

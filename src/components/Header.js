@@ -77,15 +77,25 @@ class Header extends React.Component {
       this.setState({view: 'signup'})
     } else {
       this.setState({aSyncCall: true});
-      this.props.signupUser(formData)
-        .then((response) => this.setState({
+      this.props.signupUser(formData).then((response) => {
+        console.log(response);
+        if (response.success) {
+          this.setState({
           modalIsOpen: false,
           snackBarOpen: true,
           aSyncCall: false,
           view: 'login',
-          responseText: response}));
-    }
- }
+          responseText: 'You successfuly signed up'})
+          } else {
+            this.setState({
+              snackBarOpen: true,
+              aSyncCall: false,
+              responseText: 'signed up failed...'})
+            }
+      })
+
+   }
+}
 
   handleLogOut = () => {
     this.props.logOut();
@@ -93,14 +103,25 @@ class Header extends React.Component {
     this.setState({snackBarOpen: true});
   }
 
-  handleLogIn = (username, password) => {
+  handleLogIn = (email, password) => {
   this.setState({aSyncCall: true});
-   this.props.authenticate(username, password)
-   .then(() => this.setState({
-     modalIsOpen: false,
-     snackBarOpen: true,
-     aSyncCall: false,
-     responseText: 'You are now authenticated'}));
+   this.props.authenticate(email, password)
+   .then((response) => {
+     if (response.success) {
+       this.setState({
+         modalIsOpen: false,
+         snackBarOpen: true,
+         aSyncCall: false,
+         responseText: 'You are now authenticated'})
+     } else {
+       this.setState({
+         snackBarOpen: true,
+         aSyncCall: false,
+         responseText: 'Failed to login, please enter valid data'
+       })
+     }
+   }
+   );
  }
 
  handleRequestSnackBarClose = () => {

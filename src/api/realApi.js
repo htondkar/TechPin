@@ -1,9 +1,40 @@
 import axios from 'axios';
+import $ from 'jquery'
+import request from 'superagent'
+import querystring from 'querystring'
 
-export const baseUrl = 'http://185.117.22.106:8000';
-const baseApiUrl = 'http://185.117.22.106:8000/api';
+export var baseUrl = 'http://185.117.22.106:8000';
+var baseApiUrl = 'http://185.117.22.106:8000/api';
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+var csrftoken = getCookie('csrftoken');
+
+
+var config = {
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Accept': '*/*'
+  },
+}
 
 export default class techpinApi {
+
+  //get methods
 
   static getTop25Products() {
     return axios.get(`${baseApiUrl}/products/top`);
@@ -30,20 +61,33 @@ export default class techpinApi {
     // .then(res => console.log(res));
   }
 
+  //// authentication
+
   static login(email, password) {
-    return axios.post(`${baseApiUrl}/login`, {email, password});
-    // .then(res => console.log(res));
+
+    return axios.post(`${baseApiUrl}/login`, `email=${email}&password=${password}`, config)
   }
 
-  static signup(first_name, email, password, confirm_password) {
-    return axios.post(`${baseApiUrl}/signup`, {first_name, email, password, confirm_password});
-    // .then(res => console.log(res));
+  static googleLogin(tokenId) {
+    return axios.post(`${baseApiUrl}/google-login`, `idtoken=${tokenId}`, config)
+  }
+
+  static signup(formData) {
+    console.log(formData);
+    return axios.post(`${baseApiUrl}/signup`,
+      `first_name=${formData.first_name}
+      &email=${formData.email}
+      &password=${formData.password}
+      &confirm_password=${formData.confirm_password}`,
+      config);
   }
 
   static logout() {
     return axios.get(`${baseApiUrl}/logout`);
     // .then(res => console.log(res));
   }
+
+//user interactions
 
   static postNewRate(slug, rate) {
     return axios.post(`${baseApiUrl}/products/${slug}/rate`, {rate});
@@ -61,8 +105,17 @@ export default class techpinApi {
   }
 
   static postNewProduct(formData) {
-    return axios.post(`${baseApiUrl}/products/add`, formData);
-    // .then(res => console.log(res));
+    let config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': '*/*'
+      },
+    }
+
+    const qs = querystring.stringify(formData);
+    console.log(qs);
+    return axios.post(`${baseApiUrl}/products/add`, qs, config)
+      .then(res => console.log(res));
   }
 
 }

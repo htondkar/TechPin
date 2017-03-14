@@ -16,7 +16,7 @@ class AddForm extends React.Component {
   constructor () {
     super();
     this.state = {
-      p_type : 1,
+      product_type : 1,
       chipList : [],
       categoryIds : [],
       errors: {},
@@ -39,7 +39,7 @@ class AddForm extends React.Component {
     this.setState({categories: this.props.categories});
   }
 
-  handleSelectFieldChange = (event, index, selectFieldValue) => this.setState({p_type: selectFieldValue});
+  handleSelectFieldChange = (event, index, selectFieldValue) => this.setState({product_type: selectFieldValue});
 
   handleFormFields = (event, value) => {
     const field = event.target.name;
@@ -82,7 +82,7 @@ class AddForm extends React.Component {
     const formData = {
       name_en: this.state.name_en,
       website: this.state.website,
-      p_type: this.state.p_type,
+      product_type: this.state.product_type,
       categories: this.state.categoryIds
     }
     const validationResult = this.validateForms(formData);
@@ -98,9 +98,10 @@ class AddForm extends React.Component {
     this.setState({errors: {}});
     this.props.submitProduct(formData)
       .then(response => {
+        console.log(response.data);
         this.setState({
           addStartUpResponseText: 'successfully submitted, we will check this product asap!',
-          p_type : 1,
+          product_type : 1,
           chipList : [],
           errors: {},
           snackBarOpen: true,
@@ -169,9 +170,9 @@ class AddForm extends React.Component {
         </div>
         <div>
           <SelectField
-            name='p_type'
+            name='product_type'
             floatingLabelText="Product Type"
-            value={this.state.p_type}
+            value={this.state.product_type}
             onChange={this.handleSelectFieldChange}>
               {this.props.productTypes.map((type, i) => <MenuItem key={i} value={type.id} primaryText={type.name} />)}
           </SelectField></div>
