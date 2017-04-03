@@ -51,7 +51,7 @@ class EditInfo extends React.Component {
         formData.append(keys[i], values[i])
       }
       formData.append('logo', document.getElementById('logo').files[0]);
-      this.props.actions.submitAddNewVersion(formData)
+      this.props.actions.submitAddNewVersion(formData, this.props.params.startUpName)
         .then(
           response => this.setState({snackBarOpen: true, responseText: editFormSubmitSuccessFeedbackText}),
           response => this.setState({snackBarOpen: true, responseText: editFormSubmitFailedFeedbackText})
@@ -62,7 +62,7 @@ class EditInfo extends React.Component {
   }
 
   handleSnackBarClose = () => {
-    this.state.formIsValid && browserHistory.push(`/start-ups/${this.props.params.startUpName}/`);
+    this.state.formIsValid && browserHistory.push(`/products/${this.props.params.startUpName}/`);
   }
 
   render() {

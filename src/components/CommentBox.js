@@ -20,8 +20,9 @@ export default class CommentBox extends React.Component {
 
   handleNewComment = () => {
     let commentData = {};
-    commentData.commentText = this.state.commentText;
-    commentData.date = new Date();
+    commentData.text = this.state.commentText;
+    commentData.created_at = new Date();
+    commentData.user = 'You';
     this.props.handlePostComment(commentData);
   }
 

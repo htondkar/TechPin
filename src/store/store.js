@@ -7,18 +7,17 @@ import thunk from 'redux-thunk';
 
 // laod initial state
 const defaultState = {
-  startUps: [],
   allProducts: {},
   categories: [],
   auth: {authenticated: false},
 };
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   rootReducer,
   defaultState,
-  composeEnhancers(applyMiddleware(thunk))
+  compose(applyMiddleware(thunk))
 );
 
 //load categories

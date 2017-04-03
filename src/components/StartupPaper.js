@@ -15,12 +15,14 @@ const styles = {
     borderRadius: '50%',
   }
 };
+// <img style={styles.img} src={} alt="logo"/>
 const CategoryPaper = ({product, WrapperClassName}) => {
   return (
     <Link to={`/products/${product.slug}`}>
       <Paper style={styles.paper} className={`category-paper ${WrapperClassName}`}>
-          <div className="category-image">
-            <img style={styles.img} src={baseUrl + product.details.logo} alt="logo"/>
+          <div
+            className="category-image"
+            style={{backgroundImage: baseUrl + product.details.logo}}>
           </div>
           <span><h3>{product.name_en}</h3></span>
           <div className="category-info-box">

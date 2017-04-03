@@ -60,9 +60,9 @@ class StarRating extends React.Component {
 				this.setState({snackBarIsOpen: true, snackBarText: 'Please login first'})
 			} else {
 				this.setState({ratingAsyncCall: true});
-				let newRating = ((idx + 1) + this.state.rating * this.state.raters) / (this.state.raters + 1);
-				this.setState({rating: newRating, raters: this.state.raters + 1}); //call the api
-				this.props.postNewRate(idx + 1, this.props.productId, 'username') //call the api
+				// let newRating = ((idx + 1) + this.state.rating * this.state.raters) / (this.state.raters + 1); //calc new rating
+				// this.setState({rating: newRating, raters: this.state.raters + 1}); //call the api
+				this.props.postNewRate(idx + 1, this.props.productId) //call the api
 			}
 		}
   }

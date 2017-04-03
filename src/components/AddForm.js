@@ -98,17 +98,26 @@ class AddForm extends React.Component {
     this.setState({errors: {}});
     this.props.submitProduct(formData)
       .then(response => {
-        this.setState({
-          addStartUpResponseText: 'successfully submitted, we will check this product asap!',
-          product_type : 1,
-          chipList : [],
-          errors: {},
-          snackBarOpen: true,
-          name_en: '',
-          website: '',
-          aSyncCall: false,
-          aSyncSuccess: true
-        });
+        if (response.success) {
+          this.setState({
+            addStartUpResponseText: 'successfully submitted, we will check this product asap!',
+            product_type : 1,
+            chipList : [],
+            errors: {},
+            snackBarOpen: true,
+            name_en: '',
+            website: '',
+            aSyncCall: false,
+            aSyncSuccess: true
+          });
+        } else {
+          this.setState({
+            addStartUpResponseText: 'failed to submit, plaease try again or contact us',
+            snackBarOpen: true,
+            aSyncCall: false,
+          });
+
+        }
       })
       .catch(response => {
         this.setState({
@@ -124,6 +133,10 @@ class AddForm extends React.Component {
     let valid = true;
     let errors = {};
 
+    if (formData.categories.length === 0) {
+      errors.categories = 'select at least 1 category form this list'
+      valid = false
+    }
     if (!formData.name_en || formData.name_en === '' || formData.name_en.length <= 1) {
       errors.name = 'name is rquired !';
       valid = false;
@@ -152,7 +165,7 @@ class AddForm extends React.Component {
   render() {
     return (
       <div className='add-form'>
-        <div><h3>Add a Startup!</h3></div>
+        <div><h3>Add a Product!</h3></div>
         <div>
           <TextField
             name='name_en'
@@ -177,7 +190,8 @@ class AddForm extends React.Component {
           </SelectField></div>
         <div>
           <AutoComplete
-            floatingLabelText="Add Tags"
+            errorText={this.state.errors.categories}
+            floatingLabelText="Add Categories (use suggestions)"
             filter={AutoComplete.caseInsensitiveFilter}
             searchText={this.state.searchText}
             dataSource={this.state.categories.map(item => item.name_en)}

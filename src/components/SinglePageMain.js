@@ -54,11 +54,9 @@ class SinglePageMain extends React.Component {
 
   handlePostComment = (commentData) => {
     if (this.props.authenticated) {
-      if (commentData.commentText.length > 1) {
+      if (commentData.text.length > 1) {
         this.setState({commentAsyncCall: true})
-        commentData.author = this.state.username;
-        commentData.startupName = this.props.startUp.name;
-        this.props.postNewComment(commentData)
+        this.props.postNewComment(commentData, this.props.product.product.slug)
         .then(response => {
           this.setState({commentAsyncCall: false});
           document.querySelector('#comment-field').value = '';
@@ -96,18 +94,22 @@ class SinglePageMain extends React.Component {
               <p>{desc}</p>
             </div>
           </div>
-          <div className="single-link">
-            <a href={this.state.product ? this.state.product.details.ios_app : ''} target="_blank">
-              <img src={AppleStoreLogo} alt=""/>
-            </a>
-            <a href={this.state.product ? this.state.product.details.android_app : ''} target="_blank">
-              <img src={GoogleStoreLogo} alt=""/>
-            </a>
-            <a href={this.state.product ? this.state.product.details.linkedin : ''} target="_blank">
-              <img src={LinkedLogo} alt=""/>
-            </a>
-            <div className='divider'></div>
-          </div>
+          {this.state.product &&
+            <div className="single-link">
+              {this.state.product.details.ios_app &&
+              <a href={this.state.product.details.ios_app} target="_blank">
+                <img src={AppleStoreLogo} alt=""/>
+              </a>}
+              {this.state.product.details.android_app &&
+              <a href={this.state.product.details.android_app} target="_blank">
+                <img src={GoogleStoreLogo} alt=""/>
+              </a>}
+              {this.state.product.details.linkedin &&
+              <a href={this.state.product.details.linkedin} target="_blank">
+                <img id='linkedin' src={LinkedLogo} alt=""/>
+              </a>}
+              <div className='divider'></div>
+            </div>}
           <div className="comments">
             <span className="comment-title">Comments</span>
             <CommentBox

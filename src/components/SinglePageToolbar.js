@@ -54,7 +54,7 @@ export default class SinglePageToolbar extends React.Component {
                 onClick={()=>browserHistory.push('/')}/>
             </IconButton>
           </ToolbarGroup>
-          {editAble && <ToolbarGroup>
+          {editAble && <ToolbarGroup onClick={this.checkAuthAndRedirect}>
             <IconButton tooltip='edit this page' tooltipPosition='top-center'>
               <EditorModeEdit
               style={styles.editModeIcon}

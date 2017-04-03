@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 import React, {PropTypes} from 'react';
 import {browserHistory} from 'react-router';
 import FlatButton from 'material-ui/FlatButton';
@@ -21,7 +22,7 @@ const AppbarRightControlDesktop = ({authenticated, openModal, LogOut, handleDraw
         onTouchTap={handleDrawerToggle}
       />
       <FlatButton
-        label="A~Z List"
+        label="all start ups"
         onTouchTap={() => browserHistory.push('/all-entries')}
       />
     </div>

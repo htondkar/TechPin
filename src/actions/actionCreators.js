@@ -127,6 +127,22 @@ export function submitProduct(formData) {
   }
 }
 
+export function signupUser(formData) {
+  return dispatch => {
+    return techpinApi.signup(formData) // instead of this start a new ajax call with and send the formdata
+    .then(
+      (response) => {
+        console.clear();
+        return Promise.resolve(response.data)
+      },
+      (response) => {
+        console.clear();
+        return Promise.reject(response.data)
+      }
+    )
+  }
+}
+
 export function authenticate(username, password) {
   return dispatch => {
     return techpinApi.login(username, password)
@@ -140,7 +156,7 @@ export function authenticate(username, password) {
             sessionStorage.setItem('techpin', JSON.stringify(authData))
             dispatch(successfulLogin(response.data))
           }
-            console.clear();
+          console.clear();
           return Promise.resolve(response.data)
         },
         (response) => {
@@ -203,21 +219,6 @@ export function submitAddNewVersion(formData, slug) {
   }
 }
 
-export function signupUser(formData) {
-  return dispatch => {
-    return techpinApi.signup(formData) // instead of this start a new ajax call with and send the formdata
-      .then(
-        (response) => {
-          console.clear();
-          return Promise.resolve(response.data)
-        },
-        (response) => {
-           console.clear();
-           return Promise.reject(response.data)
-         }
-       )
-  }
-}
 
 export function postNewComment(commentData, slug) {
   return (dispatch, getState) => {

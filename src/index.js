@@ -4,14 +4,12 @@ import {Router} from 'react-router';
 import {Provider} from 'react-redux';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import 'jquery';
 
 import store, {history} from './store/store';
 import routes from './routes/routes';
 
 import './styles/reset.css';
 import './styles/main.css';
-import './styles/appBar.css';
 import './styles/top25.css';
 import './styles/footer.css';
 import './styles/singlePage.css';
@@ -22,7 +20,6 @@ import './styles/categoryPage.css';
 import './styles/modals.css';
 import './styles/header.css';
 import './styles/editInfo.css';
-import './styles/allEntries.css';
 import './styles/allProducts.css';
 
 render(

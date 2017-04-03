@@ -17,7 +17,7 @@ import Subheader from 'material-ui/Subheader';
 
 import {List, ListItem} from 'material-ui/List';
 
-import Logo from '../../images/techpin.png';
+import Logo from '../../images/techpin-white.png';
 
 const modalStyle = {
   overlay : {
@@ -197,7 +197,7 @@ class Header extends React.Component {
                 this.openModal();
               }}/>}
             {this.state.windowWidth < 600 && <ListItem
-              primaryText='A~Z List'
+              primaryText='ALL STARTUPS'
               onClick={() => {
                 this.setState({drawerIsOpen: false});
                 browserHistory.push('/all-entries');

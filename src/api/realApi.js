@@ -1,7 +1,7 @@
 import axios from 'axios';
 import querystring from 'querystring'
 
-export var baseUrl = 'http://185.117.22.106:8000';
+export const baseUrl = 'http://185.117.22.106:8000';
 var baseApiUrl = 'http://185.117.22.106:8000/api';
 
 var config = {
@@ -67,33 +67,54 @@ export default class techpinApi {
 
 //user interactions
 
-  static postNewRate(slug, rate) {
-    return axios.post(`${baseApiUrl}/products/${slug}/rate`, {rate});
+  static postNewRate(rate, slug, tokenId) {
+    let config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Token ' + tokenId,
+        'Accept': '*/*'
+      },
+    }
+    const qs = querystring.stringify({rate});
+    return axios.post(`${baseApiUrl}/products/${slug}/rate`, qs, config);
     // .then(res => console.log(res));
   }
 
-  static postNewComment(slug, text) {
-    return axios.post(`${baseApiUrl}/products/${slug}/comments`, {text});
+  static postNewComment(text, slug, tokenId) {
+    let config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Token ' + tokenId,
+        'Accept': '*/*'
+      },
+    }
+    const qs = querystring.stringify({text});
+    return axios.post(`${baseApiUrl}/products/${slug}/comments`, qs, config);
     // .then(res => console.log(res));
   }
 
-  static postNewVersion(slug, formData) {
-    return axios.post(`${baseApiUrl}/products/${slug}/versions/add`, formData);
+  static postNewVersion(formData, slug, tokenId) {
+    let config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Token ' + tokenId,
+        'Accept': '*/*'
+      },
+    }
+    //convert formData to an Object
+    let newVersionFields = {}
+    for (let keyValuePair of formData.entries()) {
+      newVersionFields[keyValuePair[0]] = keyValuePair[1]
+    }
+    // const qs = querystring.stringify(newVersionFields);
+    return axios.patch(`${baseApiUrl}/products/${slug}/versions/add`, formData, config);
     // .then(res => console.log(res));
   }
 
   static postNewProduct(formData) {
-    let config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': '*/*'
-      },
-    }
-
     const qs = querystring.stringify(formData);
     console.log(qs);
     return axios.post(`${baseApiUrl}/products/add`, qs, config)
-      .then(res => console.log(res));
   }
 
 }

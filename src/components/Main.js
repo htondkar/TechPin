@@ -6,7 +6,6 @@ import * as actions from '../actions/actionCreators';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Header from './Header';
 import Footer from './Footer';
-import $ from 'jquery';
 
 class Main extends React.Component {
 
@@ -16,15 +15,7 @@ class Main extends React.Component {
   }
 
   componentDidMount = () => {
-    $(window).bind('scroll', function () {
-      if ($(window).scrollTop() > 65) {
-          $('.all-entries-toolbar').addClass('fixed');
-      } else {
-          $('.all-entries-toolbar').removeClass('fixed');
-      }
-    });
-
-    const authed = JSON.parse(localStorage.getItem('techpin'));
+    const authed = JSON.parse(sessionStorage.getItem('techpin'));
     try {
       if (authed['api-token']) {
         this.props.actions.wasAuthed(authed);
@@ -41,7 +32,7 @@ class Main extends React.Component {
     return (
       <main id="container">
           <div className="app-wrapper">
-            <nav className="header">
+            <nav className="header" id='header'>
               <Header/>
             </nav>
             <ReactCSSTransitionGroup
