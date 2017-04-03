@@ -79,6 +79,8 @@ class SinglePageMain extends React.Component {
       var details = this.state.product.details;
       if (details) {
         var desc = details.description_en
+      } else {
+        var desc = ''
       }
     }
     const comments = this.state.comments || []

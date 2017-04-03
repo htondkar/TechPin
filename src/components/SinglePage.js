@@ -5,13 +5,16 @@ import * as actions from '../actions/actionCreators';
 import SinglePageToolbar from './SinglePageToolbar';
 import SinglePageMain from './SinglePageMain';
 
+import CircularProgress from 'material-ui/CircularProgress';
+
 class SinglePage extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       product: {},
-      slug: ''
+      slug: '',
+      isLoading: false,
     }
   }
 
@@ -20,8 +23,9 @@ class SinglePage extends React.Component {
     const indexOfProductInStore = this.isCached(productName)
 
     if (indexOfProductInStore === -1) {
+      this.setState({isLoading: true})
       this.props.getSingleProduct(productName)
-      .then(product => {this.setState({product, slug: product.product.slug})});
+      .then(product => {this.setState({product, isLoading: false, slug: product.product.slug})});
     } else {
       this.setState({
         product: this.props.singleProducts[indexOfProductInStore],
@@ -41,17 +45,18 @@ class SinglePage extends React.Component {
   render() {
     return (
       <div className='single-page main-content'>
-        <SinglePageMain product={this.state.product}>
-          <SinglePageToolbar
-            editAble={true}
-            slug={this.state.slug}
-            auth={this.props.authenticated}/>
-        </SinglePageMain>
+      {this.state.isLoading ? <CircularProgress id='spinner' color={'#2962FF'} size={50}/> :
+          <SinglePageMain product={this.state.product}>
+            <SinglePageToolbar
+              editAble={true}
+              slug={this.state.slug}
+              auth={this.props.authenticated}/>
+          </SinglePageMain>
+      }
       </div>
-    );
+    )
   }
 }
-
 SinglePage.propTypes = {
 };
 
@@ -64,3 +69,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, actions)(SinglePage);
+
+  

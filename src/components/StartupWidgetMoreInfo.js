@@ -27,8 +27,8 @@ export default class StartupWidgetMoreInfo extends React.Component {
 
   render() {
     let data = {
-      website: this.state.product.website || '',
-      name_en: this.state.product.name_en || '',
+      website: this.state.product.website || '...',
+      name_en: this.state.product.name_en || '...',
       slug: this.state.product.slug || '',
       average_p_rate: this.state.product.average_p_rate || 0,
       n_p_score: this.state.product.n_p_score || 0,
