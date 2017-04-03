@@ -12,7 +12,6 @@ export default function auth(state = [], action) {
           break;
 
         case actionTypes.WAS_LOGGED_IN:
-        console.log(action.response);
           return {
             authenticated: true,
             token: action.response['api-token'],

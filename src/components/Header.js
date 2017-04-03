@@ -78,7 +78,6 @@ class Header extends React.Component {
     } else {
       this.setState({aSyncCall: true});
       this.props.signupUser(formData).then((response) => {
-        console.log(response);
         if (response.success) {
           this.setState({
           modalIsOpen: false,

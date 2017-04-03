@@ -98,7 +98,6 @@ class AddForm extends React.Component {
     this.setState({errors: {}});
     this.props.submitProduct(formData)
       .then(response => {
-        console.log(response.data);
         this.setState({
           addStartUpResponseText: 'successfully submitted, we will check this product asap!',
           product_type : 1,

@@ -46,7 +46,6 @@ class EditInfo extends React.Component {
     const keys = Object.keys(this.state.formData);
     const values = Object.values(this.state.formData);
     if(this.valid(values)) {
-      console.log('valid');
       this.setState({formIsValid: true})
       for (let i = 0; i < keys.length; i++) {
         formData.append(keys[i], values[i])
@@ -67,7 +66,6 @@ class EditInfo extends React.Component {
   }
 
   render() {
-    console.log(this.props.singleProducts);
     const productSlug = this.props.params.startUpName;
     const index = this.props.singleProducts
           .findIndex(item => item.product.slug === productSlug);

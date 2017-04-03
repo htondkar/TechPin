@@ -30,7 +30,6 @@ export default class SinglePageToolbar extends React.Component {
 
   checkAuthAndRedirect = () => {
     if (!this.props.auth) {
-      console.log('not auth');
       this.setState({snackBarOpen: true})
     } else {
       browserHistory.push(`/products/${this.props.slug}/edit`)

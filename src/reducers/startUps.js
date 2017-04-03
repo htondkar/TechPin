@@ -9,9 +9,7 @@ export default function startUps(state = [], action) {
           break;
 
         case actionTypes.SUCCESSFUL_NEW_RATE_SUBMIT:
-        console.log(action);
           const index = state.findIndex(startUp => startUp.id === action.productId);
-          console.log(index);
           let startupToMutate = state[index];
           startupToMutate.rating = action.newRating;
           // startupToMutate.raters = action.raters;

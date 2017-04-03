@@ -1,29 +1,8 @@
 import axios from 'axios';
-import $ from 'jquery'
-import request from 'superagent'
 import querystring from 'querystring'
 
 export var baseUrl = 'http://185.117.22.106:8000';
 var baseApiUrl = 'http://185.117.22.106:8000/api';
-
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-var csrftoken = getCookie('csrftoken');
-
 
 var config = {
   headers: {
@@ -73,7 +52,6 @@ export default class techpinApi {
   }
 
   static signup(formData) {
-    console.log(formData);
     return axios.post(`${baseApiUrl}/signup`,
       `first_name=${formData.first_name}
       &email=${formData.email}

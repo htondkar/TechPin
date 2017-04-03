@@ -1,17 +1,7 @@
 import * as actionTypes from './actionTypes';
-import api from '../api/api';
 import techpinApi from '../api/realApi';
-import alphaSorter from '../helpers/alphaSorter';
-
 
 //************************// Action Creators and helpers //************************//
-
-function initialLoadActionCreator(response) {
-  return {
-    type: actionTypes.INITIAL_LOAD,
-    list: response
-  }
-}
 
 function singleProductActionCreator(product) {
   return {
@@ -36,13 +26,6 @@ function initialLoadTop25ActionCreator(response) {
   }
 }
 
-//this is depricated
-function initialSortActionCreator(response) {
-  return new Promise((resolve, reject) => {
-    resolve(alphaSorter(response))
-  })
-}
-
 
 function successfulLogin(response) {
   return {
@@ -58,21 +41,19 @@ function failedLogin(response) {
   }
 }
 
-function successfulNewComment(commentData) {
+function successfulNewComment(commentData, slug) {
   return {
     type: actionTypes.POST_NEW_COMMENT,
-    commentData
+    commentData,
+    slug
   }
 }
 
-function successfulNewRate(response, productId) {
-  const newRaters = 20;
-  const newRating = response;
+function successfulNewRate(response, slug) {
   return {
     type: actionTypes.SUCCESSFUL_NEW_RATE_SUBMIT,
-    newRating: newRating,
-    newRaters: newRaters,
-    productId
+    newRating: response.new_p_rate,
+    slug
   }
 }
 
@@ -128,17 +109,19 @@ export function initialLoadTop25() {
 //******** PART 2: On Demand Calls ********//
 
 export function submitProduct(formData) {
-  console.log(formData);
   //use real api here
   return dispatch => {
     return techpinApi.postNewProduct(formData)
       .then(
         (response) => {
-          console.log(response.data);
-          return Promise.resolve()
+          if (response.statusText === 'OK' && response.status === 200) {
+            return Promise.resolve(response.data)
+          } else {
+            return Promise.reject(response.details)
+          }
         },
-        (response) => {
-           return Promise.reject(response)
+        (err) => {
+           return Promise.reject(err)
          }
        )
   }
@@ -149,19 +132,20 @@ export function authenticate(username, password) {
     return techpinApi.login(username, password)
       .then(
         (response) => {
-          console.log(response);
           if (response.data.success) {
             const authData = {
               'api-token': response.data['api-token'],
               username: response.data.user.username
             }
-            localStorage.setItem('techpin', JSON.stringify(authData))
+            sessionStorage.setItem('techpin', JSON.stringify(authData))
             dispatch(successfulLogin(response.data))
           }
+            console.clear();
           return Promise.resolve(response.data)
         },
         (response) => {
            dispatch(failedLogin(response.data))
+           console.clear();
            return Promise.reject(response.data)
          }
        )
@@ -199,13 +183,18 @@ export function getAllProducts() {
 }
 
 
-export function submitAddNewVersion(formData) {
+export function submitAddNewVersion(formData, slug) {
   //this is a form data, to access data in it, you should use it's methods
-  return dispatch => {
-    return api.editFormSubmit(formData) // instead of this start a new ajax call with and send the formdata
+  return (dispatch, getState) => {
+    const tokenId = getState().auth.token
+    return techpinApi.postNewVersion(formData, slug, tokenId)
       .then(
         (response) => {
-          return Promise.resolve(response)
+          if (response.statusText === 'OK' && response.data.success) {
+            return Promise.resolve(response)
+          } else {
+            return Promise.reject(response)
+          }
         },
         (response) => {
            return Promise.reject(response)
@@ -213,28 +202,35 @@ export function submitAddNewVersion(formData) {
        )
   }
 }
+
 export function signupUser(formData) {
   return dispatch => {
     return techpinApi.signup(formData) // instead of this start a new ajax call with and send the formdata
       .then(
         (response) => {
+          console.clear();
           return Promise.resolve(response.data)
         },
         (response) => {
+           console.clear();
            return Promise.reject(response.data)
          }
        )
   }
 }
 
-
-export function postNewComment(commentData) {
-  return dispatch => { ///////// NIAZ BE PRODUCT ID HAST BARAYE CALL
-    return api.postNewComment(commentData)
+export function postNewComment(commentData, slug) {
+  return (dispatch, getState) => {
+    const tokenId = getState().auth.token
+    return techpinApi.postNewComment(commentData.text, slug, tokenId)
       .then(
         (response) => {
-          dispatch(successfulNewComment(commentData))
-          return Promise.resolve(response)
+          if (response.statusText === 'OK' && response.data.success) {
+            dispatch(successfulNewComment(commentData, slug))
+            return Promise.resolve(response)
+          } else {
+            return Promise.reject(response)
+          }
         },
         (error) => {
            return Promise.reject(error)
@@ -242,14 +238,19 @@ export function postNewComment(commentData) {
        )
   }
 }
-export function postNewRate(rate, productId, userName) {
-  console.log(rate, productId, userName);
-  return dispatch => {
-    return api.postNewRate(rate, productId, userName)
+
+export function postNewRate(rate, slug) {
+  return (dispatch, getState) => {
+    const tokenId = getState().auth.token
+    return techpinApi.postNewRate(rate, slug, tokenId)
       .then(
         (response) => {
-          dispatch(successfulNewRate(response, productId))
-          return Promise.resolve(response)
+          if (response.statusText === 'OK' && response.data.success) {
+            dispatch(successfulNewRate(response.data, slug))
+            return Promise.resolve(response)
+          } else {
+            return Promise.reject(response.data)
+          }
         },
         (error) => {
            return Promise.reject(error)
@@ -267,7 +268,7 @@ export function OAuthLogIn(payLoad) {
             'api-token': response['api-token'],
             username: response.user.username
           }
-          localStorage.setItem('techpin', JSON.stringify(authData))
+          sessionStorage.setItem('techpin', JSON.stringify(authData))
           dispatch(successfulLogin(response.data))
           return Promise.resolve(response.data)
         },
@@ -279,7 +280,7 @@ export function OAuthLogIn(payLoad) {
 }
 
 export function logOut() {
-  localStorage.removeItem('techpin')
+  sessionStorage.removeItem('techpin')
   techpinApi.logout()
   return {
     type: actionTypes.LOG_OUT,

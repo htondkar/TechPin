@@ -28,7 +28,6 @@ export default class LoginForm extends React.Component {
   }
 
   googleAuthfailed = (response) => {
-    console.log(response);
     this.props.handleOAuthLogIn(false, 'failed to login...');
   }
 
