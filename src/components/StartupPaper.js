@@ -15,20 +15,20 @@ const styles = {
     borderRadius: '50%',
   }
 };
-// <img style={styles.img} src={} alt="logo"/>
 const CategoryPaper = ({product, WrapperClassName}) => {
+  let {} = product
   return (
     <Link to={`/products/${product.slug}`}>
       <Paper style={styles.paper} className={`category-paper ${WrapperClassName}`}>
           <div
             className="category-image"
-            style={{backgroundImage: baseUrl + product.details.logo}}>
+            style={{backgroundImage: `url(${baseUrl}${product.details.logo})`}}>
           </div>
           <span><h3>{product.name_en}</h3></span>
           <div className="category-info-box">
-            <div>{`${product.details.city}, ${product.details.country}`}</div>
-            <div>{`Founded in ${product.details.year}`}</div>
-            <div>{`N.P.S: ${product.n_p_score}`}</div>
+            {product.details.city && <div>{`${product.details.city}, ${product.details.country}`}</div>}
+            {product.details.year && <div>{`Founded in ${product.details.year}`}</div>}
+            {<div>{`N.P.S: ${product.n_p_score}`}</div>}
           </div>
           <div id='paper-short-desc'>
             {product.details.summary.split(' ').splice(0, 10).join(' ')}

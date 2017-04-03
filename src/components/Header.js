@@ -138,7 +138,8 @@ class Header extends React.Component {
         .then(() => this.setState({
           modalIsOpen: false,
           snackBarOpen: true,
-          responseText: 'You are now authenticated'}) );
+          responseText: 'You are now authenticated'})
+          ).catch((err)=> console.log(err.data))
     } else {
       this.setState({
         snackBarOpen: true,
@@ -197,7 +198,7 @@ class Header extends React.Component {
                 this.openModal();
               }}/>}
             {this.state.windowWidth < 600 && <ListItem
-              primaryText='ALL STARTUPS'
+              primaryText='A~Z'
               onClick={() => {
                 this.setState({drawerIsOpen: false});
                 browserHistory.push('/all-entries');

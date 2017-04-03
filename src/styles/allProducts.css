@@ -99,4 +99,7 @@ div.fixed {
   .all-entries-toolbar > div:last-of-type > input {
     width: 100% !important;
   }
+  /*.startup-row {
+    padding: 40px 10px;
+  }*/
 }

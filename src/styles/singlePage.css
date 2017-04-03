@@ -1,13 +1,17 @@
 .single-page {
   display: flex;
   justify-content: center;
-  align-items: center;
-  align-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
   width: 60%;
   margin: 50px auto;
 }
 .single-page > div > div:first-child {
   padding-bottom: 20px;
+}
+.single-body {
+  display: flex;
+  justify-content: center;
 }
 .single-body img {
   display: inline-block;
@@ -19,6 +23,7 @@
 }
 .single-body > img {
   width: 100px;
+  align-self: flex-start;
 }
 .single-body > div span  {
   display: block;

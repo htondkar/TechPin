@@ -9,12 +9,12 @@ import Snackbar from 'material-ui/Snackbar';
 
 const styles = {
   toolbarHomeIcon: {
-    marginLeft: 27,
+    // marginLeft: 27,
     cursor: 'pointer',
   },
   editModeIcon: {
     cursor: 'pointer',
-    marginRight: '-23px !important',
+    // marginRight: '-23px !important',
   }
 }
 
@@ -46,21 +46,27 @@ export default class SinglePageToolbar extends React.Component {
       <div>
         <Toolbar className='toolbar'>
           <ToolbarGroup firstChild={true}>
-            <IconButton tooltip='back to home' tooltipPosition='top-center'>
+            <IconButton 
+              tooltip='back to home' 
+              tooltipPosition='top-center'
+              onClick={()=>browserHistory.push('/')}
+              style={styles.toolbarHomeIcon}>
               <NavigationArrowBack
-                style={styles.toolbarHomeIcon}
                 hoverColor={'#9C27B0'}
                 color='black'
-                onClick={()=>browserHistory.push('/')}/>
+                />
             </IconButton>
           </ToolbarGroup>
           {editAble && <ToolbarGroup onClick={this.checkAuthAndRedirect}>
-            <IconButton tooltip='edit this page' tooltipPosition='top-center'>
-              <EditorModeEdit
+            <IconButton 
+              tooltip='edit this page' 
+              tooltipPosition='top-center' 
               style={styles.editModeIcon}
-              color='#0D47A1'
-              hoverColor={'#9C27B0'}
-              onClick={this.checkAuthAndRedirect}/>
+              onClick={this.checkAuthAndRedirect}>
+                <EditorModeEdit
+                  color='#0D47A1'
+                  hoverColor={'#9C27B0'}
+                />
             </IconButton>
             </ToolbarGroup>}
         </Toolbar>

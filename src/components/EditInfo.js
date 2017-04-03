@@ -12,6 +12,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FileFileUpload from 'material-ui/svg-icons/file/file-upload';
 import IconButton from 'material-ui/IconButton';
 import Snackbar from 'material-ui/Snackbar';
+import {PulseLoader} from 'halogen';
 
 const editFormSubmitSuccessFeedbackText = 'Thanks, your info will be shown after approval';
 const editFormSubmitFailedFeedbackText = 'Oops, please try again';
@@ -22,7 +23,8 @@ class EditInfo extends React.Component {
     this.state = {
       snackBarOpen: false,
       responseText: '',
-      formData: {}
+      formData: {},
+      aSyncCall: false
     }
   }
 
@@ -46,18 +48,22 @@ class EditInfo extends React.Component {
     const keys = Object.keys(this.state.formData);
     const values = Object.values(this.state.formData);
     if(this.valid(values)) {
-      this.setState({formIsValid: true})
+      this.setState({formIsValid: true, aSyncCall: true})
       for (let i = 0; i < keys.length; i++) {
         formData.append(keys[i], values[i])
       }
       formData.append('logo', document.getElementById('logo').files[0]);
       this.props.actions.submitAddNewVersion(formData, this.props.params.startUpName)
         .then(
-          response => this.setState({snackBarOpen: true, responseText: editFormSubmitSuccessFeedbackText}),
-          response => this.setState({snackBarOpen: true, responseText: editFormSubmitFailedFeedbackText})
+          response => this.setState({snackBarOpen: true, aSyncCall: false, responseText: editFormSubmitSuccessFeedbackText}),
+          response => this.setState({snackBarOpen: true, aSyncCall: false, responseText: editFormSubmitFailedFeedbackText})
         );
     } else {
-      this.setState({snackBarOpen: true, responseText: 'please fill at least 1 field', formIsValid: false})
+      this.setState({
+        snackBarOpen: true, 
+        aSyncCall: false,
+        responseText: 'please fill at least 1 field', 
+        formIsValid: false})
     }
   }
 
@@ -103,7 +109,12 @@ class EditInfo extends React.Component {
             </div>
           </form>
           <div className="submit-edit">
-            <RaisedButton label="Submit for review" primary={true} onClick={this.handleSubmit}/>
+            <RaisedButton 
+              label="Submit for review" 
+              primary={true} 
+              onClick={this.handleSubmit}>
+                {this.state.aSyncCall && <PulseLoader color="#FFFFFF" size="6px"/> }
+            </RaisedButton>  
           </div>
         </Paper>
         <Snackbar

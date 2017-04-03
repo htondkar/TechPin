@@ -43,7 +43,6 @@ export default class techpinApi {
   //// authentication
 
   static login(email, password) {
-
     return axios.post(`${baseApiUrl}/login`, `email=${email}&password=${password}`, config)
   }
 

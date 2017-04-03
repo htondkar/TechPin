@@ -17,7 +17,6 @@ export default class CommentBox extends React.Component {
     this.setState({commentText: value})
   }
 
-
   handleNewComment = () => {
     let commentData = {};
     commentData.text = this.state.commentText;
@@ -39,9 +38,9 @@ export default class CommentBox extends React.Component {
       {this.props.commentAsyncCall ?
         <CircularProgress size={33.33} style={{marginBottom: '10px'}}/> :
         <IconButton
-          style={{padding: 0}}><ContentAddCircle
-          color='#2196F3'
-          onClick={this.handleNewComment}/>
+          style={{padding: 0}}
+          onClick={this.handleNewComment}>
+            <ContentAddCircle color='#2196F3'/>
         </IconButton>
       }
       </div>

@@ -67,3 +67,10 @@ div#paper-short-desc {
   font-family: 'Rubik';
   color: #555;
 }
+.category-image {
+  height: 100px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: contain;
+}

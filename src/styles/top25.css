@@ -161,4 +161,7 @@ div.before-top25-title {
     flex-basis: 100%;
     margin-bottom: 27px;
   }
+  .flex-container {
+    padding: 0 10px; 
+  }
 }
