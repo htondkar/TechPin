@@ -1,4 +1,5 @@
+//email verfication
 export function validateEmail(email) {
-    const reg = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-    return reg.test(email);
+    const reg = New RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])+")
+    return reg.test(email)
 }
