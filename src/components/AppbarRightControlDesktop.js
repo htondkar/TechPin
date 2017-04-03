@@ -21,7 +21,7 @@ const AppbarRightControlDesktop = ({authenticated, openModal, LogOut, handleDraw
         onTouchTap={handleDrawerToggle}
       />
       <FlatButton
-        label="all start ups"
+        label="A~Z List"
         onTouchTap={() => browserHistory.push('/all-entries')}
       />
     </div>

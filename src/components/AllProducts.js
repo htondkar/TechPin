@@ -4,6 +4,7 @@ import * as actions from '../actions/actionCreators';
 
 import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import StartupRow from './StartupRow';
+import CircularProgress from 'material-ui/CircularProgress';
 
 const toolbarStyles = {
   color: 'white',
@@ -14,15 +15,38 @@ class AllProducts extends React.Component {
     super(props)
     this.state = {
       searchTerm: '',
-      products: {charecter: []}
+      products: {charecter: []},
+      aSyncCall: false,
     }
   }
   componentDidMount = () => {
     if (Object.keys(this.props.allProducts).length === 0) {
+      this.setState({aSyncCall: true})
       this.props.getAllProducts()
-      .then(allProducts => this.setState({products: allProducts}))
+        .then(allProducts => this.setState({products: allProducts, aSyncCall: false}))
     } else {
       this.setState({products: this.props.allProducts})
+    }
+    
+    var h = document.getElementById("readout");
+    var stuck = false;
+    var stickPoint = getDistance();
+
+    function getDistance() {
+      var topDist = h.offsetTop;
+      return topDist;
+    }
+
+    window.onscroll = function(e) {
+      var distance = getDistance() - window.pageYOffset;
+      var offset = window.pageYOffset;
+      if ( (distance <= 0) && !stuck) {
+        h.classList.add("fixed")
+        stuck = true;
+      } else if (stuck && (offset <= stickPoint)){
+        h.classList.remove("fixed");
+        stuck = false;
+      }
     }
   }
 
@@ -35,7 +59,7 @@ class AllProducts extends React.Component {
   render() {
     return (
       <div className='main-content'>
-        <Toolbar className='all-entries-toolbar' >
+        <Toolbar className='all-entries-toolbar' id='readout' >
           <ToolbarGroup firstChild={true} >
             <ToolbarTitle text="Alphabetically ordered list of startups" style={toolbarStyles}/>
           </ToolbarGroup>
@@ -44,8 +68,8 @@ class AllProducts extends React.Component {
           </ToolbarGroup>
         </Toolbar>
         <div className="all-entries-wrapper">
-        {Object.keys(this.state.products)
-          .sort().map((charecter, i) => {
+        {this.state.aSyncCall ? <CircularProgress id='spinner' color={'#2962FF'} size={50}/> :
+          Object.keys(this.state.products).sort().map((charecter, i) => {
           if (this.state.products[charecter].length > 0) {
             return <StartupRow
               searchTerm={this.state.searchTerm}

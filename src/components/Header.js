@@ -198,7 +198,7 @@ class Header extends React.Component {
                 this.openModal();
               }}/>}
             {this.state.windowWidth < 600 && <ListItem
-              primaryText='ALL STARTUPS'
+              primaryText='A~Z List'
               onClick={() => {
                 this.setState({drawerIsOpen: false});
                 browserHistory.push('/all-entries');

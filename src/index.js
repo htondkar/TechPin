@@ -23,6 +23,7 @@ import './styles/modals.css';
 import './styles/header.css';
 import './styles/editInfo.css';
 import './styles/allEntries.css';
+import './styles/allProducts.css';
 
 render(
   <Provider store={store}>
