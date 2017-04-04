@@ -16,7 +16,6 @@ const styles = {
   }
 };
 const CategoryPaper = ({product, WrapperClassName}) => {
-  let {} = product
   return (
     <Link to={`/products/${product.slug}`}>
       <Paper style={styles.paper} className={`category-paper ${WrapperClassName}`}>

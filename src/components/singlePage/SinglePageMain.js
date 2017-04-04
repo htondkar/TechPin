@@ -80,7 +80,7 @@ class SinglePageMain extends React.Component {
       if (details) {
         var desc = details.description_en
       } else {
-        var desc = ''
+        desc = ''
       }
     }
     const comments = this.state.comments || []
