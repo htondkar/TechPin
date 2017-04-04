@@ -4,6 +4,13 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
+.upload-logo-text {
+  cursor: pointer;
+  transition: color 0.3 ease-in;
+}
+.upload-logo-text:hover {
+  color: #000;
+}
 .three-field {
   flex-basis: 30%;
   width: 30% !important;

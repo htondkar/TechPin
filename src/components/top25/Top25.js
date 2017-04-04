@@ -76,7 +76,7 @@ export default class Top25 extends React.Component {
       return (
         <div className='top25 main-content'>
           <header className="top25-header">
-            <span>Top 25</span>
+            <span>Top Pins</span>
             <p className="sub-header">Chosen By:</p>
           </header>
           <main className="flex-container">

@@ -100,10 +100,10 @@ class EditInfo extends React.Component {
             <TextField id='instagram' className='three-field' floatingLabelText="Instagram profile" onChange={this.textFieldChangeHandler}/>
             <div className='full upload-button'>
               <div>
-                <div className="upload-logo-text">upload logo</div>
+                <div className="upload-logo-text" onClick={() => this.uploadButton.click()}>upload logo</div>
                 <IconButton style={{width: '24px', height: '24px', padding: 0}}>
-                <input type="file" id='logo' name='logo' className='input-file'/>
-                <label htmlFor='logo'><FileFileUpload/></label>
+                  <label htmlFor='logo' ref={(node) => this.uploadButton = node}><FileFileUpload/></label>
+                  <input type="file" id='logo' name='logo' className='input-file'/>  
                 </IconButton>
               </div>
             </div>
