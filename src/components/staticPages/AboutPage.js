@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
-import aboutText from '../helpers/aboutText';
+import aboutText from '../../helpers/aboutText';
 
 import Paper from 'material-ui/Paper';
-import SinglePageToolbar from './SinglePageToolbar';
+import SinglePageToolbar from '../singlePage/SinglePageToolbar';
 
 const style = {
   Width: '100%',

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import Paper from 'material-ui/Paper';
 import {Link} from 'react-router';
-import {baseUrl} from '../api/realApi';
+import {baseUrl} from '../../api/realApi';
 
 const styles = {
   paper: {

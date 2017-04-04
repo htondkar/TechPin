@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import AddForm from './AddForm';
 import SortingMenu from './SortingMenu';
 
-import sort from '../helpers/helpers';
+import sort from '../../helpers/helpers';
 import StartUpWidget from './StartUpWidget';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import FloatingActionButton from 'material-ui/FloatingActionButton';

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
-import {baseUrl} from '../api/realApi';
+import {baseUrl} from '../../api/realApi';
 
-import StarRating from './StarRating';
+import StarRating from '../sharedComponents/StarRating';
 import Divider from 'material-ui/Divider';
 
 export default class StartupWidgetMoreInfo extends React.Component {

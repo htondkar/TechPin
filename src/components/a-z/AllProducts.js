@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../actions/actionCreators';
+import * as actions from '../../actions/actionCreators';
 
 import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import StartupRow from './StartupRow';

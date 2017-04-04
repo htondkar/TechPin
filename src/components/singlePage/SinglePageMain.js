@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../actions/actionCreators';
+import * as actions from '../../actions/actionCreators';
 
 import CommentRow from './CommentRow';
 import CommentBox from './CommentBox';
@@ -9,9 +9,9 @@ import StartupWidgetMoreInfo from './StartupWidgetMoreInfo';
 import Paper from 'material-ui/Paper';
 import Snackbar from 'material-ui/Snackbar';
 
-import AppleStoreLogo from '../static/App-Store-Badge.svg'
-import GoogleStoreLogo from '../../images/google-play-badge.png'
-import LinkedLogo from '../../images/linkedin.png'
+import AppleStoreLogo from '../../static/App-Store-Badge.svg'
+import GoogleStoreLogo from '../../../images/google-play-badge.png'
+import LinkedLogo from '../../../images/linkedin.png'
 
 const styles = {
   paper: {

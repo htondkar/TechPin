@@ -4,7 +4,7 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import CircularProgress from 'material-ui/CircularProgress';
 
-import {validateEmail} from '../helpers/validator'
+import {validateEmail} from '../../helpers/validator'
 
 export default class SignupForm extends React.Component {
   constructor() {

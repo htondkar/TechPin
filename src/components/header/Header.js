@@ -1,11 +1,11 @@
 import {connect} from 'react-redux';
 import React, {PropTypes} from 'react';
 import {Link, browserHistory} from 'react-router';
-import * as actions from '../actions/actionCreators';
+import * as actions from '../../actions/actionCreators';
 
 import Modal from 'react-modal';
-import LoginForm from './LoginForm';
-import SignupForm from './SignupForm';
+import LoginForm from '../authentication/LoginForm';
+import SignupForm from '../authentication/SignupForm';
 import AppbarRightControlMobile from './AppbarRightControlMobile';
 import AppbarRightControlDesktop from './AppbarRightControlDesktop';
 
@@ -17,7 +17,7 @@ import Subheader from 'material-ui/Subheader';
 
 import {List, ListItem} from 'material-ui/List';
 
-import Logo from '../../images/techpin-white.png';
+import Logo from '../../../images/techpin-white.png';
 
 const modalStyle = {
   overlay : {

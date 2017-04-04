@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import StartupPaper from './StartupPaper';
+import StartupPaper from '../sharedComponents/StartupPaper';
 
 function filterSearchTerm(list, searchTerm){
   if (searchTerm !== '') {

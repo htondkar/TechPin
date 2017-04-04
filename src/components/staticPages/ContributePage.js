@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
-import contributeText from '../helpers/contributeText';
+import contributeText from '../../helpers/contributeText';
 
 import Paper from 'material-ui/Paper';
-import SinglePageToolbar from './SinglePageToolbar';
+import SinglePageToolbar from '../singlePage/SinglePageToolbar';
 
 const style = {
   Width: '100%',

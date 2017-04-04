@@ -2,14 +2,14 @@ import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
 import Main from '../components/Main';
-import Top25 from '../components/Top25';
-import EditInfo from '../components/EditInfo';
-import AboutPage from '../components/AboutPage';
-import SinglePage from '../components/SinglePage';
-import CategoryPage from '../components/CategoryPage';
+import Top25 from '../components/top25/Top25';
+import AllProducts from '../components/a-z/AllProducts';
+import EditInfo from '../components/singlePage/EditInfo';
 import RequireAuth from '../components/HOCs/RequireAuth';
-import ContributePage from '../components/ContributePage';
-import AllProducts from '../components/AllProducts';
+import ContributePage from '../components/staticPages/ContributePage';
+import AboutPage from '../components/staticPages/AboutPage';
+import SinglePage from '../components/singlePage/SinglePage';
+import CategoryPage from '../components/categoryPage/CategoryPage';
 
 export default (
   <Route path="/" component={Main}>

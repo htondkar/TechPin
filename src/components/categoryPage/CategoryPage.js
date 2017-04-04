@@ -1,10 +1,10 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
-import * as actions from '../actions/actionCreators';
+import * as actions from '../../actions/actionCreators';
 
 import IconButton from 'material-ui/IconButton';
-import StartupPaper from './StartupPaper';
+import StartupPaper from '../sharedComponents/StartupPaper';
 import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 
 const styles = {

@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
-import {baseUrl} from '../api/realApi';
+import {baseUrl} from '../../api/realApi';
 
-import StarRating from './StarRating';
+import StarRating from '../sharedComponents/StarRating';
 
 import {ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';

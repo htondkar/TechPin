@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
-import {footerText} from '../helpers/staticText';
+import {footerText} from '../../helpers/staticText';
 
 const Footer = (props) => {
   return (
