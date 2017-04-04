@@ -13,7 +13,6 @@ const StartUpWidget = ({product, i}) => {
   const styles = {
     logo: {
       width: 85,
-      height: 85
     },
     container: {
       backgroundColor: 'white',

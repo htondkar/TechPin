@@ -112,6 +112,7 @@ class Header extends React.Component {
          aSyncCall: false,
          responseText: 'You are now authenticated'})
      } else {
+       debugger
        this.setState({
          snackBarOpen: true,
          aSyncCall: false,
