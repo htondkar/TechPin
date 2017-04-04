@@ -266,7 +266,7 @@ export function OAuthLogIn(payLoad) {
       .then(
         (response) => {
           const authData = {
-            'api-token': response['api-token'],
+            'api-token': response.data['api-token'],
             username: response.data.user.username
           }
           sessionStorage.setItem('techpin', JSON.stringify(authData))
