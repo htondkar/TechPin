@@ -31,21 +31,21 @@ const modalStyle = {
 };
 
 class Header extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      modalIsOpen  : false,
-      drawerIsOpen : false,
       view         : 'login',
       aSyncCall    : false,
+      categories   : [],
+      modalIsOpen  : false,
+      drawerIsOpen : false,
       snackBarOpen : false,
       responseText : '',
-      categories   : [],
     }
   }
 
   componentDidMount = () => {
-
     this.setState({windowWidth: window.innerWidth});
     window.addEventListener('resize', () => this.setState({windowWidth: window.innerWidth}));
   }
@@ -55,6 +55,24 @@ class Header extends React.Component {
       this.setState({categories: nextProps.categories});
     }
   }
+
+  // shouldComponentUpdate = (nextProps, nextState) => {
+  //   if (nextProps.authenticated !== this.props.authenticated) {
+  //     return true
+  //   } else if (nextProps.categories.length !== this.props.categories.length) {
+  //     return true
+  //   } else if (nextState.drawerIsOpen !== this.state.drawerIsOpen) {
+  //     return true
+  //   } else if (nextState.modalIsOpen !== this.state.modalIsOpen) {
+  //     return true
+  //   } else if (nextState.snackBarOpen !== this.state.snackBarOpen) {
+  //     return true
+  //   } 
+    
+  //   else {
+
+  //   }
+  // }
 
   openModal = () => {
    this.setState({modalIsOpen: true});
@@ -85,21 +103,19 @@ class Header extends React.Component {
           aSyncCall: false,
           view: 'login',
           responseText: 'You successfuly signed up'})
-          } else {
-            this.setState({
-              snackBarOpen: true,
-              aSyncCall: false,
-              responseText: 'signed up failed...'})
-            }
+        } else {
+          this.setState({
+            snackBarOpen: true,
+            aSyncCall: false,
+            responseText: 'signed up failed...'})
+          }
       })
-
    }
 }
 
   handleLogOut = () => {
     this.props.logOut();
-    this.setState({responseText: 'You signed out'});
-    this.setState({snackBarOpen: true});
+    this.setState({responseText: 'You signed out', snackBarOpen: true});
   }
 
   handleLogIn = (email, password) => {
@@ -139,11 +155,13 @@ class Header extends React.Component {
           modalIsOpen: false,
           snackBarOpen: true,
           responseText: 'You are now authenticated'})
-          ).catch((err)=> console.log(err.data))
+          ).catch(()=> {
+            this.setState({snackBarOpen: true, responseText: 'Failed to login, try again'})
+          })
     } else {
       this.setState({
         snackBarOpen: true,
-        responseText: payload})
+        responseText: 'Failed to login using your google account...'})
     }
   }
 

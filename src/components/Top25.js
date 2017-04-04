@@ -6,8 +6,8 @@ import SortingMenu from './SortingMenu';
 
 import sort from '../helpers/helpers';
 import StartUpWidget from './StartUpWidget';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
 
 const modalStyle = {
   overlay : {
@@ -59,6 +59,13 @@ export default class Top25 extends React.Component {
      }
    }
 
+   shouldComponentUpdate = (nextProps, nextState) => {
+      if (nextProps.topProducts.length !== this.props.topProducts.length) {
+        return true
+      }
+      return false
+   }
+
    componentWillReceiveProps = (nextProps) => {
      if (Object.keys(nextProps.topProducts).length > 0) {
        this.setState({topProducts: nextProps.topProducts});
@@ -76,7 +83,7 @@ export default class Top25 extends React.Component {
       return (
         <div className='top25 main-content'>
           <header className="top25-header">
-            <span>Top 25 Startups</span>
+            <span>Top 25</span>
             <p className="sub-header">Chosen By:</p>
           </header>
           <main className="flex-container">

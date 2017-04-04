@@ -77,9 +77,11 @@ div.fixed {
 }
 #spinner {
   margin: 0 auto;
-  position: absolute;
+  position: reletive;
   top: 200px;
-
+}
+#spinner > div {
+  padding: 0 !important;
 }
 @media screen and (max-width: 880px) {
   .row-wrapper {
