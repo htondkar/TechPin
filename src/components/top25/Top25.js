@@ -59,13 +59,6 @@ export default class Top25 extends React.Component {
      }
    }
 
-   shouldComponentUpdate = (nextProps, nextState) => {
-      if (nextProps.topProducts.length !== this.props.topProducts.length) {
-        return true
-      }
-      return false
-   }
-
    componentWillReceiveProps = (nextProps) => {
      if (Object.keys(nextProps.topProducts).length > 0) {
        this.setState({topProducts: nextProps.topProducts});
