@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import GoogleLogin from 'react-google-login';
+import googleClientId from '../../settings'
 
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -55,7 +56,7 @@ export default class LoginForm extends React.Component {
       </div>
       <div className="google-wrapper">
         <GoogleLogin
-          clientId="57613180365-kgcq8nq2pb2v9psdqc4upm8cgmd13vam.apps.googleusercontent.com"
+          clientId={googleClientId}
           buttonText={'google signin'}
           className='google-login-button'
           onSuccess={this.googleAuthSuccess}
