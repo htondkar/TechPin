@@ -6,6 +6,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import {PulseLoader} from 'halogen';
 
+// const styles = {
+//   googleSigninDisabled: {
+//     cursor: 'wait',
+//   }
+// }
+
 export default class LoginForm extends React.Component {
   constructor () {
     super();
