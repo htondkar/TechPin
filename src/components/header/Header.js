@@ -56,24 +56,6 @@ class Header extends React.Component {
     }
   }
 
-  // shouldComponentUpdate = (nextProps, nextState) => {
-  //   if (nextProps.authenticated !== this.props.authenticated) {
-  //     return true
-  //   } else if (nextProps.categories.length !== this.props.categories.length) {
-  //     return true
-  //   } else if (nextState.drawerIsOpen !== this.state.drawerIsOpen) {
-  //     return true
-  //   } else if (nextState.modalIsOpen !== this.state.modalIsOpen) {
-  //     return true
-  //   } else if (nextState.snackBarOpen !== this.state.snackBarOpen) {
-  //     return true
-  //   } 
-    
-  //   else {
-
-  //   }
-  // }
-
   openModal = () => {
    this.setState({modalIsOpen: true});
  }
@@ -104,10 +86,11 @@ class Header extends React.Component {
           view: 'login',
           responseText: 'You successfuly signed up'})
         } else {
+          let errorText = Object.values(response.detail).join(', ')
           this.setState({
             snackBarOpen: true,
             aSyncCall: false,
-            responseText: 'signed up failed...'})
+            responseText: errorText})
           }
       })
    }

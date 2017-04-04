@@ -100,7 +100,7 @@ class AddForm extends React.Component {
       .then(response => {
         if (response.success) {
           this.setState({
-            addStartUpResponseText: 'successfully submitted, we will check this product asap!',
+            addStartUpResponseText: 'successfully submitted, we will review it asap!',
             product_type : 1,
             chipList : [],
             errors: {},
@@ -111,8 +111,9 @@ class AddForm extends React.Component {
             aSyncSuccess: true
           });
         } else {
+          let errorText = Object.values(response.detail).join(', ')  
           this.setState({
-            addStartUpResponseText: 'failed to submit, plaease try again or contact us',
+            addStartUpResponseText: errorText,
             snackBarOpen: true,
             aSyncCall: false,
           });

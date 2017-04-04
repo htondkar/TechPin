@@ -112,7 +112,6 @@ export default class techpinApi {
 
   static postNewProduct(formData) {
     const qs = querystring.stringify(formData);
-    console.log(qs);
     return axios.post(`${baseApiUrl}/products/add`, qs, config)
   }
 
