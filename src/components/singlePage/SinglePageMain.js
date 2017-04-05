@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../actions/actionCreators';
 
 import CommentRow from './CommentRow';
+import VisualInfo from './VisualInfo';
 import CommentBox from './CommentBox';
 import StartupWidgetMoreInfo from './StartupWidgetMoreInfo';
 
@@ -88,8 +89,8 @@ class SinglePageMain extends React.Component {
       <div>
         <Paper style={styles.paper} zDepth={3}>
           {this.props.children}
-          <StartupWidgetMoreInfo
-            product={this.state.product || {}}/>
+          <StartupWidgetMoreInfo product={this.state.product || {}}/>
+          <VisualInfo/>
           <div className="detailed-info">
             <div className="single-about">
               <span>{`About ${name}`}</span>

@@ -45,12 +45,12 @@ export default class StartupWidgetMoreInfo extends React.Component {
           <span>
             <a href={data.website}>{data.name_en}</a>
             <span id='single-meta-info'>
-              {`${data.city},${data.country} `}{data.year ? `founded in ${data.year}` : ''}
+              {data.city && `${data.city},${data.country}`}
             </span>
           </span>
-          <StarRating productId={data.slug} rating={data.average_p_rate} editAble={false} className='star-rating-single' />
-          <span className="nps-score">{`N.P.S: ${data.n_p_score}`}</span>
-          <span>{data.summary}</span>
+          {/*<StarRating productId={data.slug} rating={data.average_p_rate} editAble={false} className='star-rating-single' />*/}
+          {/*<span className="nps-score">{`N.P.S: ${data.n_p_score}`}</span>*/}
+          <span className='single-page-summary'>{data.summary}</span>
         </div>
         <Divider />
       </div>
