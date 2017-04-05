@@ -7,6 +7,7 @@ import VisualInfo from './VisualInfo';
 import CommentBox from './CommentBox';
 import StartupWidgetMoreInfo from './StartupWidgetMoreInfo';
 import SocialNetworks from './SocialNetworks';
+import ContactInfo from './ContactInfo';
 
 import Paper from 'material-ui/Paper';
 import Snackbar from 'material-ui/Snackbar';
@@ -82,11 +83,16 @@ class SinglePageMain extends React.Component {
       }
     }
     const comments = this.state.comments || []
-    let socialData = {
+    const socialData = {
       ios: this.state.product.details.ios_app,
       android: this.state.product.details.android_app,
       linkedin: this.state.product.details.linkedin,
       instagram: this.state.product.details.instagram
+    }
+    const contactData = {
+      email: this.state.product.details.email,
+      extraUrl: this.state.product.details.extra_url,
+      website: this.state.product.website,
     }
     return(
       <div>
@@ -102,6 +108,9 @@ class SinglePageMain extends React.Component {
           </div>
           <div className="single-socials">
             {this.state.product && <SocialNetworks socialData={socialData}/>}
+          </div>
+          <div className="contact-info">
+            <ContactInfo contactData={contactData}/>
           </div>
           <div className="comments">
             <span className="comment-title">Comments</span>

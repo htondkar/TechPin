@@ -40,7 +40,7 @@ export default class CommentBox extends React.Component {
         <IconButton
           style={{padding: 0}}
           onClick={this.handleNewComment}>
-            <ContentAddCircle color='#2196F3'/>
+            <ContentAddCircle color='#0D47A1'/>
         </IconButton>
       }
       </div>
