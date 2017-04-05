@@ -90,7 +90,7 @@ class SinglePageMain extends React.Component {
         <Paper style={styles.paper} zDepth={3}>
           {this.props.children}
           <StartupWidgetMoreInfo product={this.state.product || {}}/>
-          <VisualInfo/>
+          <VisualInfo product={this.state.product}/>
           <div className="detailed-info">
             <div className="single-about">
               <span>{`About ${name}`}</span>

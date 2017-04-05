@@ -76,11 +76,11 @@ export default class Top25 extends React.Component {
           </header>
           <main className="flex-container">
             <WidgetColumn
-              productList={this.state.topProducts.randomProducts}
-              title='Rated By Editors'/>
-            <WidgetColumn
               productList={this.state.topProducts.topRanked}
               title='Rated By Poeple'/>
+            <WidgetColumn
+              productList={this.state.topProducts.randomProducts}
+              title='Random'/>
             <WidgetColumn
               productList={this.state.topProducts.topNew}
               title='New Pins'/>
