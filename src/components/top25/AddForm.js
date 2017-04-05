@@ -196,6 +196,7 @@ class AddForm extends React.Component {
             filter={AutoComplete.caseInsensitiveFilter}
             searchText={this.state.searchText}
             dataSource={this.state.categories.map(item => item.name_en)}
+            openOnFocus={true}
             maxSearchResults={5}
             onUpdateInput={this.handleUpdateInput}
             onNewRequest={(tag) => this.handleAddTag(tag)}

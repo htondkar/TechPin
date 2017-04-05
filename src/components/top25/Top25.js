@@ -72,7 +72,7 @@ export default class Top25 extends React.Component {
         <div className='top25 main-content'>
           <header className="top25-header">
             <span>Top Pins</span>
-            <p className="sub-header">Dynamic list of startups & accelerators in Iran</p>
+            <p className="sub-header">Dynamic list of startups & accelerators</p>
           </header>
           <main className="flex-container">
             <WidgetColumn
