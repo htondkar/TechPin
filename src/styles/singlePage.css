@@ -92,7 +92,7 @@
   height: 30px;
   margin-right: 15px;
 }
-img#linkedin {
+img#linkedin, img#instagram {
   width: 30px;
   height: 30px;
 }
@@ -215,6 +215,12 @@ div.single-page-visual-widget:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.social-disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.4;
+  filter: alpha(opacity=40); /* msie */
 }
 @media screen and (max-width: 920px) {
   .single-page {

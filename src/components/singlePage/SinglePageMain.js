@@ -6,13 +6,10 @@ import CommentRow from './CommentRow';
 import VisualInfo from './VisualInfo';
 import CommentBox from './CommentBox';
 import StartupWidgetMoreInfo from './StartupWidgetMoreInfo';
+import SocialNetworks from './SocialNetworks';
 
 import Paper from 'material-ui/Paper';
 import Snackbar from 'material-ui/Snackbar';
-
-import AppleStoreLogo from '../../static/App-Store-Badge.svg'
-import GoogleStoreLogo from '../../../images/google-play-badge.png'
-import LinkedLogo from '../../../images/linkedin.png'
 
 const styles = {
   paper: {
@@ -85,6 +82,12 @@ class SinglePageMain extends React.Component {
       }
     }
     const comments = this.state.comments || []
+    let socialData = {
+      ios: this.state.product.details.ios_app,
+      android: this.state.product.details.android_app,
+      linkedin: this.state.product.details.linkedin,
+      instagram: this.state.product.details.instagram
+    }
     return(
       <div>
         <Paper style={styles.paper} zDepth={3}>
@@ -97,22 +100,9 @@ class SinglePageMain extends React.Component {
               <p>{desc}</p>
             </div>
           </div>
-          {this.state.product &&
-            <div className="single-link">
-              {this.state.product.details.ios_app &&
-              <a href={this.state.product.details.ios_app} target="_blank">
-                <img src={AppleStoreLogo} alt=""/>
-              </a>}
-              {this.state.product.details.android_app &&
-              <a href={this.state.product.details.android_app} target="_blank">
-                <img src={GoogleStoreLogo} alt=""/>
-              </a>}
-              {this.state.product.details.linkedin &&
-              <a href={this.state.product.details.linkedin} target="_blank">
-                <img id='linkedin' src={LinkedLogo} alt=""/>
-              </a>}
-              <div className='divider'></div>
-            </div>}
+          <div className="single-socials">
+            {this.state.product && <SocialNetworks socialData={socialData}/>}
+          </div>
           <div className="comments">
             <span className="comment-title">Comments</span>
             <CommentBox
