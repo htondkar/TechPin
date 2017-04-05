@@ -1,5 +1,5 @@
 .category-page {
-  padding: 2% 20%;
+  padding: 2% 10%;
 }
 .category-flex-container {
   display: flex;
@@ -7,7 +7,7 @@
   justify-content: center;
 }
 .category-flex-container > * {
-  margin: 20px;
+  margin: 10px;
 }
 div.category-paper {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;

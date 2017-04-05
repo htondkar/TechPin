@@ -76,7 +76,7 @@ class EditInfo extends React.Component {
     const index = this.props.singleProducts
           .findIndex(item => item.product.slug === productSlug);
     const product = this.props.singleProducts[index];
-    const name = product && product.name_en;
+    const name = product && product.product.name_en;
     return (
       <div className='single-page main-content edit-info'>
         <Paper style={{width: '100%'}} zDepth={3}>
@@ -86,7 +86,7 @@ class EditInfo extends React.Component {
             {`Share your info about ${name} with us!`}
           </div>
           <form className="edit-info-form">
-            <TextField id='website' className='three-field' floatingLabelText="Website" onChange={this.textFieldChangeHandler} />
+            <TextField id='extra_url' className='three-field' floatingLabelText="extra url" onChange={this.textFieldChangeHandler} />
             <TextField id='email' className='three-field' floatingLabelText="email address" type='email' onChange={this.textFieldChangeHandler}/>
             <TextField id='employees' className='three-field' floatingLabelText="Number of Employees" onChange={this.textFieldChangeHandler}/>
             <TextField id='year' className='three-field' floatingLabelText="Launch Year" onChange={this.textFieldChangeHandler}/>
