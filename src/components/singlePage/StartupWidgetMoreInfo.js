@@ -40,7 +40,7 @@ export default class StartupWidgetMoreInfo extends React.Component {
     }
     return (
       <div className="single-body">
-        <img src={baseUrl + data.logo} height='100px' alt='logo'/>
+        <img src={baseUrl + data.logo} width='100px' alt='logo'/>
         <div>
           <span>
             <a href={data.website}>{data.name_en}</a>
@@ -48,7 +48,7 @@ export default class StartupWidgetMoreInfo extends React.Component {
               {`${data.city},${data.country} `}{data.year ? `founded in ${data.year}` : ''}
             </span>
           </span>
-          <StarRating productId={data.slug} rating={data.average_p_rate} editAble={true} className='star-rating-single' />
+          <StarRating productId={data.slug} rating={data.average_p_rate} editAble={false} className='star-rating-single' />
           <span className="nps-score">{`N.P.S: ${data.n_p_score}`}</span>
           <span>{data.summary}</span>
         </div>

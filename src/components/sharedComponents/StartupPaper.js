@@ -1,7 +1,9 @@
 import React, {PropTypes} from 'react';
-import Paper from 'material-ui/Paper';
 import {Link} from 'react-router';
+
 import {baseUrl} from '../../api/realApi';
+import Paper from 'material-ui/Paper';
+import StarRating from './StarRating'
 
 const styles = {
   paper: {
@@ -27,7 +29,7 @@ const CategoryPaper = ({product, WrapperClassName}) => {
           <div className="category-info-box">
             {product.details.city && <div>{`${product.details.city}, ${product.details.country}`}</div>}
             {product.details.year && <div>{`Founded in ${product.details.year}`}</div>}
-            {<div>{`N.P.S: ${product.n_p_score}`}</div>}
+            <StarRating rating={product.ranking} editAble={false} className='star-paper'/>
           </div>
           <div id='paper-short-desc'>
             {product.details.summary.split(' ').splice(0, 10).join(' ')}

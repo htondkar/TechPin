@@ -25,8 +25,13 @@ export default class WidgetColumn extends React.Component {
     }
   }
 
+  componentDidMount = () => {
+    if (this.props.productList.length > 0) {
+      this.setState({productList: this.props.productList})
+    }
+  }
+
   handleSort = (event, sortBy) => {
-    debugger
     if (sortBy !== this.state.sortBy) {
       let sortedList = sort(this.props.productList, sortBy)
       this.setState({productList: sortedList, sortBy})

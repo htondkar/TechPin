@@ -33,9 +33,6 @@
   display: inline-block;
   margin-left: 20px;
 }
-.single-body > div span.star-rating-single i {
-  cursor: pointer;
-}
 .single-body > div span.nps-score  {
   color: #666;
   font-size: 15.5px;
