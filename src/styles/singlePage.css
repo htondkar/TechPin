@@ -6,6 +6,9 @@
   width: 60%;
   margin: 50px auto;
 }
+#single-page-main-content {
+  min-width: 40vw;
+}
 .single-page > div > div:first-child {
   padding-bottom: 20px;
 }
@@ -146,7 +149,7 @@ div.comments > span {
 .divider {
   margin-top: 34px;
   width: 100%;
-  border-bottom: 1px solid rgb(224,224,244);
+  border-bottom: 1px solid #e0e0e0;
 }
 .comment-title {
   font-size: 20px;
@@ -161,11 +164,14 @@ div.comments > span {
   align-content: center;
   align-content: center;
 }
-.contact-info-row > span {
+.contact-info-title {
+  display: flex;
+  align-content: center;
+  align-items: center;
   font-family: 'Rubik';
   margin-left: 10px;
-  font-size: 14px;
-  font-weight: 600
+  font-size: 16px;
+  font-weight: 500
 }
 #signle-page-snackbar > div > div > span {
   font-size: 20px;
@@ -234,8 +240,11 @@ div.single-page-visual-widget:hover {
 .social-disabled {
   cursor: not-allowed;
   pointer-events: none;
-  opacity: 0.4;
-  filter: alpha(opacity=40); /* msie */
+  opacity: 0.2;
+  filter: alpha(opacity=20); /* msie */
+}
+.link-disabled {
+  pointer-events: none;
 }
 .contact-info {
   margin: 20px 30px;
@@ -244,15 +253,28 @@ div.single-page-visual-widget:hover {
   .single-page {
     width: 80%;
   }
+  div.single-body > img {
+    width: 120px;
+    height: auto;
+    align-items: flex-start;
+  }
 }
 @media screen and (max-width: 650px) {
   div.single-body {
     display: flex;
     justify-content: center;
   }
+  .single-page-main-content {
+    min-width: 350px !important;
+  }
   .single-page {
     width: 100%;
     margin: 0
+  }
+  div.single-body > img {
+    width: 120px;
+    height: auto;
+    align-items: flex-start;
   }
 }
 @media screen and (max-width: 400px) {
@@ -268,7 +290,7 @@ div.single-page-visual-widget:hover {
   }
   div.single-body > img {
     width: 120px;
-    height: 120px;
+    height: auto;
     margin-bottom: 30px;
   }
   .single-body > div {

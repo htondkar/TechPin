@@ -35,6 +35,7 @@ class Main extends React.Component {
               <Header/>
             </nav>
             <ReactCSSTransitionGroup
+              component='div'
               transitionName="main"
               transitionEnterTimeout={350}
               transitionLeaveTimeout={1}>

@@ -19,8 +19,8 @@
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
 }
 .column:hover {
-  background-color: #304FFE;
-  border: 1px solid #304FFE;
+  background-color: #0D47A1;
+  border: 1px solid #0D47A1;
   box-shadow: rgba(48, 79, 254, 0.117647) 0px 0px 15px 5px, rgba(48, 79, 254, 0.117647) 0px 0px 10px 5px;
 }
 .column:hover div.chooser-title > div{

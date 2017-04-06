@@ -96,7 +96,7 @@ class SinglePageMain extends React.Component {
     }
     return(
       <div>
-        <Paper style={styles.paper} zDepth={3}>
+        <Paper id='single-page-main-content' style={styles.paper} zDepth={3}>
           {this.props.children}
           <StartupWidgetMoreInfo product={this.state.product || {}}/>
           <VisualInfo product={this.state.product}/>

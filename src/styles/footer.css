@@ -47,3 +47,8 @@ section.copyright ul li a:hover{
   font-family: 'Dosis';
 
 }
+@media screen and (max-width: 450px) {
+  .footer {
+    padding: 55px 20px 0px 20px; 
+  }
+}
