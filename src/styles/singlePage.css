@@ -293,19 +293,19 @@ div.single-page-visual-widget:hover {
   cursor: pointer;
   transition: all 0.4s cubic-bezier(.25,.8,.25,1);
 }
-.rate-box:hover {
+.rate-box.active:hover {
   background-color: #0D47A1;
   color: white;
   transform: translateY(-10px);
 }
-.rate-box.not-selected {
+.rate-box.deactive {
   pointer-events: none;
 }
-.rate-box.not-selected:hover {
+/*.rate-box.not-selected:hover {
   background-color: #e8e8e8;
   color: #0D47A1;
-  transform: none; 
-}
+  transform: none;
+}*/
 
 
 

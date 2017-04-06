@@ -102,7 +102,11 @@ class SinglePageMain extends React.Component {
           <StartupWidgetMoreInfo product={this.state.product || {}}/>
           <VisualInfo product={this.state.product}/>
           <div className="rating">
-            <Rate name={name}/>
+            <Rate
+              name={name}
+              slug={this.state.product.slug}
+              submitRate={this.props.postNewRate}
+              authenticated={this.props.authenticated}/>
           </div>
           <div className="detailed-info">
             <div className="single-about">
