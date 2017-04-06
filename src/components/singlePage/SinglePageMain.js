@@ -8,6 +8,7 @@ import CommentBox from './CommentBox';
 import StartupWidgetMoreInfo from './StartupWidgetMoreInfo';
 import SocialNetworks from './SocialNetworks';
 import ContactInfo from './ContactInfo';
+import Rate from './Rate';
 
 import Paper from 'material-ui/Paper';
 import Snackbar from 'material-ui/Snackbar';
@@ -100,6 +101,9 @@ class SinglePageMain extends React.Component {
           {this.props.children}
           <StartupWidgetMoreInfo product={this.state.product || {}}/>
           <VisualInfo product={this.state.product}/>
+          <div className="rating">
+            <Rate name={name}/>
+          </div>
           <div className="detailed-info">
             <div className="single-about">
               <span>{`About ${name}`}</span>
