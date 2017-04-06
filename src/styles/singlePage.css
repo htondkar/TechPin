@@ -298,7 +298,14 @@ div.single-page-visual-widget:hover {
   color: white;
   transform: translateY(-10px);
 }
-
+.rate-box.not-selected {
+  pointer-events: none;
+}
+.rate-box.not-selected:hover {
+  background-color: #e8e8e8;
+  color: #0D47A1;
+  transform: none; 
+}
 
 
 
