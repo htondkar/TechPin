@@ -15,7 +15,7 @@ const styles = {
 const VisualInfo = ({product}) => {
   return (
     <div className='visual-info'>
-        <div id='single-page-rating' className='single-page-visual-parent' >
+        <div className='single-page-visual-parent' >
             <div className='single-page-visual-widget'>
             {`${product.average_p_rate.toFixed(1)}`}
             <StarRating rating={product.average_p_rate} className='visual-info-star' editable={false}/>
@@ -27,7 +27,7 @@ const VisualInfo = ({product}) => {
                 </div>
             </div>
         </div>
-        <div id='single-page-rating' className='single-page-visual-parent' >
+        <div className='single-page-visual-parent' >
             <div className='single-page-visual-widget'>
                 {product.n_p_score}
             </div>
@@ -38,7 +38,7 @@ const VisualInfo = ({product}) => {
                 </div>
             </div>
         </div>
-        <div id='single-page-rating' className='single-page-visual-parent' >
+        <div className='single-page-visual-parent' >
             <div className='single-page-visual-widget'>
                 {product.details.employees || '?'}
             </div>
@@ -49,7 +49,7 @@ const VisualInfo = ({product}) => {
                 </div>
             </div>
         </div>
-        <div id='single-page-rating' className='single-page-visual-parent' >
+        <div className='single-page-visual-parent' >
             <div className='single-page-visual-widget'>
                 {product.details.year || '?'}
             </div>

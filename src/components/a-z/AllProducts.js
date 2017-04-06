@@ -56,6 +56,15 @@ class AllProducts extends React.Component {
     })
   }
 
+  filterSearchTerm = (list, searchTerm) => {
+    if (searchTerm !== '') {
+      let filterdList = list.filter(item => item.name_en.match(new RegExp(searchTerm, 'gi')))
+      return filterdList;
+    } else {
+      return list;
+    }
+  }
+
   render() {
     return (
       <div className='main-content'>
@@ -74,7 +83,7 @@ class AllProducts extends React.Component {
             return <StartupRow
               searchTerm={this.state.searchTerm}
               key={i} char={charecter}
-              list={this.state.products[charecter]} />
+              filterdList={this.filterSearchTerm(this.state.products[charecter], this.state.searchTerm) } />
           }
         })}
         </div>

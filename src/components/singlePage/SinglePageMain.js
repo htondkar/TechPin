@@ -95,7 +95,7 @@ class SinglePageMain extends React.Component {
       website: this.state.product.website,
     }
     return(
-      <div>
+      <div id='single-page-main-container'>
         <Paper id='single-page-main-content' style={styles.paper} zDepth={3}>
           {this.props.children}
           <StartupWidgetMoreInfo product={this.state.product || {}}/>
