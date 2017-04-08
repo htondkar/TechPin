@@ -300,6 +300,11 @@ div.single-page-visual-widget:hover {
 }
 .rate-box.deactive {
   pointer-events: none;
+  color: white;
+}
+.rate-box.rate-selected {
+  background-color: #0D47A1;
+  color: white;
 }
 /*.rate-box.not-selected:hover {
   background-color: #e8e8e8;

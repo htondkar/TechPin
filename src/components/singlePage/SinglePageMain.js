@@ -100,7 +100,7 @@ class SinglePageMain extends React.Component {
         <Paper id='single-page-main-content' style={styles.paper} zDepth={3}>
           {this.props.children}
           <StartupWidgetMoreInfo product={this.state.product || {}}/>
-          <VisualInfo product={this.state.product}/>
+          <VisualInfo product={this.props.product.product}/>
           <div className="rating">
             <Rate
               name={name}

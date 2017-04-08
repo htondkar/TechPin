@@ -1,8 +1,8 @@
 import axios from 'axios';
 import querystring from 'querystring'
 
-export const baseUrl = 'http://185.117.22.106:8000';
-var baseApiUrl = 'http://185.117.22.106:8000/api';
+export const baseUrl = 'https://api.techpin.xyz';
+var baseApiUrl = 'https://api.techpin.xyz/api';
 
 var config = {
   headers: {

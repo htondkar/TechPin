@@ -86,18 +86,18 @@ class EditInfo extends React.Component {
             {`Share your info about ${name} with us!`}
           </div>
           <form className="edit-info-form">
-            <TextField id='extra_url' className='three-field' floatingLabelText="extra url" onChange={this.textFieldChangeHandler} />
-            <TextField id='email' className='three-field' floatingLabelText="email address" type='email' onChange={this.textFieldChangeHandler}/>
-            <TextField id='employees' className='three-field' floatingLabelText="Number of Employees" onChange={this.textFieldChangeHandler}/>
-            <TextField id='year' className='three-field' floatingLabelText="Launch Year" onChange={this.textFieldChangeHandler}/>
-            <TextField id='city' className='three-field' floatingLabelText="City" onChange={this.textFieldChangeHandler}/>
-            <TextField id='country' className='three-field' floatingLabelText="Country" onChange={this.textFieldChangeHandler}/>
-            <TextField id='description_en' fullWidth={true} rows={3} multiLine={true} floatingLabelText="What do they do?" onChange={this.textFieldChangeHandler}/>
-            <TextField id='android_app' fullWidth={true} floatingLabelText="Android App Url" onChange={this.textFieldChangeHandler}/>
-            <TextField id='ios_app' fullWidth={true} floatingLabelText="iOs App Url" onChange={this.textFieldChangeHandler}/>
-            <TextField id='linkedin' className='three-field' floatingLabelText="Linkedin profile" onChange={this.textFieldChangeHandler}/>
-            <TextField id='twitter' className='three-field' floatingLabelText="Twitter Account" onChange={this.textFieldChangeHandler}/>
-            <TextField id='instagram' className='three-field' floatingLabelText="Instagram profile" onChange={this.textFieldChangeHandler}/>
+            <TextField id='extra_url' defaultValue={product.product.details.extra_url} className='three-field' floatingLabelText="extra url" onChange={this.textFieldChangeHandler} />
+            <TextField id='email' defaultValue={product.product.details.email} className='three-field' floatingLabelText="email address" type='email' onChange={this.textFieldChangeHandler}/>
+            <TextField id='employees' defaultValue={product.product.details.employees} className='three-field' floatingLabelText="Number of Employees" onChange={this.textFieldChangeHandler}/>
+            <TextField id='year' defaultValue={product.product.details.year} className='three-field' floatingLabelText="Launch Year" onChange={this.textFieldChangeHandler}/>
+            <TextField id='city' defaultValue={product.product.details.city} className='three-field' floatingLabelText="City" onChange={this.textFieldChangeHandler}/>
+            <TextField id='country' defaultValue={product.product.details.country} className='three-field' floatingLabelText="Country" onChange={this.textFieldChangeHandler}/>
+            <TextField id='description_en' defaultValue={product.product.details.description_en} fullWidth={true} rows={3} multiLine={true} floatingLabelText="What do they do?" onChange={this.textFieldChangeHandler}/>
+            <TextField id='android_app' defaultValue={product.product.details.android_app} fullWidth={true} floatingLabelText="Android App Url" onChange={this.textFieldChangeHandler}/>
+            <TextField id='ios_app' defaultValue={product.product.details.ios_app} fullWidth={true} floatingLabelText="iOs App Url" onChange={this.textFieldChangeHandler}/>
+            <TextField id='linkedin' defaultValue={product.product.details.linkedin} className='three-field' floatingLabelText="Linkedin profile" onChange={this.textFieldChangeHandler}/>
+            <TextField id='twitter' defaultValue={product.product.details.twitter} className='three-field' floatingLabelText="Twitter Account" onChange={this.textFieldChangeHandler}/>
+            <TextField id='instagram' defaultValue={product.product.details.instagram} className='three-field' floatingLabelText="Instagram profile" onChange={this.textFieldChangeHandler}/>
             <div className='full upload-button'>
               <div>
                 <div className="upload-logo-text" onClick={() => this.uploadButton.click()}>upload logo</div>
