@@ -8,10 +8,22 @@ function sortByName(a,b) {
   }
 }
 
+//this is the real nps sort method
+// function sortByNps(a,b) {
+//   if ((a.n_p_score - b.n_p_score) < 0) {
+//     return 1;
+//   } else if ((a.n_p_score - b.n_p_score) > 0) {
+//     return -1;
+//   } else {
+//     return sortByName(a,b)
+//   }
+// }
+
+//this is temporary sort method for nps
 function sortByNps(a,b) {
-  if ((a.n_p_score - b.n_p_score) < 0) {
+  if ((a.rate_count - b.rate_count) < 0) {
     return 1;
-  } else if ((a.n_p_score - b.n_p_score) > 0) {
+  } else if ((a.rate_count - b.rate_count) > 0) {
     return -1;
   } else {
     return sortByName(a,b)

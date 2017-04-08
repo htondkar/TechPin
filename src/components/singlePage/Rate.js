@@ -11,7 +11,7 @@ export default class Rate extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userRate: 0,
+      userRate: null,
       userRated: false,
       snackBarIsOpen: false,
       snackBarText: '',
@@ -22,14 +22,12 @@ export default class Rate extends React.Component {
       this.setState({userRate: event.target.id});
       this.props.submitRate(event.target.id, this.props.slug)
       .then((res) => {
-        console.log(res.data.new_p_rate);
         if (res.status === 200 && res.data.success) {
           this.setState({
           snackBarIsOpen: true,
           snackBarText: 'Successfuly submited your rate',
           userRated: true
         })
-
         }
       })
     } else {
@@ -54,6 +52,7 @@ export default class Rate extends React.Component {
           <span>Rate {this.props.name}</span>
         </span>
         <div className="rate-box-container" onClick={this.handleRate}>
+          <div id='0' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 0 ? 'rate-selected' : ''}`}>0</div>
           <div id='1' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 1 ? 'rate-selected' : ''}`}>1</div>
           <div id='2' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 2 ? 'rate-selected' : ''}`}>2</div>
           <div id='3' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 3 ? 'rate-selected' : ''}`}>3</div>
