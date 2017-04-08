@@ -251,7 +251,7 @@ div.single-page-visual-widget:hover {
 }
 .rating {
   margin: 0 30px 20px 30px;
-  padding: 20px;
+  padding: 20px 0;
   border-bottom: 1px solid #e0e0e0;
 }
 .single-page-rate {
@@ -381,6 +381,6 @@ div.single-page-visual-widget:hover {
 
 @media screen and (min-width: 1400px) {
   .single-page {
-    width: 42.5%;
+    width: 43.5%;
   }
 }

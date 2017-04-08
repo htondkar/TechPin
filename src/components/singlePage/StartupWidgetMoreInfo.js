@@ -43,7 +43,7 @@ export default class StartupWidgetMoreInfo extends React.Component {
         <img src={baseUrl + data.logo} width='100px' alt='logo'/>
         <div>
           <span>
-            <a href={data.website}>{data.name_en}</a>
+            <a href={data.website} target='_blank'>{data.name_en}</a>
             <span id='single-meta-info'>
               {data.city && `${data.city},${data.country}`}
             </span>
