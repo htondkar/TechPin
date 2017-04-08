@@ -31,19 +31,28 @@ class CategoryPage extends React.Component {
          .some(category => category === this.props.params.category)
   })
 
+  filterDuplicate = arr => arr.filter((product, index) => {
+    return arr.findIndex(item => item.slug === product.slug) === index
+  })
+
   componentWillMount = () => {
     if(Object.keys(this.props.topProducts).length > 0) {
-      const allTop = this.props.topProducts
+      const allTop = [
+        ...this.props.topProducts.topNew, 
+        ...this.props.topProducts.topRanked, 
+        ...this.props.topProducts.randomProducts]
+      const filteredByCategory = this.filterByCategory(allTop)
       this.setState({
-        allTopProducts: [...allTop.topNew, ...allTop.topRanked, ...allTop.randomProducts]
+        allTopProducts: this.filterDuplicate(filteredByCategory)
       })
     } else {
       this.props.initialLoadTop25().then(allTop => {
+        const filteredByCategory = this.filterByCategory([
+          ...allTop.topNew, 
+          ...allTop.topRanked, 
+          ...allTop.randomProducts])
         this.setState({
-          allTopProducts:
-          [ ...allTop.top_new,
-            ...allTop.top_ranked,
-            ...allTop.random_products]
+          allTopProducts: this.filterDuplicate(filteredByCategory)
         })
       })
     }
@@ -66,8 +75,8 @@ class CategoryPage extends React.Component {
           <div></div>
         </header>
         <main className="category-flex-container">
-          {this.filterByCategory(this.state.allTopProducts)
-            .map((product, i) => <StartupPaper key={i} product={product} />)}
+          {this.state.allTopProducts.map((product, i) => <StartupPaper key={i} product={product} />)}
+
         </main>
       </div>);
   }
