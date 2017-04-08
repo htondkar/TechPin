@@ -17,6 +17,11 @@ class SinglePage extends React.Component {
       isLoading: false,
     }
   }
+  componentDidMount = () => {
+    if (this.props.authenticated) {
+      this.props.getPreviousUserRates(this.props.params.startUpName)
+    }
+  }
 
   componentWillMount = () => {
     const productName = this.props.params.startUpName
@@ -46,7 +51,7 @@ class SinglePage extends React.Component {
     return (
       <div className='single-page main-content'>
       {this.state.isLoading ? <CircularProgress id='spinner' color={'#2962FF'} size={50}/> :
-          <SinglePageMain product={this.state.product}>
+          <SinglePageMain product={this.state.product} userRate={this.props.userRates[this.props.params.startUpName]}>
             <SinglePageToolbar
               editAble={true}
               slug={this.state.slug}
@@ -64,7 +69,8 @@ function mapStateToProps(state) {
   return {
     list: state.startUps,
     authenticated: state.auth.authenticated,
-    singleProducts: state.singleProducts
+    singleProducts: state.singleProducts,
+    userRates: state.userRates || {}
   }
 }
 

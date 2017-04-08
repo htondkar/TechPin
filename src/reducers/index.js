@@ -7,9 +7,11 @@ import categories from './categories';
 import productTypes from './productTypes';
 import topProducts from './topProducts';
 import singleProducts from './singleProducts';
+import userRates from './userRates';
 
 const rootReducer = combineReducers({
   auth,
+  userRates,
   allProducts,
   categories,
   productTypes,

@@ -17,10 +17,32 @@ export default class Rate extends React.Component {
       snackBarText: '',
     }
   }
+  componentWillMount() {
+    if (this.props.userRate) {
+      this.setState({userRate: this.formatRate(this.props.userRate.rate)})
+    }
+  }
+
+  componentwillreceiveprops(nextProps) {
+    if (nextProps.userRate) {
+      this.setState({userRate: this.formatRate(nextProps.userRate.rate)})
+    }
+  }
+
+  formatRate = rate => {
+    let rateToInt = parseInt(rate, 10)
+    if(rateToInt === 0 || rateToInt === 1 || rateToInt === 2) return 1;
+    if(rateToInt === 3 || rateToInt === 4) return 2;
+    if(rateToInt === 5 || rateToInt === 6) return 3;
+    if(rateToInt === 7 || rateToInt === 8) return 4;
+    if(rateToInt === 9 || rateToInt === 10) return 5;
+  }
+
   handleRate = (event) => {
     if (this.props.authenticated) {
       this.setState({userRate: event.target.id});
-      this.props.submitRate(event.target.id, this.props.slug)
+      console.log(this.formatRate(event.target.id))
+      this.props.submitRate(this.formatRate(event.target.id), this.props.slug)
       .then((res) => {
         if (res.status === 200 && res.data.success) {
           this.setState({
@@ -52,17 +74,17 @@ export default class Rate extends React.Component {
           <span>Rate {this.props.name}</span>
         </span>
         <div className="rate-box-container" onClick={this.handleRate}>
-          <div id='0' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 0 ? 'rate-selected' : ''}`}>0</div>
-          <div id='1' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 1 ? 'rate-selected' : ''}`}>1</div>
-          <div id='2' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 2 ? 'rate-selected' : ''}`}>2</div>
-          <div id='3' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 3 ? 'rate-selected' : ''}`}>3</div>
-          <div id='4' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 4 ? 'rate-selected' : ''}`}>4</div>
-          <div id='5' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 5 ? 'rate-selected' : ''}`}>5</div>
-          <div id='6' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 6 ? 'rate-selected' : ''}`}>6</div>
-          <div id='7' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 7 ? 'rate-selected' : ''}`}>7</div>
-          <div id='8' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 8 ? 'rate-selected' : ''}`}>8</div>
-          <div id='9' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 9 ? 'rate-selected' : ''}`}>9</div>
-          <div id='10' className={`rate-box ${this.state.userRated ? 'deactive' : 'active'} ${this.state.userRate == 10 ? 'rate-selected' : ''}`}>10</div>
+          <div id='0' className={`rate-box ${this.state.userRate == 0 ? 'rate-selected' : ''}`}>0</div>
+          <div id='1' className={`rate-box ${this.state.userRate == 1 ? 'rate-selected' : ''}`}>1</div>
+          <div id='2' className={`rate-box ${this.state.userRate == 2 ? 'rate-selected' : ''}`}>2</div>
+          <div id='3' className={`rate-box ${this.state.userRate == 3 ? 'rate-selected' : ''}`}>3</div>
+          <div id='4' className={`rate-box ${this.state.userRate == 4 ? 'rate-selected' : ''}`}>4</div>
+          <div id='5' className={`rate-box ${this.state.userRate == 5 ? 'rate-selected' : ''}`}>5</div>
+          <div id='6' className={`rate-box ${this.state.userRate == 6 ? 'rate-selected' : ''}`}>6</div>
+          <div id='7' className={`rate-box ${this.state.userRate == 7 ? 'rate-selected' : ''}`}>7</div>
+          <div id='8' className={`rate-box ${this.state.userRate == 8 ? 'rate-selected' : ''}`}>8</div>
+          <div id='9' className={`rate-box ${this.state.userRate == 9 ? 'rate-selected' : ''}`}>9</div>
+          <div id='10' className={`rate-box ${this.state.userRate == 10 ? 'rate-selected' : ''}`}>10</div>
         </div>
         <Snackbar
           open={this.state.snackBarIsOpen}

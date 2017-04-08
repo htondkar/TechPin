@@ -293,15 +293,15 @@ div.single-page-visual-widget:hover {
   cursor: pointer;
   transition: all 0.4s cubic-bezier(.25,.8,.25,1);
 }
-.rate-box.active:hover {
+.rate-box:hover {
   background-color: #0D47A1;
   color: white;
   transform: translateY(-10px);
 }
-.rate-box.deactive {
+/*.rate-box.deactive {
   pointer-events: none;
   color: white;
-}
+}*/
 .rate-box.rate-selected {
   background-color: #0D47A1;
   color: white;
@@ -381,6 +381,6 @@ div.single-page-visual-widget:hover {
 
 @media screen and (min-width: 1400px) {
   .single-page {
-    width: 43.5%;
+    width: 45%;
   }
 }

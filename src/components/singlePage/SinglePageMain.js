@@ -104,6 +104,7 @@ class SinglePageMain extends React.Component {
           <div className="rating">
             <Rate
               name={name}
+              userRate={this.props.userRate}
               slug={this.state.product.slug}
               submitRate={this.props.postNewRate}
               authenticated={this.props.authenticated}/>

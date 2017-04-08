@@ -2,7 +2,7 @@ import axios from 'axios';
 import querystring from 'querystring'
 
 export const baseUrl = 'https://api.techpin.xyz';
-var baseApiUrl = 'https://api.techpin.xyz/api';
+var baseApiUrl = 'https://api.techpin.xyz';
 
 var config = {
   headers: {
@@ -37,6 +37,17 @@ export default class techpinApi {
 
   static getSingleProduct(slug) {
     return axios.get(`${baseApiUrl}/products/${slug}`);
+    // .then(res => console.log(res));
+  }
+
+  static getPreviousUserRates(slug, tokenId) {
+    let config = {
+      headers: {
+        'Accept': '*/*',
+        'Authorization': 'Token ' + tokenId,
+      },
+    }
+    return axios.get(`${baseApiUrl}/rates/${slug}`, config);
     // .then(res => console.log(res));
   }
 

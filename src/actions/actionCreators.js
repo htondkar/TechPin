@@ -17,6 +17,14 @@ function allProductsActionCreator(allProducts) {
   }
 }
 
+function successfulFetchUserRates(res, slug) {
+  return {
+    type: actionTypes.USER_RATES_FETCH_SUCCESS,
+    userRates: res,
+    slug
+  }
+}
+
 function initialLoadTop25ActionCreator(response) {
   return {
     type: actionTypes.INITIAL_TOP25_LOAD,
@@ -53,6 +61,7 @@ function successfulNewRate(response, slug) {
   return {
     type: actionTypes.SUCCESSFUL_NEW_RATE_SUBMIT,
     newRating: response.new_p_rate,
+    newRateCount: response.p_rate_count,
     slug
   }
 }
@@ -246,8 +255,30 @@ export function postNewRate(rate, slug) {
     return techpinApi.postNewRate(rate, slug, tokenId)
       .then(
         (response) => {
+          console.log(response)
           if (response.status === 200 && response.data.success) {
             dispatch(successfulNewRate(response.data, slug))
+            return Promise.resolve(response)
+          } else {
+            return Promise.reject(response.data)
+          }
+        },
+        (error) => {
+           return Promise.reject(error)
+         }
+       )
+  }
+}
+
+export function getPreviousUserRates(slug) {
+  return (dispatch, getState) => {
+    const tokenId = getState().auth.token
+    return techpinApi.getPreviousUserRates(slug, tokenId)
+      .then(
+        (response) => {
+          console.log(response)
+          if (response.status === 200 && response.data.success) {
+            dispatch(successfulFetchUserRates(response.data, slug))
             return Promise.resolve(response)
           } else {
             return Promise.reject(response.data)
