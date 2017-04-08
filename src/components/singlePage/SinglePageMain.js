@@ -23,6 +23,7 @@ class SinglePageMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      rating: {},
       product: {},
       comments: [],
       username: '',
@@ -67,11 +68,29 @@ class SinglePageMain extends React.Component {
     }
   }
 
+  handlePostRate = (rate, slug) => {
+    if (this.props.authenticated) {
+        this.props.postNewRate(rate, slug)
+         .then((res) => {
+          console.log(res)
+          this.setState({
+          rating: {rating: res.data.new_p_rate, rateCount: res.data.p_rate_count},
+          snackBarIsOpen: true,
+          snackBarText: 'Successfuly submited your rate',
+          userRated: true
+        })
+      })
+    } else {
+      this.setState({snackBarIsOpen: true, snackBarText: 'please login first'})
+    }
+  }
+
   handleSnackBarClose = () => {
     this.setState({
       snackBarIsOpen: false,
     });
   };
+
 
   render() {
     if (this.state.product) {
@@ -100,13 +119,18 @@ class SinglePageMain extends React.Component {
         <Paper id='single-page-main-content' style={styles.paper} zDepth={3}>
           {this.props.children}
           <StartupWidgetMoreInfo product={this.state.product || {}}/>
-          <VisualInfo product={this.props.product.product}/>
+          <VisualInfo 
+            average_p_rate={this.state.rating.rating || this.props.product.product.average_p_rate} 
+            rate_count={this.state.rating.rateCount || this.props.product.product.rate_count} 
+            n_p_score={this.props.product.product.n_p_score} 
+            employees={this.props.product.product.details.employees}
+            year={this.props.product.product.details.year}/>
           <div className="rating">
             <Rate
               name={name}
-              userRate={this.props.userRate}
+              userRate={this.props.userRate ? this.props.userRate.rate: undefined}
               slug={this.state.product.slug}
-              submitRate={this.props.postNewRate}
+              submitRate={this.handlePostRate}
               authenticated={this.props.authenticated}/>
           </div>
           <div className="detailed-info">
@@ -144,6 +168,7 @@ function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
     username: state.auth.username,
+    rateCount: state.topProducts,
   }
 }
 export default connect(mapStateToProps, actions)(SinglePageMain);

@@ -276,7 +276,6 @@ export function getPreviousUserRates(slug) {
     return techpinApi.getPreviousUserRates(slug, tokenId)
       .then(
         (response) => {
-          console.log(response)
           if (response.status === 200 && response.data.success) {
             dispatch(successfulFetchUserRates(response.data, slug))
             return Promise.resolve(response)

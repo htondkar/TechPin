@@ -12,24 +12,54 @@ const styles = {
         color:'#0D47A1'
     },
 }
-const VisualInfo = ({product}) => {
-  return (
-    <div className='visual-info'>
+export default class VisualInfo extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      snackBarOpen: false,
+      rateCount: null,
+      averageRate: null,
+      product: {}
+    }
+  }
+
+  componentDidMount = () => {
+    if(this.props.product) {
+        this.setState({product: this.props.product})
+    }
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+      if(nextProps.rating) {
+          this.setState({product: Object.assign({}, this.state.product, {
+              rate_count: nextProps.rateCount,
+              average_p_rate: nextProps.rating
+          })})
+      }
+  }
+
+
+  render() {
+    // let product = this.props.product
+    const editAble = this.props.editAble;
+    return (
+        <div className='visual-info'>
         <div className='single-page-visual-parent' >
             <div className='single-page-visual-widget'>
-            {`${product.average_p_rate.toFixed(1)}`}
-            <StarRating rating={product.average_p_rate} className='visual-info-star' editable={false}/>
+            {`${this.props.average_p_rate.toFixed(1)}`}
+            <StarRating rating={this.props.average_p_rate} className='visual-info-star' editable={false}/>
             </div>
             <div>
                 <div className='visual-info-sub-span'>
-                    <span>{product.rate_count}</span> 
+                    <span>{this.props.rate_count}</span> 
                     <SocialPeople style={styles.svgIcon}/>
                 </div>
             </div>
         </div>
         <div className='single-page-visual-parent' >
             <div className='single-page-visual-widget'>
-                {product.n_p_score}
+                {this.props.n_p_score}
             </div>
             <div>
                 <div className='visual-info-sub-span'>
@@ -40,7 +70,7 @@ const VisualInfo = ({product}) => {
         </div>
         <div className='single-page-visual-parent' >
             <div className='single-page-visual-widget'>
-                {product.details.employees || '?'}
+                {this.props.employees || '?'}
             </div>
             <div>
                 <div className='visual-info-sub-span'>
@@ -51,7 +81,7 @@ const VisualInfo = ({product}) => {
         </div>
         <div className='single-page-visual-parent' >
             <div className='single-page-visual-widget'>
-                {product.details.year || '?'}
+                {this.props.year || '?'}
             </div>
             <div>
                 <div className='visual-info-sub-span'>
@@ -60,11 +90,10 @@ const VisualInfo = ({product}) => {
                 </div>
             </div>
         </div>
-    </div>
-    );
+    </div>);
+  }
 }
 
 VisualInfo.propTypes = {
 };
 
-export default VisualInfo

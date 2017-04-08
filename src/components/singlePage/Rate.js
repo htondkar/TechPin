@@ -19,17 +19,17 @@ export default class Rate extends React.Component {
   }
   componentWillMount() {
     if (this.props.userRate) {
-      this.setState({userRate: this.formatRate(this.props.userRate.rate)})
+      this.setState({userRate: this.formatRateToReceive(this.props.userRate)})
     }
   }
 
-  componentwillreceiveprops(nextProps) {
-    if (nextProps.userRate) {
-      this.setState({userRate: this.formatRate(nextProps.userRate.rate)})
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.userRate && !this.state.userRate) {
+      this.setState({userRate: this.formatRateToReceive(nextProps.userRate)})
     }
   }
 
-  formatRate = rate => {
+  formatRateToSend = rate => {
     let rateToInt = parseInt(rate, 10)
     if(rateToInt === 0 || rateToInt === 1 || rateToInt === 2) return 1;
     if(rateToInt === 3 || rateToInt === 4) return 2;
@@ -41,17 +41,7 @@ export default class Rate extends React.Component {
   handleRate = (event) => {
     if (this.props.authenticated) {
       this.setState({userRate: event.target.id});
-      console.log(this.formatRate(event.target.id))
-      this.props.submitRate(this.formatRate(event.target.id), this.props.slug)
-      .then((res) => {
-        if (res.status === 200 && res.data.success) {
-          this.setState({
-          snackBarIsOpen: true,
-          snackBarText: 'Successfuly submited your rate',
-          userRated: true
-        })
-        }
-      })
+      this.props.submitRate(this.formatRateToSend(event.target.id), this.props.slug)
     } else {
       this.setState({
         snackBarIsOpen: true,
