@@ -123,7 +123,6 @@ export function submitProduct(formData) {
     return techpinApi.postNewProduct(formData)
       .then(
         (response) => {
-          console.log(response)
           if (response.status === 200 && response.data.success) {
             return Promise.resolve(response.data)
           } else {
@@ -216,7 +215,6 @@ export function submitAddNewVersion(formData, slug) {
     return techpinApi.postNewVersion(formData, slug, tokenId)
       .then(
         (response) => {
-          console.log(response)
           if (response.data.success) {
             return Promise.resolve(response)
           } else {
@@ -224,7 +222,6 @@ export function submitAddNewVersion(formData, slug) {
           }
         },
         (response) => {
-           console.log(response)
            return Promise.reject(response)
          }
        )

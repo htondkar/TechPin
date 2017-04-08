@@ -97,7 +97,6 @@ class AddForm extends React.Component {
     this.setState({errors: {}});
     this.props.submitProduct(formData)
       .then(response => {
-          console.log(response);
         if (response.success) {
           this.props.submitAddNewVersion(new FormData(), response.slug)
           this.setState({
@@ -122,7 +121,6 @@ class AddForm extends React.Component {
         }
       })
       .catch(response => {
-        console.log(response)
         let errorText = Object.values(response.detail).join(', ')
         this.setState({
           addStartUpResponseText: errorText,
