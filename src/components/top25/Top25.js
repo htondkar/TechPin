@@ -3,14 +3,14 @@ import React, {PropTypes} from 'react';
 import Modal from 'react-modal';
 import AddForm from './AddForm';
 import WidgetColumn from './WidgetColumn'
-import SortingMenu from './SortingMenu';
+import sort from '../../helpers/helpers';
+
 
 
 import StartUpWidget from './StartUpWidget';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 
-// import sort from '../../helpers/helpers';
 
 function generateListItem (product, i) {
   return <StartUpWidget product={product} key={product.name_en} i={i}/>
@@ -37,11 +37,6 @@ export default class Top25 extends React.Component {
           topNew: [],
           topRanked: [],
           randomProducts: []
-        },
-        sortBy: {
-          editors: 'name',
-          people: 'name',
-          _new: 'name',
         }
       }
     }
@@ -57,13 +52,23 @@ export default class Top25 extends React.Component {
    componentWillMount = () => {
      if (Object.keys(this.props.topProducts).length > 0) {
        const topProducts = this.props.topProducts;
-       this.setState({topProducts});
+       this.setState({topProducts: {
+         topNew: sort(topProducts.topNew, 'nps'), 
+         topRanked: sort(topProducts.topRanked, 'nps'), 
+         randomProducts: sort(topProducts.randomProducts, 'nps') 
+       }}
+       );
      }
    }
 
    componentWillReceiveProps = (nextProps) => {
      if (Object.keys(nextProps.topProducts).length > 0) {
-       this.setState({topProducts: nextProps.topProducts});
+       this.setState({topProducts: {
+          topNew: sort(nextProps.topProducts.topNew, 'nps'), 
+         topRanked: sort(nextProps.topProducts.topRanked, 'nps'), 
+         randomProducts: sort(nextProps.topProducts.randomProducts, 'nps') 
+       }}
+       );
      }
    }
 

@@ -14,7 +14,7 @@ function sortByNps(a,b) {
   } else if ((a.n_p_score - b.n_p_score) > 0) {
     return -1;
   } else {
-    return 0;
+    return sortByName(a,b)
   }
 }
 
@@ -24,7 +24,7 @@ function sortByRating(a,b) {
   } else if ((a.average_p_rate - b.average_p_rate) > 0) {
     return -1;
   } else {
-    return 0;
+    return sortByName(a,b)
   }
 }
 

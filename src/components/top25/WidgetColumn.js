@@ -13,7 +13,7 @@ export default class WidgetColumn extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      sortBy: 'name',
+      sortBy: 'nps',
       productList: []
     }
     this.handleSort = this.handleSort.bind(this)

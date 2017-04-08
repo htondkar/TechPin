@@ -43,7 +43,8 @@ export default class techpinApi {
   //// authentication
 
   static login(email, password) {
-    return axios.post(`${baseApiUrl}/login`, `email=${email}&password=${password}`, config)
+    let qs =  querystring.stringify({email, password})
+    return axios.post(`${baseApiUrl}/login`, qs, config)
   }
 
   static googleLogin(tokenId) {
@@ -51,12 +52,8 @@ export default class techpinApi {
   }
 
   static signup(formData) {
-    return axios.post(`${baseApiUrl}/signup`,
-      `first_name=${formData.first_name}
-      &email=${formData.email}
-      &password=${formData.password}
-      &confirm_password=${formData.confirm_password}`,
-      config);
+    let qs =  querystring.stringify({...formData}) 
+    return axios.post(`${baseApiUrl}/signup`, qs, config);
   }
 
   static logout() {
