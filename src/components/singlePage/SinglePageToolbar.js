@@ -32,7 +32,7 @@ export default class SinglePageToolbar extends React.Component {
     if (!this.props.auth) {
       this.setState({snackBarOpen: true})
     } else {
-      browserHistory.push(`/products/${this.props.slug}/edit`)
+      browserHistory.push(`/${this.props.slug}/edit`)
     }
   }
 

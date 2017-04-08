@@ -29,7 +29,7 @@ const StartUpWidget = ({product, i}) => {
   }
   return (
     <div style={styles.container}>
-      <Link to={`products/${slug}`}>
+      <Link to={`${slug}`}>
         <ListItem
           className='widget'
           secondaryTextLines={2}

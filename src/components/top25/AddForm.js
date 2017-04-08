@@ -93,12 +93,13 @@ class AddForm extends React.Component {
       this.setState({errors: validationResult.errors})
     }
   }
-
   clearStateAndSubmit = formData => {
     this.setState({errors: {}});
     this.props.submitProduct(formData)
       .then(response => {
+          console.log(response);
         if (response.success) {
+          this.props.submitAddNewVersion(new FormData(), response.slug)
           this.setState({
             addStartUpResponseText: 'successfully submitted, we will review it asap!',
             product_type : 1,
@@ -121,9 +122,12 @@ class AddForm extends React.Component {
         }
       })
       .catch(response => {
+        console.log(response)
+        let errorText = Object.values(response.detail).join(', ')
         this.setState({
-          addStartUpResponseText: 'failed to submit, plaease try again or contact us',
+          addStartUpResponseText: errorText,
           snackBarOpen: true,
+          aSyncCall: false,
         });
       });
   }

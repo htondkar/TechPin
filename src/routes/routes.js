@@ -18,7 +18,7 @@ export default (
     <Route path="contribute" component={ContributePage} />
     <Route path="categories/:category" component={CategoryPage} />
     <Route path="all-entries" component={AllProducts} />
-    <Route path="products/:startUpName" component={SinglePage}/>
-    <Route path="products/:startUpName/edit" component={RequireAuth(EditInfo)} />
+    <Route path=":startUpName" component={SinglePage}/>
+    <Route path=":startUpName/edit" component={RequireAuth(EditInfo)} />
   </Route>
 );

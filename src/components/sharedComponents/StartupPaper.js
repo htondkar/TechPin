@@ -19,7 +19,7 @@ const styles = {
 };
 const CategoryPaper = ({product, WrapperClassName}) => {
   return (
-    <Link to={`/products/${product.slug}`}>
+    <Link to={`${product.slug}`}>
       <Paper style={styles.paper} className={`category-paper ${WrapperClassName}`}>
           <div
             className="category-image"

@@ -123,14 +123,15 @@ export function submitProduct(formData) {
     return techpinApi.postNewProduct(formData)
       .then(
         (response) => {
-          if (response.statusText === 'OK' && response.status === 200) {
+          console.log(response)
+          if (response.status === 200 && response.data.success) {
             return Promise.resolve(response.data)
           } else {
-            return Promise.reject(response.details)
+            return Promise.reject(response)
           }
         },
-        (err) => {
-           return Promise.reject(err)
+        (res) => {
+           return res
          }
        )
   }
@@ -215,13 +216,15 @@ export function submitAddNewVersion(formData, slug) {
     return techpinApi.postNewVersion(formData, slug, tokenId)
       .then(
         (response) => {
-          if (response.statusText === 'OK' && response.data.success) {
+          console.log(response)
+          if (response.data.success) {
             return Promise.resolve(response)
           } else {
             return Promise.reject(response)
           }
         },
         (response) => {
+           console.log(response)
            return Promise.reject(response)
          }
        )
@@ -235,7 +238,7 @@ export function postNewComment(commentData, slug) {
     return techpinApi.postNewComment(commentData.text, slug, tokenId)
       .then(
         (response) => {
-          if (response.statusText === 'OK' && response.data.success) {
+          if (response.status === 200 && response.data.success) {
             dispatch(successfulNewComment(commentData, slug))
             return Promise.resolve(response)
           } else {
