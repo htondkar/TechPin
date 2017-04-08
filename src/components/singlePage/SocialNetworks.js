@@ -4,6 +4,7 @@ import AppleStoreLogo from '../../static/App-Store-Badge.svg'
 import GoogleStoreLogo from '../../../images/google-play-badge.png'
 import LinkedLogo from '../../../images/linkedin.png'
 import InstagramLogo from '../../../images/instagram.png'
+import TwitterLogo from '../../../images/twitter.svg'
 
 const SocialNetworks = ({socialData}) => {
   return (
@@ -19,6 +20,9 @@ const SocialNetworks = ({socialData}) => {
               </a>
               <a href={socialData.instagram || ''} target="_blank" className={socialData.instagram ? '' : 'social-disabled'}>
                 <img id='instagram' src={InstagramLogo} alt=""/>
+              </a>
+              <a href={socialData.twitter || ''} target="_blank" className={socialData.twitter ? '' : 'social-disabled'}>
+                <img id='instagram' src={TwitterLogo} alt=""/>
               </a>
               <div className='divider'></div>
             </div>

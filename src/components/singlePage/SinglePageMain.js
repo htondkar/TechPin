@@ -72,7 +72,6 @@ class SinglePageMain extends React.Component {
     if (this.props.authenticated) {
         this.props.postNewRate(rate, slug)
          .then((res) => {
-          console.log(res)
           this.setState({
           rating: {rating: res.data.new_p_rate, rateCount: res.data.p_rate_count},
           snackBarIsOpen: true,
@@ -107,7 +106,8 @@ class SinglePageMain extends React.Component {
       ios: this.state.product.details.ios_app,
       android: this.state.product.details.android_app,
       linkedin: this.state.product.details.linkedin,
-      instagram: this.state.product.details.instagram
+      instagram: this.state.product.details.instagram,
+      twitter: this.state.product.details.twitter
     }
     const contactData = {
       email: this.state.product.details.email,

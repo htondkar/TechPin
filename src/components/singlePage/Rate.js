@@ -17,17 +17,12 @@ export default class Rate extends React.Component {
       snackBarText: '',
     }
   }
-  componentWillMount() {
-    if (this.props.userRate) {
-      this.setState({userRate: this.formatRateToReceive(this.props.userRate)})
-    }
-  }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.userRate && !this.state.userRate) {
-      this.setState({userRate: this.formatRateToReceive(nextProps.userRate)})
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.userRate && !this.state.userRate) {
+  //     this.setState({userRate: (nextProps.userRate)})
+  //   }
+  // }
 
   formatRateToSend = rate => {
     let rateToInt = parseInt(rate, 10)

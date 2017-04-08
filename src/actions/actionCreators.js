@@ -255,7 +255,6 @@ export function postNewRate(rate, slug) {
     return techpinApi.postNewRate(rate, slug, tokenId)
       .then(
         (response) => {
-          console.log(response)
           if (response.status === 200 && response.data.success) {
             dispatch(successfulNewRate(response.data, slug))
             return Promise.resolve(response)
