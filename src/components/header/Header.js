@@ -17,7 +17,7 @@ import Subheader from 'material-ui/Subheader';
 
 import {List, ListItem} from 'material-ui/List';
 
-import Logo from '../../../images/techpin-white.png';
+import Logo from '../../../images/techpin.svg';
 
 const modalStyle = {
   overlay : {

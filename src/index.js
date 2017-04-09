@@ -8,6 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import store, {history} from './store/store';
 import routes from './routes/routes';
 
+
 import './styles/reset.css';
 import './styles/main.css';
 import './styles/top25.css';
@@ -23,6 +24,7 @@ import './styles/editInfo.css';
 import './styles/allProducts.css';
 
 render(
+  
   <Provider store={store}>
     <MuiThemeProvider>
       <Router

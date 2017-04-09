@@ -8,7 +8,8 @@ div.drawer > div:last-child > div > a > div:hover {
   border-right: 5px solid #3F51B5;
 }
 .logo-img {
-  height: 60px;
+  height: 40px;
+  margin-top: 12px;
 }
 .app-bar {
   background-color: #0D47A1 !important;
