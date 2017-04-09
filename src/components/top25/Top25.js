@@ -53,7 +53,9 @@ export default class Top25 extends React.Component {
      if (Object.keys(this.props.topProducts).length > 0) {
        const topProducts = this.props.topProducts;
        this.setState({topProducts: {
-         topNew: sort(topProducts.topNew, 'nps'), 
+        //topNew: sort(topProducts.topNew, 'nps'), 
+        //topNew will be in timely order form server
+         topNew: topProducts.topNew, 
          topRanked: sort(topProducts.topRanked, 'nps'), 
          randomProducts: sort(topProducts.randomProducts, 'nps') 
        }}
@@ -64,7 +66,7 @@ export default class Top25 extends React.Component {
    componentWillReceiveProps = (nextProps) => {
      if (Object.keys(nextProps.topProducts).length > 0) {
        this.setState({topProducts: {
-          topNew: sort(nextProps.topProducts.topNew, 'nps'), 
+         topNew: nextProps.topProducts.topNew, 
          topRanked: sort(nextProps.topProducts.topRanked, 'nps'), 
          randomProducts: sort(nextProps.topProducts.randomProducts, 'nps') 
        }}
