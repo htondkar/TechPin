@@ -56,7 +56,7 @@ export default class Rate extends React.Component {
       <div className="single-page-rate">
         <span>
           <ToggleStar style={styles.svgStar} />
-          <span>Rate {this.props.name}</span>
+          <span>How likely do you recommend {this.props.name} to others?</span>
         </span>
         <div className="rate-box-container" onClick={this.handleRate}>
           <div id='0' className={`rate-box ${this.state.userRate == 0 ? 'rate-selected' : ''}`}>0</div>

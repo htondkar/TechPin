@@ -89,6 +89,7 @@
 .single-link {
   margin: 20px 0;
   padding: 0 30px;
+  text-align: center
 }
 .single-link img {
   width: 100px;
@@ -338,13 +339,19 @@ div.single-page-visual-widget:hover {
   }
   .single-page {
     width: 100%;
-    margin: 0
+    margin: 0;
+    max-height: 100vh;
+    overflow: scroll;
   }
   div.single-body > img {
     width: 120px;
     height: auto;
     align-items: flex-start;
   }
+  .single-page-rate > span > span {
+    text-align: center;
+  }
+  
 }
 @media screen and (max-width: 450px) {
   div.single-body {
