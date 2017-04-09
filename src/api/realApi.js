@@ -1,6 +1,10 @@
 import axios from 'axios';
 import querystring from 'querystring'
 
+require('core-js/fn/object/values')
+require('core-js/fn/object/entries')
+
+
 export const baseUrl = 'https://api.techpin.xyz';
 var baseApiUrl = 'https://api.techpin.xyz';
 
@@ -11,6 +15,16 @@ var config = {
   },
 }
 
+ function isSafari() {
+     let ua = navigator.userAgent.toLowerCase(); 
+      if (ua.indexOf('safari') != -1) { 
+        if (ua.indexOf('chrome') > -1) {
+          return(false) // Chrome
+        } else {
+          return(true) // Safari
+        }
+      }
+  } 
 export default class techpinApi {
 
   //get methods

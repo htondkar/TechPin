@@ -8,6 +8,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import store, {history} from './store/store';
 import routes from './routes/routes';
 
+require('core-js/fn/object/values')
+require('core-js/fn/object/entries')
 
 import './styles/reset.css';
 import './styles/main.css';

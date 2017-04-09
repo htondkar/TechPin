@@ -6,6 +6,11 @@ import {browserHistory} from 'react-router';
 import SinglePageToolbar from './SinglePageToolbar';
 import StartupWidgetMoreInfo from './StartupWidgetMoreInfo';
 
+require('core-js/fn/object/values')
+require('core-js/fn/object/entries')
+
+import FormData from 'formdata-polyfill'
+
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -43,8 +48,26 @@ class EditInfo extends React.Component {
     return false;
   }
 
+  isSafari = () => {
+     let ua = navigator.userAgent.toLowerCase(); 
+      if (ua.indexOf('safari') != -1) { 
+        if (ua.indexOf('chrome') > -1) {
+          return(false) // Chrome
+        } else {
+          return(true) // Safari
+        }
+      }
+  } 
+
 
   handleSubmit = () => {
+    if (this.isSafari) {
+      
+    } else {
+      
+    }
+   
+
     let formData = new FormData();
     const keys = Object.keys(this.state.formData);
     const values = Object.values(this.state.formData);
