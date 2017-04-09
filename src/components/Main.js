@@ -8,7 +8,7 @@ import * as actions from '../actions/actionCreators';
 import Header from './header/Header';
 import Footer from './footer/Footer';
 
-import TechpinFavIcon from '../../images/techpin.png';
+import TechpinFavIcon from '../../images/favicon.png';
 import Favicon from 'react-favicon';
 
 class Main extends React.Component {

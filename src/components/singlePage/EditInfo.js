@@ -55,7 +55,8 @@ class EditInfo extends React.Component {
       }
       formData.append('logo', document.getElementById('logo').files[0]);
       let slug = this.props.newProductSlug || this.props.params.startUpName || ''
-      this.props.actions.submitAddFirstVersion(formData, slug)
+      if (this.props.newProductSlug) {
+        this.props.actions.submitAddFirstVersion(formData, slug)
         .then(
           response => {
             this.setState({snackBarOpen: true, aSyncCall: false, responseText: editFormSubmitSuccessFeedbackText})
@@ -65,6 +66,18 @@ class EditInfo extends React.Component {
             this.setState({snackBarOpen: true, aSyncCall: false, responseText: editFormSubmitFailedFeedbackText})
           }
         );
+      } else {
+          this.props.actions.submitAddNewVersion(formData, slug)
+        .then(
+          response => {
+            this.setState({snackBarOpen: true, aSyncCall: false, responseText: editFormSubmitSuccessFeedbackText})
+            if(this.props.newProductSlug) {this.props.cleanNewProduct()}
+          },
+          response => {
+            this.setState({snackBarOpen: true, aSyncCall: false, responseText: editFormSubmitFailedFeedbackText})
+          }
+        );
+      }
     } else {
       this.setState({
         snackBarOpen: true, 
@@ -76,14 +89,13 @@ class EditInfo extends React.Component {
 
   handleSnackBarClose = () => {
     if(!this.props.newProductSlug) {
-      this.state.formIsValid && browserHistory.push(`/products/${this.props.params.startUpName}/`);
+      this.state.formIsValid && browserHistory.push(`/${this.props.params.startUpName}/`);
     } else {
       this.state.formIsValid && browserHistory.push(`/`);
     }
   }
 
   render() {
-    console.log(this.props.newProductSlug);
     if(!this.props.newProductSlug) {
        var productSlug = this.props.params && this.props.params.startUpName;
        var index = this.props.singleProducts

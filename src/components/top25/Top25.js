@@ -97,7 +97,7 @@ export default class Top25 extends React.Component {
        newProductSlug: null,
        addVersionModalIsOpen: false,
        snackbarIsOpen: true,
-       snackbarText: 'successfuly added your data to the product'
+       snackbarText: 'Thank you! We will review and publish your submission.'
        })
    }
 

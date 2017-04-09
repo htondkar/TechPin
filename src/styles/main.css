@@ -15,7 +15,9 @@ div.app-bar > div:last-child > div > [type="button"] {
 div.app-bar > div:last-child {
   margin: 0 !important;
 }
-
+body {
+  overflow-x: hidden;
+}
 @media screen and (min-width: 900px) {
   .app-wrapper > span {
     width: 100%;
