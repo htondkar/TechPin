@@ -2,15 +2,14 @@ import React, {PropTypes} from 'react';
 
 import Modal from 'react-modal';
 import AddForm from './AddForm';
+import EditInfo from '../singlePage/EditInfo';
 import WidgetColumn from './WidgetColumn'
 import sort from '../../helpers/helpers';
-
-
 
 import StartUpWidget from './StartUpWidget';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-
+import Snackbar from 'material-ui/Snackbar';
 
 function generateListItem (product, i) {
   return <StartUpWidget product={product} key={product.name_en} i={i}/>
@@ -32,7 +31,11 @@ export default class Top25 extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        modalIsOpen : false,
+        snackbarIsOpen: false,
+        snackbarText: '',
+        newProductSlug: null,
+        addProductModalIsOpen : false,
+        addVersionModalIsOpen : false,
         topProducts: {
           topNew: [],
           topRanked: [],
@@ -41,12 +44,20 @@ export default class Top25 extends React.Component {
       }
     }
 
-    handleModalOpen = () => {
-      this.setState({modalIsOpen: true});
+    handleAddProductModalOpen = () => {
+      this.setState({addProductModalIsOpen: true});
     }
 
-    closeModal = () => {
-     this.setState({modalIsOpen: false});
+    closeAddProductModal = () => {
+     this.setState({addProductModalIsOpen: false});
+   }
+
+    handleAddVersionModalOpen = () => {
+      this.setState({addVersionModalIsOpen: true});
+    }
+
+    closeAddVersionModal = () => {
+     this.setState({addVersionModalIsOpen: false});
    }
 
    componentWillMount = () => {
@@ -73,6 +84,29 @@ export default class Top25 extends React.Component {
        );
      }
    }
+   persistNewProduct = (slug) => {
+     this.setState({
+       newProductSlug: slug,
+       addProductModalIsOpen: false, 
+       addVersionModalIsOpen: true
+      })
+   }
+
+   cleanNewProduct = () => {
+     this.setState({
+       newProductSlug: null,
+       addVersionModalIsOpen: false,
+       snackbarIsOpen: true,
+       snackbarText: 'successfuly added your data to the product'
+       })
+   }
+
+   handleSnackbarRequestClose = () => {
+      this.setState({
+        snackbarIsOpen: false,
+      });
+    };
+
 
     render() {
       return (
@@ -92,18 +126,37 @@ export default class Top25 extends React.Component {
               productList={this.state.topProducts.topNew}
               title='New Pins'/>
           </main>
-          <FloatingActionButton secondary={true} className='floating-action-button' onClick={this.handleModalOpen}>
+          <FloatingActionButton secondary={true} className='floating-action-button' onClick={this.handleAddProductModalOpen}>
             <ContentAdd />
           </FloatingActionButton>
           <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal}
+            isOpen={this.state.addProductModalIsOpen}
+            onRequestClose={this.closeAddProductModal}
             style={modalStyle}
             className='add-modal'
             overlayClassName="add-overlay"
             contentLabel="Modal">
-              <AddForm closeModal={this.closeModal} />
+              <AddForm closeModal={this.closeAddProductModal} persistNewProduct={this.persistNewProduct}/>
           </Modal>
+          <Modal
+            isOpen={this.state.addVersionModalIsOpen}
+            onRequestClose={this.closeAddVersionModal}
+            style={modalStyle}
+            className='add-modal'
+            overlayClassName="add-overlay"
+            contentLabel="Modal">
+              <EditInfo 
+                newProductSlug={this.state.newProductSlug} 
+                cleanNewProduct={this.cleanNewProduct}
+                actions={this.props.actions}
+                />
+          </Modal>
+          <Snackbar
+            open={this.state.snackbarIsOpen}
+            message={this.state.snackbarText}
+            autoHideDuration={4000}
+            onRequestClose={this.handleSnackbarRequestClose}
+          />
         </div>
       );
     }

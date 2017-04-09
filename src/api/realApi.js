@@ -123,4 +123,16 @@ export default class techpinApi {
     return axios.post(`${baseApiUrl}/products/add`, qs, config)
   }
 
+  static postFirstVersion(formData, slug) {
+    //convert formData to an Object
+    let newVersionFields = {}
+    for (let keyValuePair of formData.entries()) {
+      newVersionFields[keyValuePair[0]] = keyValuePair[1]
+    }
+    // const qs = querystring.stringify(newVersionFields);
+    return axios.patch(`${baseApiUrl}/products/${slug}/versions/add`, formData);
+    // .then(res => console.log(res));
+  }
+
+
 }

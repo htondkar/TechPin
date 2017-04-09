@@ -228,6 +228,25 @@ export function submitAddNewVersion(formData, slug) {
   }
 }
 
+export function submitAddFirstVersion(formData, slug) {
+  //this is a form data, to access data in it, you should use it's methods
+  return (dispatch, getState) => {
+    return techpinApi.postFirstVersion(formData, slug)
+      .then(
+        (response) => {
+          if (response.data.success) {
+            return Promise.resolve(response)
+          } else {
+            return Promise.reject(response)
+          }
+        },
+        (response) => {
+           return Promise.reject(response)
+         }
+       )
+  }
+}
+
 
 export function postNewComment(commentData, slug) {
   return (dispatch, getState) => {

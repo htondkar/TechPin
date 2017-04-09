@@ -43,6 +43,7 @@ class EditInfo extends React.Component {
     return false;
   }
 
+
   handleSubmit = () => {
     let formData = new FormData();
     const keys = Object.keys(this.state.formData);
@@ -53,10 +54,16 @@ class EditInfo extends React.Component {
         formData.append(keys[i], values[i])
       }
       formData.append('logo', document.getElementById('logo').files[0]);
-      this.props.actions.submitAddNewVersion(formData, this.props.params.startUpName)
+      let slug = this.props.newProductSlug || this.props.params.startUpName || ''
+      this.props.actions.submitAddFirstVersion(formData, slug)
         .then(
-          response => this.setState({snackBarOpen: true, aSyncCall: false, responseText: editFormSubmitSuccessFeedbackText}),
-          response => this.setState({snackBarOpen: true, aSyncCall: false, responseText: editFormSubmitFailedFeedbackText})
+          response => {
+            this.setState({snackBarOpen: true, aSyncCall: false, responseText: editFormSubmitSuccessFeedbackText})
+            if(this.props.newProductSlug) {this.props.cleanNewProduct()}
+          },
+          response => {
+            this.setState({snackBarOpen: true, aSyncCall: false, responseText: editFormSubmitFailedFeedbackText})
+          }
         );
     } else {
       this.setState({
@@ -68,22 +75,34 @@ class EditInfo extends React.Component {
   }
 
   handleSnackBarClose = () => {
-    this.state.formIsValid && browserHistory.push(`/products/${this.props.params.startUpName}/`);
+    if(!this.props.newProductSlug) {
+      this.state.formIsValid && browserHistory.push(`/products/${this.props.params.startUpName}/`);
+    } else {
+      this.state.formIsValid && browserHistory.push(`/`);
+    }
   }
 
   render() {
-    const productSlug = this.props.params.startUpName;
-    const index = this.props.singleProducts
+    console.log(this.props.newProductSlug);
+    if(!this.props.newProductSlug) {
+       var productSlug = this.props.params && this.props.params.startUpName;
+       var index = this.props.singleProducts
           .findIndex(item => item.product.slug === productSlug);
-    const product = this.props.singleProducts[index];
-    const name = product && product.product.name_en;
+       var product = this.props.singleProducts[index];
+       var name = product && product.product.name_en;  
+    } else {
+      var product = {}
+      product.product = {}
+      product.product.details = {}
+    }
+   
     return (
       <div className='single-page main-content edit-info'>
         <Paper style={{width: '100%'}} zDepth={3}>
           <SinglePageToolbar editAble={false} />
-            <StartupWidgetMoreInfo {...product}/>
+            {!this.props.newProductSlug && <StartupWidgetMoreInfo {...product}/> }
           <div className="share-info">
-            {`Share your info about ${name} with us!`}
+            {`Share your info about ${name || 'it '} with us!`}
           </div>
           <form className="edit-info-form">
             <TextField id='extra_url' defaultValue={product.product.details.extra_url} className='three-field' floatingLabelText="extra url" onChange={this.textFieldChangeHandler} />

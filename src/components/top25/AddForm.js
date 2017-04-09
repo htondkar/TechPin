@@ -71,10 +71,11 @@ class AddForm extends React.Component {
   };
 
   handleSnackBarClose = () => {
-    this.setState({
-      snackBarOpen: false,
-    });
-    this.props.aSyncSuccess && this.props.closeModal();
+    //this will not do anything because when it is called the component is unmounted
+    // this.setState({
+    //   snackBarOpen: false,
+    // });
+    // this.props.aSyncSuccess && this.props.closeModal();
   };
 
   handleSubmit = () => {
@@ -98,18 +99,19 @@ class AddForm extends React.Component {
     this.props.submitProduct(formData)
       .then(response => {
         if (response.success) {
-          this.props.submitAddNewVersion(new FormData(), response.slug)
-          this.setState({
-            addStartUpResponseText: 'successfully submitted, we will review it asap!',
-            product_type : 1,
-            chipList : [],
-            errors: {},
-            snackBarOpen: true,
-            name_en: '',
-            website: '',
-            aSyncCall: false,
-            aSyncSuccess: true
-          });
+          this.props.persistNewProduct(response.slug)
+          // set state is not needed anymore, user is redirected
+          // this.setState({
+          //   addStartUpResponseText: 'successfully submitted, we will review it asap!',
+          //   product_type : 1,
+          //   chipList : [],
+          //   errors: {},
+          //   snackBarOpen: true,
+          //   name_en: '',
+          //   website: '',
+          //   aSyncCall: false,
+          //   aSyncSuccess: true
+          // });
         } else {
           let errorText = Object.values(response.detail).join(', ')  
           this.setState({
@@ -117,17 +119,16 @@ class AddForm extends React.Component {
             snackBarOpen: true,
             aSyncCall: false,
           });
-
         }
       })
-      .catch(response => {
-        let errorText = Object.values(response.detail).join(', ')
-        this.setState({
-          addStartUpResponseText: errorText,
-          snackBarOpen: true,
-          aSyncCall: false,
-        });
-      });
+      // .catch(response => {
+      //   let errorText = Object.values(response.detail).join(', ')
+      //   this.setState({
+      //     addStartUpResponseText: errorText,
+      //     snackBarOpen: true,
+      //     aSyncCall: false,
+      //   });
+      // });
   }
 
   validateForms = formData => {
@@ -155,7 +156,6 @@ class AddForm extends React.Component {
   }
 
   generateSubmitArea = () => {
-
     if (this.state.aSyncCall) {
       return <CircularProgress style={{height: '36px'}} />;
     } else if (this.state.aSyncSuccess) {
