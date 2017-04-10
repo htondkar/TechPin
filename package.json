@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "autoprefixer": "6.6.1",
+    "babel-cli": "^6.24.1",
     "babel-core": "6.21.0",
     "babel-eslint": "7.1.1",
     "babel-jest": "18.0.0",
@@ -53,7 +54,7 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
-    "babel-polyfill": "6.20.0",
+    "babel-polyfill": "^6.20.0",
     "core-js": "^2.4.1",
     "formdata-polyfill": "^1.0.7",
     "halogen": "^0.2.0",
