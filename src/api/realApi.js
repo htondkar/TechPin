@@ -4,7 +4,6 @@ import querystring from 'querystring'
 require('core-js/fn/object/values')
 require('core-js/fn/object/entries')
 
-
 export const baseUrl = 'https://api.techpin.xyz';
 var baseApiUrl = 'https://api.techpin.xyz';
 
