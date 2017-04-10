@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-import AppleStoreLogo from '../../static/App-Store-Badge.svg'
+import AppleStoreLogo from '../../../images/App-Store-Badge.svg'
 import GoogleStoreLogo from '../../../images/google-play-badge.png'
 import LinkedLogo from '../../../images/linkedin.png'
 import InstagramLogo from '../../../images/instagram.png'
