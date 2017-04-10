@@ -123,12 +123,13 @@ export default class techpinApi {
       },
     }
     //convert formData to an Object
-    let newVersionFields = {}
-    for (let keyValuePair of formData.entries()) {
-      newVersionFields[keyValuePair[0]] = keyValuePair[1]
-    }
+    // let newVersionFields = {}
+    // for (let keyValuePair of formData.entries()) {
+    //   newVersionFields[keyValuePair[0]] = keyValuePair[1]
+    // }
+    
     // const qs = querystring.stringify(newVersionFields);
-    return axios.patch(`${baseApiUrl}/products/${slug}/versions/add`, formData, config);
+    return axios.patch(`${baseApiUrl}/products/${slug}/versions/add`, formData, config)
     // .then(res => console.log(res));
   }
 
@@ -139,12 +140,12 @@ export default class techpinApi {
 
   static postFirstVersion(formData, slug) {
     //convert formData to an Object
-    let newVersionFields = {}
-    for (let keyValuePair of formData.entries()) {
-      newVersionFields[keyValuePair[0]] = keyValuePair[1]
-    }
+    // let newVersionFields = {}
+    // for (let keyValuePair of formData.entries()) {
+    //   newVersionFields[keyValuePair[0]] = keyValuePair[1]
+    // }
     // const qs = querystring.stringify(newVersionFields);
-    return axios.patch(`${baseApiUrl}/products/${slug}/versions/add`, formData);
+    return axios.patch(`${baseApiUrl}/products/${slug}/versions/add`, formData, config);
     // .then(res => console.log(res));
   }
 

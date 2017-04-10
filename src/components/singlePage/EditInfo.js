@@ -9,7 +9,7 @@ import StartupWidgetMoreInfo from './StartupWidgetMoreInfo';
 require('core-js/fn/object/values')
 require('core-js/fn/object/entries')
 
-import FormData from 'formdata-polyfill'
+// import FormData from 'formdata-polyfill'
 
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
@@ -61,13 +61,6 @@ class EditInfo extends React.Component {
 
 
   handleSubmit = () => {
-    if (this.isSafari) {
-      
-    } else {
-      
-    }
-   
-
     let formData = new FormData();
     const keys = Object.keys(this.state.formData);
     const values = Object.values(this.state.formData);
@@ -81,6 +74,7 @@ class EditInfo extends React.Component {
       if (this.props.newProductSlug) {
         this.props.actions.submitAddFirstVersion(formData, slug)
         .then(
+          
           response => {
             this.setState({snackBarOpen: true, aSyncCall: false, responseText: editFormSubmitSuccessFeedbackText})
             if(this.props.newProductSlug) {this.props.cleanNewProduct()}
