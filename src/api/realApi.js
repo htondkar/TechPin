@@ -14,16 +14,6 @@ var config = {
   },
 }
 
- function isSafari() {
-     let ua = navigator.userAgent.toLowerCase(); 
-      if (ua.indexOf('safari') != -1) { 
-        if (ua.indexOf('chrome') > -1) {
-          return(false) // Chrome
-        } else {
-          return(true) // Safari
-        }
-      }
-  } 
 export default class techpinApi {
 
   //get methods
@@ -121,12 +111,6 @@ export default class techpinApi {
         'Accept': '*/*'
       },
     }
-    //convert formData to an Object
-    // let newVersionFields = {}
-    // for (let keyValuePair of formData.entries()) {
-    //   newVersionFields[keyValuePair[0]] = keyValuePair[1]
-    // }
-    
     // const qs = querystring.stringify(newVersionFields);
     return axios.patch(`${baseApiUrl}/products/${slug}/versions/add`, formData, config)
     // .then(res => console.log(res));
@@ -138,11 +122,6 @@ export default class techpinApi {
   }
 
   static postFirstVersion(formData, slug) {
-    //convert formData to an Object
-    // let newVersionFields = {}
-    // for (let keyValuePair of formData.entries()) {
-    //   newVersionFields[keyValuePair[0]] = keyValuePair[1]
-    // }
     // const qs = querystring.stringify(newVersionFields);
     return axios.patch(`${baseApiUrl}/products/${slug}/versions/add`, formData, config);
     // .then(res => console.log(res));
