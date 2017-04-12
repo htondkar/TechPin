@@ -13,12 +13,12 @@ const defaultState = {
   auth: {authenticated: false},
 };
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   rootReducer,
   defaultState,
-  composeEnhancers(applyMiddleware(thunk))
+  compose(applyMiddleware(thunk))
 );
 
 //load categories
