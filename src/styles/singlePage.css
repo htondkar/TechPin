@@ -20,6 +20,8 @@
 .single-body img {
   display: inline-block;
   background-color: #e8e8e8;
+  padding: 5px;
+  border-radius: 10px;
 }
 .single-body > div {
   display: inline-block;

@@ -72,7 +72,6 @@ class EditInfo extends React.Component {
       if (this.props.newProductSlug) {
         this.props.actions.submitAddFirstVersion(formData, slug)
         .then(
-          
           response => {
             this.setState({snackBarOpen: true, aSyncCall: false, responseText: editFormSubmitSuccessFeedbackText})
             if(this.props.newProductSlug) {this.props.cleanNewProduct()}
@@ -126,7 +125,7 @@ class EditInfo extends React.Component {
     return (
       <div className='single-page main-content edit-info'>
         <Paper style={{width: '100%'}} zDepth={3}>
-          <SinglePageToolbar editAble={false} />
+          <SinglePageToolbar editAble={false} closeModal={this.props.closeModal} inModal={this.props.inModal}/>
             {!this.props.newProductSlug && <StartupWidgetMoreInfo {...product}/> }
           <div className="share-info">
             {`Share your info about ${name || 'it '} with us!`}

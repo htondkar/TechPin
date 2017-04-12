@@ -40,6 +40,15 @@ export default class SinglePageToolbar extends React.Component {
     this.setState({snackBarOpen: false})
   }
 
+  handleBackButton = () => {
+    if (this.props.inModal) {
+      this.props.closeModal()   
+    }
+    else {
+      browserHistory.push('/')
+    }
+  }
+
   render() {
     const editAble = this.props.editAble;
     return (
@@ -49,7 +58,7 @@ export default class SinglePageToolbar extends React.Component {
             <IconButton 
               tooltip='back to home' 
               tooltipPosition='top-center'
-              onClick={()=>browserHistory.push('/')}
+              onClick={this.handleBackButton}
               style={styles.toolbarHomeIcon}>
               <NavigationArrowBack
                 hoverColor={'#9C27B0'}

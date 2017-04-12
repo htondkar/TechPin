@@ -126,7 +126,7 @@ export function submitProduct(formData) {
           if (response.status === 200 && response.data.success) {
             return Promise.resolve(response.data)
           } else {
-            return Promise.reject(response)
+            return Promise.reject(response.data)
           }
         },
         (res) => {

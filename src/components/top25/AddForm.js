@@ -72,9 +72,9 @@ class AddForm extends React.Component {
 
   handleSnackBarClose = () => {
     //this will not do anything because when it is called the component is unmounted
-    // this.setState({
-    //   snackBarOpen: false,
-    // });
+    this.setState({
+      snackBarOpen: false,
+    });
     // this.props.aSyncSuccess && this.props.closeModal();
   };
 
@@ -111,9 +111,11 @@ class AddForm extends React.Component {
           //   website: '',
           //   aSyncCall: false,
           //   aSyncSuccess: true
-          // });
+          // });\
         } else {
           debugger
+          //check for error object and respond accordingly
+          // or close the modal ?
           let errorText = Object.values(response.detail).join(', ')  
           this.setState({
             addStartUpResponseText: errorText,
@@ -122,14 +124,14 @@ class AddForm extends React.Component {
           });
         }
       })
-      // .catch(response => {
-      //   let errorText = Object.values(response.detail).join(', ')
-      //   this.setState({
-      //     addStartUpResponseText: errorText,
-      //     snackBarOpen: true,
-      //     aSyncCall: false,
-      //   });
-      // });
+      .catch(response => {
+        let errorText = Object.values(response.detail).join(', ')
+        this.setState({
+          addStartUpResponseText: errorText,
+          snackBarOpen: true,
+          aSyncCall: false,
+        });
+      });
   }
 
   validateForms = formData => {

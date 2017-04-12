@@ -146,6 +146,8 @@ export default class Top25 extends React.Component {
             overlayClassName="add-overlay"
             contentLabel="Modal">
               <EditInfo 
+                inModal={this.state.addVersionModalIsOpen}
+                closeModal={this.closeAddVersionModal}
                 newProductSlug={this.state.newProductSlug} 
                 cleanNewProduct={this.cleanNewProduct}
                 actions={this.props.actions}
