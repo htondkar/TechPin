@@ -4,6 +4,8 @@ import aboutText from '../../helpers/aboutText';
 import Paper from 'material-ui/Paper';
 import SinglePageToolbar from '../singlePage/SinglePageToolbar';
 
+import gitRepo from '../../helpers/links'
+
 const style = {
   Width: '100%',
 }
@@ -17,7 +19,7 @@ const AboutPage = (props) => {
             <h2>About</h2>
             <p>{aboutText.about}</p>
             <h3>Why Open Source?</h3>
-            <p>{aboutText.whyOpenSource}</p>
+            <p>{aboutText.whyOpenSource} <a href={gitRepo} target='_blank'> TechPin GitHub Repository right here</a></p>
             <h3>Why Crowdsourced?</h3>
             <p>{aboutText.whyCrowdFund}</p>
             <h3>Why Non-profit?</h3>

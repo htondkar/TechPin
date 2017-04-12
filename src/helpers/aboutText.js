@@ -5,7 +5,7 @@ TechPin is Open, this means everyone can add new products to it or edit the exis
 
 const whyOpenSource = `This is an open project and we believe in this openness. We want everyone to create great projects and products from it’s code and it’s technology.
 
-TechPin is build by Python and Django Framework.`;
+TechPin is built with Python/Django Framework on the back-end and React on the front. You can find the official `;
 
 const whyCrowdFund = `TechPin is a knowledge platform and this only happens if all of us contribute to it and make it truly useful. We believe in power of crowdsourcing and true collaboration.`;
 

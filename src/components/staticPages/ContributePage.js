@@ -4,6 +4,8 @@ import contributeText from '../../helpers/contributeText';
 import Paper from 'material-ui/Paper';
 import SinglePageToolbar from '../singlePage/SinglePageToolbar';
 
+import gitRepo from '../../helpers/links'
+
 const style = {
   Width: '100%',
 }
@@ -25,7 +27,7 @@ const ContributePage = (props) => {
             <h3>Share A Product</h3>
             <p>{contributeText.shareAProduct}</p>
             <h3>Development</h3>
-            <p>{contributeText.development}</p>
+            <p>{contributeText.development} <a href={gitRepo} target='_blank'>GitHub.</a></p>
             <h3>Contributor’s Rank</h3>
             <p>{contributeText.contributors}</p>
             <p>{contributeText.contributors}</p>
