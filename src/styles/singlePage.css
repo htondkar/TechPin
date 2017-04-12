@@ -19,6 +19,7 @@
 }
 .single-body img {
   display: inline-block;
+  background-color: #e8e8e8;
 }
 .single-body > div {
   display: inline-block;
@@ -323,6 +324,7 @@ div.single-page-visual-widget:hover {
     width: 80%;
   }
   div.single-body > img {
+    
     width: 120px;
     height: auto;
     align-items: flex-start;

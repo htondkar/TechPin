@@ -4,6 +4,8 @@ import {baseUrl} from '../../api/realApi';
 import StarRating from '../sharedComponents/StarRating';
 import Divider from 'material-ui/Divider';
 
+import NoLogoImage from '../../../images/nologo.png';
+
 export default class StartupWidgetMoreInfo extends React.Component {
   constructor() {
     super();
@@ -40,7 +42,10 @@ export default class StartupWidgetMoreInfo extends React.Component {
     }
     return (
       <div className="single-body">
-        <img src={baseUrl + data.logo} width='100px' alt='logo'/>
+        {data.logo ?
+          <img src={baseUrl + data.logo} width='100px' alt='logo'/> :
+          <img src={NoLogoImage} width='100px' alt='logo'/> 
+        }
         <div>
           <span>
             <a href={data.website} target='_blank'>{data.name_en}</a>

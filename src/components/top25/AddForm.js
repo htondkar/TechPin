@@ -113,6 +113,7 @@ class AddForm extends React.Component {
           //   aSyncSuccess: true
           // });
         } else {
+          debugger
           let errorText = Object.values(response.detail).join(', ')  
           this.setState({
             addStartUpResponseText: errorText,
@@ -199,7 +200,7 @@ class AddForm extends React.Component {
             searchText={this.state.searchText}
             dataSource={this.state.categories.map(item => item.name_en)}
             openOnFocus={true}
-            maxSearchResults={5}
+            maxSearchResults={3}
             onUpdateInput={this.handleUpdateInput}
             onNewRequest={(tag) => this.handleAddTag(tag)}
           />

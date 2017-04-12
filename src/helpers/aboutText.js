@@ -1,13 +1,13 @@
-const about = `TechPin is (and will be) simply an Open sourced, Crowdsourced, Non-profit project. The Main Goal of TechPin is to promote and share Iranian startups and products in global market. With TechPin, you can see what’s the new up and coming startups and products in Iran, what people think about them, how they rate their services and how they are compared with their competitors.
+const about = `TechPin is (and will be) simply an Open sourced, Crowd-sourced, Non-profit project. The Main Goal of TechPin is to promote and share Iranian startups and products in global market. With TechPin, you can see what’s the new up and coming startups and products in Iran, what people think about them, how they rate their services and how they are compared with their competitors.
 
 TechPin is Open, this means everyone can add new products to it or edit the existing ones. You can rate the services you use and comment on them.`;
 
 
 const whyOpenSource = `This is an open project and we believe in this openness. We want everyone to create great projects and products from it’s code and it’s technology.
 
-TechPin is built with Python/Django Framework on the back-end and React on the front. You can find the official `;
+TechPin is built with Python/Django Framework on the backend and React on the front. You can find the official `;
 
-const whyCrowdFund = `TechPin is a knowledge platform and this only happens if all of us contribute to it and make it truly useful. We believe in power of crowdsourcing and true collaboration.`;
+const whyCrowdFund = `TechPin is a knowledge platform and this only happens if all of us contribute to it and make it truly useful. We believe in power of crowd-sourcing and true collaboration.`;
 
 const whyNonProfit = `We believe that everyone who contributes to TechPin is one of the owners of TechPin. We don’t want to make money from this project whatsoever.
 
@@ -23,8 +23,8 @@ Customers are surveyed on one single question. They are asked to rate on an 11-p
 Based on their rating, customers are then classified in 3 categories: detractors, passives and promoters.
 
 ‘Detractors’ gave a score lower or equal to 6. They are not particularly thrilled by the product or the service. They, with all likelihood, won’t purchase again from the company, could potentially damage the company’s reputation through negative word of mouth.
-
-‘Passives’ gave a score of 7 or 8. They are somewhat satisfied but could easily switch to a competitor’s offering if given the opportunity. They probably wouldn’t spread any negative word-of-mouth, but are not enthusiastic enough about your products or services to actually promote them.
+\
+‘Passives’ gave a score of 7 or 8. They are somewhat satisfied but could easily switch to a competitor’s offering if given the opportunity. They probably wouldn't spread any negative word-of-mouth, but are not enthusiastic enough about your products or services to actually promote them.
 
 ‘Promoters’ answered 9 or 10. They love the company’s products and services. They are the repeat buyers, are the enthusiastic evangelist who recommends the company products and services to other potential buyers.
 

@@ -3,9 +3,10 @@
   background-color: white;
   border-radius: 10px;
 }
-.ReactModal__Body--open {
+.ReactModal__Body--open, .ReactModal__Overlay, .ReactModalPortal {
     overflow: hidden;
 }
+ 
 .login-singnup-overlay {
   z-index: 1200;
   display: flex;

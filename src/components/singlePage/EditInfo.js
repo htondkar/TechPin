@@ -9,8 +9,6 @@ import StartupWidgetMoreInfo from './StartupWidgetMoreInfo';
 require('core-js/fn/object/values')
 require('core-js/fn/object/entries')
 
-// import FormData from 'formdata-polyfill'
-
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
