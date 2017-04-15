@@ -38,6 +38,11 @@ export default class techpinApi {
     // .then(res => console.log(res));
   }
 
+  static getProductsByCategory(categorySlug) {
+    return axios.get(`${baseApiUrl}/category/${categorySlug}/products`);
+    // .then(res => console.log(res));
+  }
+
   static getSingleProduct(slug) {
     return axios.get(`${baseApiUrl}/products/${slug}`);
     // .then(res => console.log(res));

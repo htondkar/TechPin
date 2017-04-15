@@ -209,7 +209,7 @@ class Header extends React.Component {
             {this.state.categories.map((item, i) => {
               return (
                 <Link to={`/categories/${item.slug}`} key={i}>
-                  <ListItem primaryText={item.name_en} onClick={this.handleDrawerClose}/>
+                  <ListItem primaryText={item.name_en} onClick={this.handleDrawerClose} style={{textTransform: 'capitalize'}}/>
                 </Link>)})}
           </List>
         </Drawer>

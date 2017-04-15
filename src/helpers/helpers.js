@@ -1,7 +1,9 @@
-function sortByName(a,b) {
-  if (a.name_en > b.name_en) {
+export function sortByName(a,b) {
+  const nameA = a.name_en.toLowerCase()
+  const nameB = b.name_en.toLowerCase()
+  if (nameA > nameB) {
     return 1;
-  } else if (a.name_en < b.name_en) {
+  } else if (nameA < nameB) {
     return -1;
   } else {
     return 0;

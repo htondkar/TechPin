@@ -10,6 +10,14 @@ function singleProductActionCreator(product) {
   }
 }
 
+function getProductsByCategoryActionCreator(products, categorySlug) {
+  return {
+    type: actionTypes.CATEGORY_ITEMS_FETCH_SUCCESS,
+    products,
+    categorySlug
+  }
+}
+
 function allProductsActionCreator(allProducts) {
   return {
     type: actionTypes.LOAD_ALL_PRODUCTS,
@@ -198,6 +206,21 @@ export function getAllProducts() {
       .then(
         (response) => {
           dispatch(allProductsActionCreator(response.data))
+          return Promise.resolve(response.data.products)
+        },
+        (error) => {
+           return Promise.reject(error)
+         }
+       )
+  }
+}
+
+export function getProductsByCategory(categorySlug) {
+  return dispatch => {
+    return techpinApi.getProductsByCategory(categorySlug)
+      .then(
+        (response) => {
+          dispatch(getProductsByCategoryActionCreator(response.data.products, categorySlug))
           return Promise.resolve(response.data.products)
         },
         (error) => {
